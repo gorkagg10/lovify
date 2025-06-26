@@ -1,0 +1,9 @@
+.spotify-connect-container {
+    background: #111111;
+    height: 100vh;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}

@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+.landing-container{
+    display: flex;
+    flex-direction: column;
+    background: #111111;
+    justify-content: center; /* horizontal */
+    align-items: center;
+    height: 100vh;
+    padding-top: 0px;
+    gap: 16px;
+}
+
+.button{
+    background: #1CD66A;
+    border-radius: 90px;
+    width: 300px;
+    height: 100px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+h1 {
+    color: #FFFFFF;
+    display: flex;
+    font-size: 96px;
+    text-align: center;
+}

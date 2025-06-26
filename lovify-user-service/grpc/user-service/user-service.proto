@@ -1,0 +1,51 @@
+edition = "2023";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "lovify-user/service";
+package lovify_user_service;
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc MusicProviderLogin(MusicProviderLoginRequest) returns (MusicProviderLoginResponse);
+  rpc MusicProviderOAuthCallback(MusicProviderOAuthCallbackRequest) returns (google.protobuf.Empty);
+}
+
+enum Gender {
+  UNKNOWN_GENDER = 0;
+  MALE = 1;
+  FEMALE = 2;
+}
+
+enum SexualOrientation {
+  UNKNOWN_SEXUAL_ORIENTATION = 0;
+  HETEROSEXUAL = 1;
+  HOMOSEXUAL = 2;
+}
+
+message CreateUserRequest {
+  string email = 1;
+  google.protobuf.Timestamp birthday = 2;
+  Gender gender = 3;
+  SexualOrientation sexualOrientation = 4;
+  string description = 5;
+  string name = 6;
+}
+
+message CreateUserResponse {
+  string userID = 1;
+}
+
+message MusicProviderLoginRequest {
+  string userID = 1;
+}
+
+message MusicProviderLoginResponse {
+  string url = 1;
+}
+
+message MusicProviderOAuthCallbackRequest {
+  string state = 1;
+  string code = 2;
+}

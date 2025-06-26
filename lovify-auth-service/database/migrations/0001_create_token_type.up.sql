@@ -1,0 +1,1 @@
+CREATE TYPE token_type AS ENUM ('csrf','session');

@@ -1,0 +1,54 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* ← Centra verticalmente logo y botón */
+    padding: 48px 160px;
+    background: #111111;
+}
+
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    width: auto;
+    object-fit: contain;
+}
+
+.lovify_logo {
+    width: auto;
+    height: 110px;
+    object-fit: contain;
+}
+
+.brand {
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+}
+
+.login-button {
+    background: #ffffff;
+    color: black;
+    font-weight: bold;
+    font-size: 28px;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    width: 275px;
+    height: 90px;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+}

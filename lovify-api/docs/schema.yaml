@@ -1,0 +1,51 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Lovify
+  license:
+    name: MIT
+paths:
+  /users:
+    get:
+      summary: List all users.go
+      operationId: listUsers
+      tags:
+        - users.go
+      responses:
+        200:
+          description: A paged array of users.go
+    post:
+      summary: Create a login
+      operationId: createUser
+      tags:
+        - users.go
+      responses:
+        201:
+          description: Expected response to a valid request
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    User:
+      required:
+        - id
+        - name
+        - location
+    Users:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

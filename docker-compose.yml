@@ -1,0 +1,87 @@
+version: '3.8'
+services:
+  postgres-db:
+    container_name: postgres-db
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - '5432:5432'
+  mongodb:
+    container_name: mongodb
+    image: mongodb/mongodb-community-server:latest
+    restart: unless-stopped
+    volumes:
+      - mongodb-data:/data/db
+    ports:
+      - '27017:27017'
+  lovify-auth-service:
+    container_name: lovify-auth-service
+    build:
+      context: ./lovify-auth-service
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: postgres-db
+      DB_NAME: auth
+      DB_PASSWORD: authsvcpwd
+      DB_PORT: 5432
+      DB_SSL_MODE: disable
+      DB_USER: auth_svc
+      MIGRATIONS_PATH: /usr/local/database/migrations
+    ports:
+      - '8081:8081'
+    depends_on:
+      - postgres-db
+  lovify-user-service:
+    container_name: lovify-user-service
+    build:
+      context: ./lovify-user-service
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: localhost
+      DB_PORT: 27017
+      SPOTIFY_OAUTH_CLIENT_ID: f4ed25e807ab4b74b981cd606a75699b
+      SPOTIFY_OAUTH_CLIENT_SECRET: 4b8515bf00ed4f67bbcd9a77d7486bdb
+      SPOTIFY_OAUTH_REDIRECT_URL: http://127.0.0.1:8080/callback/spotify
+    ports:
+      - '8082:8082'
+    depends_on:
+      - mongodb
+  lovify-api:
+    container_name: lovify-api
+    build:
+      context: ./lovify-api
+      dockerfile: Dockerfile
+    environment:
+      AUTH_SERVICE_ENDPOINT: lovify-auth-service:8081
+      PORT: 8080
+      USER_SERVICE_ENDPOINT: lovify-user-service:8082
+    ports:
+      - '8080:8080'
+    depends_on:
+      - lovify-auth-service
+      - lovify-user-service
+  lovify-app:
+    container_name: lovify-app
+    build:
+      args:
+        REACT_APP_API_URL: http://lovify-api:8080
+      context: ./lovify-app
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./lovify-app:/app
+      - ./lovify-app/node_modules:/app/node_modules
+    stdin_open: true
+    tty: true
+    command: npm start
+    depends_on:
+      - lovify-api
+volumes:
+  postgres-data:
+  mongodb-data:
+

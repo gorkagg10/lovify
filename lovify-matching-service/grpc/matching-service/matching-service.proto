@@ -1,0 +1,16 @@
+edition = "2023";
+
+option go_package = "lovify-matching/service";
+package lovify_matching_service;
+
+service MatchingService {
+  rpc RecommendUsers(RecommendUsersRequest) returns (RecommendUsersResponse);
+}
+
+message RecommendUsersRequest {
+  string userID = 1;
+}
+
+message RecommendUsersResponse {
+  repeated string recommendedUsersIDs = 1;
+}

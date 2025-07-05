@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/gorkagg10/lovify-user-service/internal/infra/aescgm"
 	"log/slog"
 	"net"
 	"net/http"
@@ -12,19 +11,22 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/nats-io/nats.go"
+	"github.com/nats-io/nats.go/jetstream"
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/oauth2"
 	spotifyoauth2 "golang.org/x/oauth2/spotify"
 	"google.golang.org/grpc"
 
-	"github.com/gorkagg10/lovify-user-service/config"
-	"github.com/gorkagg10/lovify-user-service/database"
-	service "github.com/gorkagg10/lovify-user-service/grpc/user-service"
-	"github.com/gorkagg10/lovify-user-service/internal/domain/oauth"
-	"github.com/gorkagg10/lovify-user-service/internal/domain/profile"
-	"github.com/gorkagg10/lovify-user-service/internal/infra/mongodb"
-	"github.com/gorkagg10/lovify-user-service/internal/infra/server"
-	"github.com/gorkagg10/lovify-user-service/internal/infra/spotify"
+	"github.com/gorkagg10/lovify/lovify-user-service/config"
+	"github.com/gorkagg10/lovify/lovify-user-service/database"
+	service "github.com/gorkagg10/lovify/lovify-user-service/grpc/user-service"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/oauth"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/profile"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/infra/aescgm"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/infra/mongodb"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/infra/server"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/infra/spotify"
 )
 
 func main() {
@@ -34,8 +36,12 @@ func main() {
 	defer stop()
 
 	conf, err := config.NewConfig()
+	if err != nil {
+		slog.Error("failed to load config", err)
+		os.Exit(1)
+	}
 
-	dbClient, err := database.Connect(ctx)
+	dbClient, err := database.Connect(ctx, conf.DatabaseConfig)
 	if err != nil {
 		slog.Error("failed to connect to database: %v", err)
 		os.Exit(1)
@@ -47,6 +53,19 @@ func main() {
 		}
 	}()
 
+	natsConnection, err := nats.Connect(conf.NatsURL)
+	if err != nil {
+		slog.Error("failed to connect to nats server: %v", err)
+		os.Exit(1)
+	}
+	defer natsConnection.Drain()
+
+	jetStream, err := jetstream.New(natsConnection)
+	if err != nil {
+		slog.Error("failed to connect to jetstream: %v", err)
+		os.Exit(1)
+	}
+
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
 		slog.Error("failed to listen", slog.String("error", err.Error()))
@@ -54,7 +73,7 @@ func main() {
 	}
 	slog.Info("listening", slog.String("port", fmt.Sprintf(":%d", port)))
 
-	userServer := setupUserServer(dbClient, conf.SpotifyOAuthConfig)
+	userServer := setupUserServer(dbClient, conf.SpotifyOAuthConfig, jetStream)
 	srv := SetupGrpcServer(userServer)
 
 	go func() {
@@ -95,7 +114,7 @@ func NewSecureHTTPClient() *http.Client {
 	}
 }
 
-func setupUserServer(dbClient *mongo.Client, spotifyOAuthConfig *config.SpotifyOAuthConfig) *server.UserServer {
+func setupUserServer(dbClient *mongo.Client, spotifyOAuthConfig *config.SpotifyOAuthConfig, jetStream jetstream.JetStream) *server.UserServer {
 	userCollection := dbClient.Database("userService").Collection("profiles")
 	musicProviderTokensCollection := dbClient.Database("userService").Collection("musicProviderTokens")
 	musicProviderDataCollection := dbClient.Database("userService").Collection("musicProviderData")
@@ -113,7 +132,7 @@ func setupUserServer(dbClient *mongo.Client, spotifyOAuthConfig *config.SpotifyO
 		},
 	)
 
-	profileManager := profile.NewManager(userRepository, securityRepository, musicProviderRepository)
+	profileManager := profile.NewManager(userRepository, securityRepository, musicProviderRepository, jetStream)
 	oAuthService := oauth.NewService(oAuthRepository)
 	return server.NewUserServer(profileManager, oAuthService)
 }

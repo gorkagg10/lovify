@@ -1,0 +1,127 @@
+.card-area {
+    background: #111111;
+    height: 100vh;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__progress {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+}
+
+.progress-dot {
+    width: 28px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.progress-dot.active {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.card {
+    width: 320px;
+    height: 420px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    background-size: cover;        /* ocupa todo */
+    background-position: center;   /* centrado */
+    background-repeat: no-repeat;  /* sin repetición */
+}
+
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.arrow:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.arrow--left {
+    left: 12px;
+}
+.arrow--right {
+    right: 12px;
+}
+
+.photo {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card__info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent); /* 🎯 gradiente difuminado */
+    backdrop-filter: blur(0.5px); /* opcional: desenfoque si usas fondo translúcido */
+}
+
+.distance {
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+
+.card__actions {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 32px;
+    z-index: 2;
+}
+
+.btn {
+    background: white;
+    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.btn--no:hover svg {
+    color: #ff1f1f;
+}
+.btn--yes:hover svg {
+    color: #00b14f;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}

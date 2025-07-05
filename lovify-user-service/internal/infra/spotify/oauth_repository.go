@@ -5,7 +5,7 @@ import (
 
 	"golang.org/x/oauth2"
 
-	"github.com/gorkagg10/lovify-user-service/internal/domain/oauth"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/oauth"
 )
 
 type OAuthRepository struct {

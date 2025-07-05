@@ -7,13 +7,23 @@ import './styles/login.css';
 import './styles/signin.css';
 import './styles/create_user.css';
 import './styles/spotify_connect.css'
+import './styles/card_area.css'
+import './styles/sidebar.css'
+import './styles/main_page.css';
+import './styles/messages.css';
+import './styles/chat_panel.css';
+import './styles/profile_photo_uploader.css';
+import './styles/profile_photos.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {ConfigProvider} from "./context/ConfigContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+      <ConfigProvider>
+          <App />
+      </ConfigProvider>
   </React.StrictMode>
 );
 

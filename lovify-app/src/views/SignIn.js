@@ -1,7 +1,9 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {useConfig} from "../context/ConfigContext";
 
 function SignIn() {
+    const { apiUrl } = useConfig();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -14,7 +16,7 @@ function SignIn() {
         formData.append("email", email);
         formData.append("password", password);
 
-        const response = await fetch('http://localhost:8080/auth/register', {
+        const response = await fetch(`${apiUrl}/auth/register`, {
             method:'POST',
             contentType:'multipart/form-data',
             body: formData,
@@ -52,7 +54,7 @@ function SignIn() {
                     />
                 </div>
 
-                <button type="submit">Crear cuenta</button>
+                <button className="signin-button" type="submit">Crear cuenta</button>
 
                 {message && <p className="message">{message}</p>}
             </form>

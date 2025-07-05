@@ -5,18 +5,15 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 
-	"github.com/gorkagg10/lovify-authentication-service/config"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/config"
 )
 
-const migrationsPath = "database/migrations"
-
 func Migrate(databaseConfig *config.DatabaseConfig) error {
-	migration, err := migrate.New(fmt.Sprintf("file://%s", migrationsPath),
+	migration, err := migrate.New(fmt.Sprintf("file://%s", databaseConfig.MigrationsPath),
 		fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s",
 			databaseConfig.Username, databaseConfig.Password, databaseConfig.Host, databaseConfig.Port,
 			databaseConfig.Database, databaseConfig.SSLMode),

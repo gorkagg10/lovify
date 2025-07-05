@@ -1,0 +1,5 @@
+.main_page {
+    display: flex;
+    flex-direction: row;
+    height: 100vh; /* ocupar toda la altura de la pantalla */
+}

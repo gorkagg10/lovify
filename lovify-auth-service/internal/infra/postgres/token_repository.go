@@ -5,11 +5,11 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	autherrors "github.com/gorkagg10/lovify-authentication-service/errors"
+	autherrors "github.com/gorkagg10/lovify/lovify-authentication-service/errors"
 	"log/slog"
 	"time"
 
-	"github.com/gorkagg10/lovify-authentication-service/internal/domain/login"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/domain/login"
 )
 
 type TokenRepository struct {

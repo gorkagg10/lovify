@@ -128,11 +128,12 @@ func (x *LoginRequest) GetPassword() string {
 }
 
 type LoginResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionToken  *Token                 `protobuf:"bytes,1,opt,name=sessionToken" json:"sessionToken,omitempty"`
-	CsrfToken     *Token                 `protobuf:"bytes,2,opt,name=csrfToken" json:"csrfToken,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	SessionToken       *Token                 `protobuf:"bytes,1,opt,name=sessionToken" json:"sessionToken,omitempty"`
+	CsrfToken          *Token                 `protobuf:"bytes,2,opt,name=csrfToken" json:"csrfToken,omitempty"`
+	IsProfileConnected *bool                  `protobuf:"varint,3,opt,name=isProfileConnected" json:"isProfileConnected,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *LoginResponse) Reset() {
@@ -177,6 +178,13 @@ func (x *LoginResponse) GetCsrfToken() *Token {
 		return x.CsrfToken
 	}
 	return nil
+}
+
+func (x *LoginResponse) GetIsProfileConnected() bool {
+	if x != nil && x.IsProfileConnected != nil {
+		return *x.IsProfileConnected
+	}
+	return false
 }
 
 type Token struct {
@@ -301,10 +309,11 @@ const file_grpc_auth_service_auth_service_proto_rawDesc = "" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"@\n" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"\x89\x01\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"\xb9\x01\n" +
 	"\rLoginResponse\x12>\n" +
 	"\fsessionToken\x18\x01 \x01(\v2\x1a.lovify_auth_service.TokenR\fsessionToken\x128\n" +
-	"\tcsrfToken\x18\x02 \x01(\v2\x1a.lovify_auth_service.TokenR\tcsrfToken\"a\n" +
+	"\tcsrfToken\x18\x02 \x01(\v2\x1a.lovify_auth_service.TokenR\tcsrfToken\x12.\n" +
+	"\x12isProfileConnected\x18\x03 \x01(\bR\x12isProfileConnected\"a\n" +
 	"\x05Token\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x12B\n" +
 	"\x0eexpirationDate\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0eexpirationDate\"n\n" +

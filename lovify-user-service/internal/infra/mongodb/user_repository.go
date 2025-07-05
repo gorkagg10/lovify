@@ -7,8 +7,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 
-	"github.com/gorkagg10/lovify-user-service/internal/domain/oauth"
-	"github.com/gorkagg10/lovify-user-service/internal/domain/profile"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/oauth"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/profile"
 )
 
 type UserRepository struct {

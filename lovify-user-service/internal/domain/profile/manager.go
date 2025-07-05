@@ -3,28 +3,32 @@ package profile
 import (
 	"context"
 	"encoding/base64"
-	userServiceGrpc "github.com/gorkagg10/lovify-user-service/grpc/user-service"
-	"github.com/gorkagg10/lovify-user-service/internal/domain/oauth"
+	"github.com/gorkagg10/lovify/lovify-user-service/events"
+	userServiceGrpc "github.com/gorkagg10/lovify/lovify-user-service/grpc/user-service"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/oauth"
+	"github.com/nats-io/nats.go/jetstream"
 )
 
 type Manager struct {
 	userRepository          UserRepository
 	securityRepository      SecurityRepository
 	musicProviderRepository MusicProviderRepository
+	jetStream               jetstream.JetStream
 }
 
 func NewManager(
 	userRepository UserRepository,
 	securityRepository SecurityRepository,
 	musicProviderRepository MusicProviderRepository,
+	jetStream jetstream.JetStream,
 ) *Manager {
 	return &Manager{
 		userRepository:          userRepository,
 		securityRepository:      securityRepository,
 		musicProviderRepository: musicProviderRepository,
+		jetStream:               jetStream,
 	}
 }
-
 func (m *Manager) CreateUserProfile(ctx context.Context, req *userServiceGrpc.CreateUserRequest) (string, error) {
 	userProfile := NewUserProfile(
 		req.GetEmail(),
@@ -34,7 +38,23 @@ func (m *Manager) CreateUserProfile(ctx context.Context, req *userServiceGrpc.Cr
 		req.GetSexualOrientation().String(),
 		req.GetDescription(),
 	)
-	return m.userRepository.CreateUserProfile(ctx, userProfile)
+	userProfileID, err := m.userRepository.CreateUserProfile(ctx, userProfile)
+	if err != nil {
+		return "", err
+	}
+
+	profile := events.NewProfile(userProfileID)
+	profileMsg, err := profile.ToMsg()
+	if err != nil {
+		return "", err
+	}
+
+	_, err = m.jetStream.Publish(ctx, events.CreateProfile, profileMsg)
+	if err != nil {
+		return "", err
+	}
+
+	return userProfileID, nil
 }
 
 func (m *Manager) encryptToken(token *oauth.Token) (*oauth.Token, error) {

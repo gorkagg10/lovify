@@ -1,6 +1,6 @@
 package service
 
-import "github.com/gorkagg10/lovify-user-service/errors"
+import "github.com/gorkagg10/lovify/lovify-user-service/errors"
 
 func (u *CreateUserRequest) Validate() error {
 	switch {

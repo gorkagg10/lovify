@@ -47,7 +47,7 @@ input {
     outline: none;
 }
 
-button{
+.login-button {
     margin-top: 60px;
     background: #1CD66A;
     font-weight: bold;

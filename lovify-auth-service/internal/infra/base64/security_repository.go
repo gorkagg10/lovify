@@ -3,8 +3,8 @@ package base64
 import (
 	"crypto/rand"
 	"encoding/base64"
-	autherrors "github.com/gorkagg10/lovify-authentication-service/errors"
-	"github.com/gorkagg10/lovify-authentication-service/internal/domain/login"
+	autherrors "github.com/gorkagg10/lovify/lovify-authentication-service/errors"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/domain/login"
 	"log/slog"
 	"time"
 

@@ -7,12 +7,13 @@ import (
 )
 
 const (
-	DBHost     = "DB_HOST"
-	DBPort     = "DB_PORT"
-	DBUser     = "DB_USER"
-	DBPassword = "DB_PASSWORD"
-	DBName     = "DB_NAME"
-	SSLMode    = "DB_SSL_MODE"
+	MigrationsPath = "MIGRATIONS_PATH"
+	DBHost         = "DB_HOST"
+	DBPort         = "DB_PORT"
+	DBUser         = "DB_USER"
+	DBPassword     = "DB_PASSWORD"
+	DBName         = "DB_NAME"
+	SSLMode        = "DB_SSL_MODE"
 
 	DefaultDBHost    = "localhost"
 	DefaultDBPort    = "5432"
@@ -22,7 +23,8 @@ const (
 )
 
 var (
-	emptyDBPassword = errors.New("empty database password")
+	emptyDBPassword     = errors.New("empty database password")
+	emptyMigrationsPath = errors.New("empty database migrations path")
 )
 
 type Config struct {
@@ -40,15 +42,20 @@ func NewConfig() (*Config, error) {
 }
 
 type DatabaseConfig struct {
-	Host     string
-	Port     string
-	Username string
-	Password string
-	Database string
-	SSLMode  string
+	MigrationsPath string
+	Host           string
+	Port           string
+	Username       string
+	Password       string
+	Database       string
+	SSLMode        string
 }
 
 func NewDatabaseConfig() (*DatabaseConfig, error) {
+	migrationsPath := os.Getenv(MigrationsPath)
+	if migrationsPath == "" {
+		return nil, emptyMigrationsPath
+	}
 	hostname := os.Getenv(DBHost)
 	if hostname == "" {
 		hostname = DefaultDBHost
@@ -75,11 +82,12 @@ func NewDatabaseConfig() (*DatabaseConfig, error) {
 	}
 
 	return &DatabaseConfig{
-		Host:     hostname,
-		Port:     port,
-		Username: username,
-		Password: password,
-		Database: databaseName,
-		SSLMode:  sslMode,
+		MigrationsPath: migrationsPath,
+		Host:           hostname,
+		Port:           port,
+		Username:       username,
+		Password:       password,
+		Database:       databaseName,
+		SSLMode:        sslMode,
 	}, nil
 }

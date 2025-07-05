@@ -1,7 +1,9 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {useConfig} from "../context/ConfigContext";
 
 function CreateUser() {
+    const { apiUrl } = useConfig();
     const [name, setName] = useState('');
     const [birthday, setBirthday] = useState('');
     const [gender, setGender] = useState('');
@@ -26,7 +28,7 @@ function CreateUser() {
         formData.append("sexualOrientation", sexualOrientation)
         formData.append("description", description);
 
-        const response = await fetch('http://localhost:8080/users', {
+        const response = await fetch(`${apiUrl}/users`, {
             method:'POST',
             contentType:'multipart/form-data',
             body: formData,

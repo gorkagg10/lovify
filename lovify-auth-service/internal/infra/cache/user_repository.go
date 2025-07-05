@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/gorkagg10/lovify-authentication-service/internal/domain/login"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/domain/login"
 )
 
 type UserRepository struct {

@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/events"
 	"log/slog"
 	"net"
 	"os"
@@ -12,13 +13,13 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/gorkagg10/lovify-authentication-service/config"
-	"github.com/gorkagg10/lovify-authentication-service/database"
-	service "github.com/gorkagg10/lovify-authentication-service/grpc/auth-service"
-	"github.com/gorkagg10/lovify-authentication-service/internal/domain/login"
-	"github.com/gorkagg10/lovify-authentication-service/internal/infra/base64"
-	"github.com/gorkagg10/lovify-authentication-service/internal/infra/postgres"
-	"github.com/gorkagg10/lovify-authentication-service/internal/infra/server"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/config"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/database"
+	service "github.com/gorkagg10/lovify/lovify-authentication-service/grpc/auth-service"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/domain/login"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/infra/base64"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/infra/postgres"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/infra/server"
 )
 
 func main() {
@@ -48,6 +49,21 @@ func main() {
 		if err = pgClient.Close(); err != nil {
 			slog.Error("closing database client", slog.String("error", err.Error()))
 			os.Exit(1)
+		}
+	}()
+
+	natsHandler, err := events.NewNatsHandler("localhost:4222")
+	if err != nil {
+		slog.Error("creating nats handler", slog.String("error", err.Error()))
+		os.Exit(1)
+	}
+
+	go func() {
+		if err := events.Listen(ctx, natsHandler, []events.Consumer{
+			events.NewConsumer(
+				events.CreateProfileConsumer, events.Workqueue, login.ProcessProfileCreation,
+			),
+		}); err != nil {
 		}
 	}()
 

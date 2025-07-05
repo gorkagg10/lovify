@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"log/slog"
 
-	autherrors "github.com/gorkagg10/lovify-authentication-service/errors"
-	"github.com/gorkagg10/lovify-authentication-service/internal/domain/login"
+	autherrors "github.com/gorkagg10/lovify/lovify-authentication-service/errors"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/domain/login"
 )
 
 type UserRepository struct {

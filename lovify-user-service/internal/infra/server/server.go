@@ -2,9 +2,9 @@ package server
 
 import (
 	"context"
-	userServiceGrpc "github.com/gorkagg10/lovify-user-service/grpc/user-service"
-	"github.com/gorkagg10/lovify-user-service/internal/domain/oauth"
-	"github.com/gorkagg10/lovify-user-service/internal/domain/profile"
+	userServiceGrpc "github.com/gorkagg10/lovify/lovify-user-service/grpc/user-service"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/oauth"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/profile"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 

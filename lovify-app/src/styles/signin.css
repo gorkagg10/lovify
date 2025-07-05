@@ -48,7 +48,7 @@ input {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-button {
+.signin-button{
     margin-top: 60px;
     background: #1CD66A;
     font-weight: bold;
@@ -61,7 +61,7 @@ button {
     transition: background 0.3s;
 }
 
-button:hover {
+.signin-button:hover {
     background-color: #1db954;
 }
 

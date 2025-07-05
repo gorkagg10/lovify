@@ -1,6 +1,11 @@
+import CardArea from "../component/CardArea";
+import Sidebar from "../component/Sidebar";
+
 function MainPage() {
     return (
-        <div>
+        <div className="main_page">
+            <Sidebar/>
+            <CardArea/>
         </div>
     )
 }

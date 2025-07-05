@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/nats-io/nats.go/jetstream"
 	"time"
 )
 
@@ -105,4 +106,8 @@ func (a *Authorization) AuthorizeUser(ctx context.Context, email string, session
 		return errors.New("invalid csrf token")
 	}
 	return nil
+}
+
+func ProcessProfileCreation(msg jetstream.Msg) {
+	userService.
 }

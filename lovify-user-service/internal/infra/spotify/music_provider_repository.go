@@ -3,7 +3,7 @@ package spotify
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorkagg10/lovify-user-service/internal/domain/profile"
+	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/profile"
 	"io"
 	"net/http"
 )

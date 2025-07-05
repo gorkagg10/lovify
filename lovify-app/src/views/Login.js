@@ -1,7 +1,9 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {useConfig} from "../context/ConfigContext";
 
 function Login() {
+    const { apiUrl } = useConfig()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -13,8 +15,9 @@ function Login() {
         const formData = new FormData();
         formData.append("email", email);
         formData.append("password", password);
+        console.log(apiUrl)
 
-        const response = await fetch('http://localhost:8080/auth/login', {
+        const response = await fetch("http://localhost:8080/auth/login", {
             method:'POST',
             contentType:'multipart/form-data',
             body: formData,
@@ -22,7 +25,7 @@ function Login() {
         });
 
         if (response.ok) {
-            const data = await response.json();
+            console.log(response);
             sessionStorage.setItem('email', email)
             navigate('/users')
         } else {
@@ -55,7 +58,7 @@ function Login() {
                     />
                 </div>
 
-                <button type="submit">Iniciar Sesión</button>
+                <button className="login.button" type="submit">Iniciar Sesión</button>
 
                 {message && <p className="login-message">{message}</p>}
             </form>

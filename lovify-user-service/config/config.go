@@ -10,6 +10,12 @@ const (
 	SpotifyOAuthClientID     = "SPOTIFY_OAUTH_CLIENT_ID"
 	SpotifyOAuthClientSecret = "SPOTIFY_OAUTH_CLIENT_SECRET"
 	SpotifyOAuthRedirectURL  = "SPOTIFY_OAUTH_REDIRECT_URL"
+	DBHost                   = "DB_HOST"
+	DBPort                   = "DB_PORT"
+	NatsURL                  = "NATS_URL"
+
+	DefaultDBHost = "localhost"
+	DefaultDBPort = "27017"
 )
 
 var (
@@ -18,6 +24,8 @@ var (
 
 type Config struct {
 	SpotifyOAuthConfig *SpotifyOAuthConfig
+	DatabaseConfig     *DatabaseConfig
+	NatsURL            string
 }
 
 func NewConfig() (*Config, error) {
@@ -25,8 +33,17 @@ func NewConfig() (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
+	databaseConfig, err := NewDatabaseConfig()
+	if err != nil {
+		return nil, err
+	}
+	natsURL := os.Getenv(NatsURL)
+	if natsURL == "" {
+		return nil, fmt.Errorf(EmptyEnvVariableErrMsg, NatsURL)
+	}
 	return &Config{
 		SpotifyOAuthConfig: spotifyOAuthConfig,
+		DatabaseConfig:     databaseConfig,
 	}, nil
 }
 
@@ -53,5 +70,26 @@ func NewSpotifyOAuthConfig() (*SpotifyOAuthConfig, error) {
 		ClientID:     clientID,
 		ClientSecret: clientSecret,
 		RedirectURL:  redirectURL,
+	}, nil
+}
+
+type DatabaseConfig struct {
+	Host string
+	Port string
+}
+
+func NewDatabaseConfig() (*DatabaseConfig, error) {
+	hostname := os.Getenv(DBHost)
+	if hostname == "" {
+		hostname = DefaultDBHost
+	}
+	port := os.Getenv(DBPort)
+	if port == "" {
+		port = DefaultDBPort
+	}
+
+	return &DatabaseConfig{
+		Host: hostname,
+		Port: port,
 	}, nil
 }

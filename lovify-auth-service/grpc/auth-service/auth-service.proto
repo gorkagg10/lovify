@@ -25,6 +25,7 @@ message LoginRequest {
 message LoginResponse {
   Token sessionToken = 1;
   Token csrfToken = 2;
+  bool isProfileConnected = 3;
 }
 
 message Token {

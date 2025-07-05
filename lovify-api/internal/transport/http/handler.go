@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"github.com/gorkagg10/lovify-api/config"
 	authServiceGrpc "github.com/gorkagg10/lovify-authentication-service/grpc/auth-service"
-	userServiceGrpc "github.com/gorkagg10/lovify-user-service/grpc/user-service"
+	userServiceGrpc "github.com/gorkagg10/lovify/lovify-user-service/grpc/user-service"
 	"github.com/rs/cors"
 	"log/slog"
 	"net/http"

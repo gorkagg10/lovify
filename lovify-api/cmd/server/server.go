@@ -1,14 +1,14 @@
 package main
 
 import (
-	userServiceGrpc "github.com/gorkagg10/lovify-user-service/grpc/user-service"
+	userServiceGrpc "github.com/gorkagg10/lovify/lovify-user-service/grpc/user-service"
 	"log/slog"
 	"os"
 
 	"github.com/gorkagg10/lovify-api/config"
 	"github.com/gorkagg10/lovify-api/grpc"
 	transportHttp "github.com/gorkagg10/lovify-api/internal/transport/http"
-	authServiceGrpc "github.com/gorkagg10/lovify-authentication-service/grpc/auth-service"
+	authServiceGrpc "github.com/gorkagg10/lovify/lovify-authentication-service/grpc/auth-service"
 )
 
 func Run(

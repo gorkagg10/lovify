@@ -10,7 +10,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	userServiceGrpc "github.com/gorkagg10/lovify-user-service/grpc/user-service"
+	userServiceGrpc "github.com/gorkagg10/lovify/lovify-user-service/grpc/user-service"
 )
 
 type CreateUserResponse struct {

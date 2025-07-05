@@ -6,7 +6,7 @@ require golang.org/x/crypto v0.37.0
 
 require (
 	github.com/gorilla/mux v1.8.1
-	github.com/gorkagg10/lovify-user-service v0.0.0-20250623194706-5c75c28a1d26
+	github.com/gorkagg10/lovify/lovify-user-service v0.0.0-20250623194706-5c75c28a1d26
 	github.com/rs/cors v1.11.1
 	google.golang.org/grpc v1.73.0
 )

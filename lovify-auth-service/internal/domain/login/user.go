@@ -1,17 +1,19 @@
 package login
 
 type User struct {
-	id             string
-	email          string
-	hashedPassword string
-	sessionToken   *Token
-	csrfToken      *Token
+	id                 string
+	email              string
+	hashedPassword     string
+	sessionToken       *Token
+	csrfToken          *Token
+	isProfileConnected bool
 }
 
-func NewUser(email string, hashedPassword string) *User {
+func NewUser(email string, hashedPassword string, isProfileConnected bool) *User {
 	return &User{
-		email:          email,
-		hashedPassword: hashedPassword,
+		email:              email,
+		hashedPassword:     hashedPassword,
+		isProfileConnected: isProfileConnected,
 	}
 }
 
@@ -37,4 +39,8 @@ func (u *User) setSessionToken(sessionToken *Token) {
 
 func (u *User) setCSRFToken(csrfToken *Token) {
 	u.csrfToken = csrfToken
+}
+
+func (u *User) IsProfileConnected() bool {
+	return u.isProfileConnected
 }

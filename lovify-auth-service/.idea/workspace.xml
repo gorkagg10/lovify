@@ -5,146 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7765bc57-2532-478d-950d-2415e11b68a4" name="Changes" comment="fix: changed username for email">
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/0.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/1.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/1.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/10.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/10.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/11.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/11.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/12.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/12.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/13.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/13.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/14.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/14.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/15.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/15.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/2.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/2.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/3.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/3.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/4.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/4.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/5.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/5.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/6.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/6.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/7.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/7.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/8.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/8.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/9.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/9.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/index.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.cache/default-development/index.pack.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/declarations/src/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/declarations/src/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.browser.cjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.browser.cjs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.browser.development.cjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.browser.development.cjs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.browser.development.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.browser.development.esm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.browser.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.browser.esm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.cjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.cjs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.development.cjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.development.cjs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.development.edge-light.cjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.development.edge-light.cjs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.development.edge-light.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.development.edge-light.esm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.development.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.development.esm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.edge-light.cjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.edge-light.cjs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.edge-light.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.edge-light.esm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.esm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.umd.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/dist/emotion-styled.umd.min.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@emotion/styled/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/core-downloads-tracker/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/core-downloads-tracker/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Backdrop/Backdrop.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Backdrop/Backdrop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Breadcrumbs/BreadcrumbCollapsed.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Breadcrumbs/BreadcrumbCollapsed.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Chip/Chip.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Chip/Chip.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Input/inputClasses.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Input/inputClasses.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/NativeSelect/NativeSelectInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/NativeSelect/NativeSelectInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/OutlinedInput/NotchedOutline.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/OutlinedInput/NotchedOutline.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/OutlinedInput/outlinedInputClasses.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/OutlinedInput/outlinedInputClasses.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Radio/RadioButtonIcon.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Radio/RadioButtonIcon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Select/SelectInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/Select/SelectInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/SwipeableDrawer/SwipeArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/SwipeableDrawer/SwipeArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Backdrop/Backdrop.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Backdrop/Backdrop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Breadcrumbs/BreadcrumbCollapsed.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Breadcrumbs/BreadcrumbCollapsed.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Chip/Chip.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Chip/Chip.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Input/inputClasses.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Input/inputClasses.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/NativeSelect/NativeSelectInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/NativeSelect/NativeSelectInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/OutlinedInput/NotchedOutline.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/OutlinedInput/NotchedOutline.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/OutlinedInput/outlinedInputClasses.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/OutlinedInput/outlinedInputClasses.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Radio/RadioButtonIcon.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Radio/RadioButtonIcon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Select/SelectInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/Select/SelectInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/SwipeableDrawer/SwipeArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/SwipeableDrawer/SwipeArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/internal/SwitchBase.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/internal/SwitchBase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/locale/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/locale/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/styles/components.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/styles/components.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/styles/createThemeNoVars.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/styles/createThemeNoVars.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/styles/shouldSkipGeneratingVar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/styles/shouldSkipGeneratingVar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/version/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/esm/version/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/internal/SwitchBase.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/internal/SwitchBase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/locale/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/locale/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/styles/components.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/styles/components.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/styles/createThemeNoVars.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/styles/createThemeNoVars.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/styles/shouldSkipGeneratingVar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/styles/shouldSkipGeneratingVar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/version/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/material/version/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/private-theming/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/private-theming/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/private-theming/esm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/private-theming/esm/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/private-theming/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/private-theming/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/private-theming/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/private-theming/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/StyledEngineProvider/StyledEngineProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/StyledEngineProvider/StyledEngineProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/esm/StyledEngineProvider/StyledEngineProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/esm/StyledEngineProvider/StyledEngineProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/esm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/esm/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/styled-engine/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/DefaultPropsProvider/DefaultPropsProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/DefaultPropsProvider/DefaultPropsProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/GlobalStyles/GlobalStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/GlobalStyles/GlobalStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/ThemeProvider/ThemeProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/ThemeProvider/ThemeProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/createStyled/createStyled.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/createStyled/createStyled.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/DefaultPropsProvider/DefaultPropsProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/DefaultPropsProvider/DefaultPropsProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/GlobalStyles/GlobalStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/GlobalStyles/GlobalStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/ThemeProvider/ThemeProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/ThemeProvider/ThemeProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/createStyled/createStyled.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/createStyled/createStyled.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/styleFunctionSx/styleFunctionSx.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/styleFunctionSx/styleFunctionSx.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/version/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/esm/version/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/styleFunctionSx/styleFunctionSx.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/styleFunctionSx/styleFunctionSx.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/version/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/system/version/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/types/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/types/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/types/esm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/types/esm/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/types/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/types/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/types/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/types/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/esm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/esm/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/esm/resolveProps/resolveProps.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/esm/resolveProps/resolveProps.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/esm/resolveProps/resolveProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/esm/resolveProps/resolveProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/resolveProps/resolveProps.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/resolveProps/resolveProps.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/resolveProps/resolveProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/node_modules/@mui/utils/resolveProps/resolveProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/routes/GlobalRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/routes/GlobalRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/styles/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/styles/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/styles/signin.css" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/styles/signin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/CreateUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/CreateUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/MainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/MainPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/SignIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/SignIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/SpotifyConnect.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/SpotifyConnect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/cmd/server/User_Service_Local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/cmd/server/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/database/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/database/database.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/grpc/user-service/validator.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/grpc/user-service/validator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/internal/domain/profile/manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/internal/domain/profile/manager.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/internal/domain/profile/repositories.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/internal/domain/profile/repositories.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/internal/infra/mongodb/user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/internal/infra/mongodb/user_repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/internal/infra/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/internal/infra/server/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/internal/infra/spotify/music_provider_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/internal/infra/spotify/music_provider_repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/internal/infra/spotify/oauth_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/internal/infra/spotify/oauth_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/login.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,16 +29,16 @@
     &quot;assignee&quot;: &quot;gorkagg10&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:gorkagg10/lovify.git",
-    "accountId": "6865bd0f-4c0c-443f-8c90-d019b1722036"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:gorkagg10/lovify.git&quot;,
+    &quot;accountId&quot;: &quot;6865bd0f-4c0c-443f-8c90-d019b1722036&quot;
   }
-}]]></component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -203,7 +64,7 @@
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/gorka/lovify/lovify-auth-service",
+    "last_opened_file_path": "/Users/gorka/lovify/lovify-auth-service/database/migrations",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -309,7 +170,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/internal/domain/login/authorization.go</url>
-          <line>37</line>
+          <line>39</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
@@ -319,7 +180,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/internal/domain/login/authorization.go</url>
-          <line>85</line>
+          <line>87</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>

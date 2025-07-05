@@ -27,7 +27,7 @@ func (u *UserRepository) GetUser(_ context.Context, email string) (*login.User, 
 	if !ok {
 		return nil, fmt.Errorf("user not found")
 	}
-	return login.NewUser(user.Email(), user.HashedPassword()), nil
+	return login.NewUser(user.Email(), user.HashedPassword(), false), nil
 }
 
 func (u *UserRepository) CreateUser(_ context.Context, user *login.User) error {

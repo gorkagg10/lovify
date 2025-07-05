@@ -2,9 +2,12 @@ package login
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	userService "github.com/gorkagg10/lovify/lovify-user-service/events"
 	"github.com/nats-io/nats.go/jetstream"
+	"log/slog"
 	"time"
 )
 
@@ -42,7 +45,7 @@ func (a *Authorization) Register(ctx context.Context, email string, password str
 	if err != nil {
 		return err
 	}
-	user := NewUser(email, hashedPassword)
+	user := NewUser(email, hashedPassword, false)
 	if err = a.userRepository.CreateUser(ctx, user); err != nil {
 		return err
 	}
@@ -109,5 +112,10 @@ func (a *Authorization) AuthorizeUser(ctx context.Context, email string, session
 }
 
 func ProcessProfileCreation(msg jetstream.Msg) {
-	userService.
+	profile := new(userService.Profile)
+	if err := json.Unmarshal(msg.Data(), profile); err != nil {
+		msg.Ack()
+		return
+	}
+	slog.Info(profile.UserID)
 }

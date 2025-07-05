@@ -1,9 +1,10 @@
 package postgres
 
 type User struct {
-	ID       int64
-	Email    string
-	Password string
+	ID                 int64
+	Email              string
+	Password           string
+	IsProfileConnected bool
 }
 
 type Token struct {

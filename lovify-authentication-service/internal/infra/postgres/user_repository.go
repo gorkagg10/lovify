@@ -59,12 +59,11 @@ func (u *UserRepository) CreateUser(ctx context.Context, user *login.User) error
 	return nil
 }
 
-func (u *UserRepository) ConnectProfile(ctx context.Context, userID string) error {
-	if err := u.pgClient.QueryRowContext(
-		ctx,
+func (u *UserRepository) ConnectProfile(email string) error {
+	if err := u.pgClient.QueryRow(
 		`UPDATE users
 				SET profile_connected = true
-				WHERE id = $1`, userID).Err(); err != nil {
+				WHERE email = $1`, email).Err(); err != nil {
 		slog.Error("connecting profile", slog.String("error", err.Error()))
 		return err
 	}

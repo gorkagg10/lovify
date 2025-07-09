@@ -43,7 +43,7 @@ func (m *Manager) CreateUserProfile(ctx context.Context, req *userServiceGrpc.Cr
 		return "", err
 	}
 
-	profile := events.NewProfile(userProfileID)
+	profile := events.NewProfile(req.GetEmail())
 	profileMsg, err := profile.ToMsg()
 	if err != nil {
 		return "", err

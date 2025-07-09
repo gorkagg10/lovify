@@ -58,15 +58,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	go func() {
-		if err := events.Listen(ctx, natsHandler, []events.Consumer{
-			events.NewConsumer(
-				events.CreateProfileConsumer, events.Workqueue, login.ProcessProfileCreation,
-			),
-		}); err != nil {
-		}
-	}()
-
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
 		slog.Error("failed to listen", slog.String("error", err.Error()))
@@ -74,8 +65,23 @@ func main() {
 	}
 	slog.Info("listening", slog.String("port", fmt.Sprintf(":%d", port)))
 
-	authServer := setupAuthServer(pgClient)
+	userRepository := postgres.NewUserRepository(pgClient)
+	tokenRepository := postgres.NewTokenRepository(pgClient)
+	securityRepository := base64.NewSecurityRepository()
+
+	authenticationService := login.NewAuthorization(userRepository, securityRepository, tokenRepository)
+	authServer := server.NewAuthServer(authenticationService)
+
 	srv := setupGrpcServer(authServer)
+
+	go func() {
+		if err := events.Listen(ctx, natsHandler, []events.Consumer{
+			events.NewConsumer(
+				events.CreateProfileConsumer, events.Workqueue, authenticationService.ProcessProfileCreation,
+			),
+		}); err != nil {
+		}
+	}()
 
 	go func() {
 		if err = srv.Serve(lis); err != nil {

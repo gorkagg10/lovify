@@ -1,6 +1,7 @@
 package http
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"google.golang.org/grpc/codes"
@@ -56,6 +57,10 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "User successfully registered")
 }
 
+type LoginResponse struct {
+	IsProfileConnected bool `json:"is_profile_connected"`
+}
+
 func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	email := r.FormValue("email")
 	password := r.FormValue("password")
@@ -96,8 +101,17 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		HttpOnly: false, // Needs to be accessible to the client side
 	})
 
+	loginAPIResponse := LoginResponse{
+		IsProfileConnected: loginResponse.GetIsProfileConnected(),
+	}
+	loginAPIResponseJSON, err := json.Marshal(loginAPIResponse)
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintln(w, "Login successful!")
+	w.Write(loginAPIResponseJSON)
 }
 
 func (h *Handler) Protected(w http.ResponseWriter, r *http.Request) {

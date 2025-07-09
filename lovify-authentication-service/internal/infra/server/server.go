@@ -44,6 +44,7 @@ func (s *AuthServer) Login(ctx context.Context, req *authServiceGrpc.LoginReques
 			Token:          util.ValueToPointer(user.CSRFToken().Token()),
 			ExpirationDate: timestamppb.New(user.CSRFToken().ExpirationDate()),
 		},
+		IsProfileConnected: util.ValueToPointer(user.IsProfileConnected()),
 	}, nil
 }
 

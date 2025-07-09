@@ -5,12 +5,12 @@ import "encoding/json"
 const CreateProfile = "create-profile"
 
 type Profile struct {
-	UserID string `json:"user_id"`
+	Email string `json:"email"`
 }
 
-func NewProfile(userID string) *Profile {
+func NewProfile(email string) *Profile {
 	return &Profile{
-		UserID: userID,
+		Email: email,
 	}
 }
 

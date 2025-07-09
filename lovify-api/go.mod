@@ -1,4 +1,4 @@
-module github.com/gorkagg10/lovify-api
+module github.com/gorkagg10/lovify/lovify-api
 
 go 1.24.1
 
@@ -6,13 +6,10 @@ require golang.org/x/crypto v0.37.0
 
 require (
 	github.com/gorilla/mux v1.8.1
+	github.com/gorkagg10/lovify/lovify-authentication-service v0.0.0-20250709181034-5b0412c3c0e0
+	github.com/gorkagg10/lovify/lovify-user-service v0.0.0-20250705121632-3990a16d94c1
 	github.com/rs/cors v1.11.1
 	google.golang.org/grpc v1.73.0
-)
-
-require (
-	github.com/gorkagg10/lovify/lovify-user-service v0.0.0-20250705121632-3990a16d94c1 // indirect
-	golang.org/x/oauth2 v0.30.0 // indirect
 )
 
 require (

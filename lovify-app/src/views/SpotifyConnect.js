@@ -3,6 +3,7 @@ import {useConfig} from "../context/ConfigContext";
 
 function SpotifyConnect() {
     const { apiUrl } = useConfig()
+    console.log(apiUrl)
 
     const handleLogin= () => {
         const userID = sessionStorage.getItem("userID");

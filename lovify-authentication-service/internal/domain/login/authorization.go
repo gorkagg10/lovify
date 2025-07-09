@@ -111,11 +111,23 @@ func (a *Authorization) AuthorizeUser(ctx context.Context, email string, session
 	return nil
 }
 
-func ProcessProfileCreation(msg jetstream.Msg) {
+func (a *Authorization) ProcessProfileCreation(msg jetstream.Msg) {
 	profile := new(userService.Profile)
 	if err := json.Unmarshal(msg.Data(), profile); err != nil {
-		msg.Ack()
+		if err = msg.Nak(); err != nil {
+			slog.Error("not acknowledging message", err)
+		}
 		return
 	}
-	slog.Info(profile.UserID)
+	err := a.userRepository.ConnectProfile(profile.Email)
+	if err != nil {
+		slog.Error("error connecting profile to user", err)
+		if err = msg.Nak(); err != nil {
+			slog.Error("not acknowledging message", err)
+		}
+		return
+	}
+	if err = msg.Ack(); err != nil {
+		slog.Error("error acknowledging message", err)
+	}
 }

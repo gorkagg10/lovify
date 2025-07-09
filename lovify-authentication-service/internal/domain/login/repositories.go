@@ -6,7 +6,7 @@ type UserRepository interface {
 	EmailExists(context context.Context, email string) (bool, error)
 	GetUser(context context.Context, email string) (*User, error)
 	CreateUser(context context.Context, user *User) error
-	//ConnectProfile(context context.Context, userID string) error
+	ConnectProfile(email string) error
 }
 
 type SecurityRepository interface {

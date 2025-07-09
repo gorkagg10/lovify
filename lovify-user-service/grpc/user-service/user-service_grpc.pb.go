@@ -23,6 +23,7 @@ const (
 	UserService_CreateUser_FullMethodName                 = "/lovify_user_service.UserService/CreateUser"
 	UserService_MusicProviderLogin_FullMethodName         = "/lovify_user_service.UserService/MusicProviderLogin"
 	UserService_MusicProviderOAuthCallback_FullMethodName = "/lovify_user_service.UserService/MusicProviderOAuthCallback"
+	UserService_StoreUserPhotos_FullMethodName            = "/lovify_user_service.UserService/StoreUserPhotos"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -32,6 +33,7 @@ type UserServiceClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	MusicProviderLogin(ctx context.Context, in *MusicProviderLoginRequest, opts ...grpc.CallOption) (*MusicProviderLoginResponse, error)
 	MusicProviderOAuthCallback(ctx context.Context, in *MusicProviderOAuthCallbackRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	StoreUserPhotos(ctx context.Context, in *StoreUserPhotosRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type userServiceClient struct {
@@ -72,6 +74,16 @@ func (c *userServiceClient) MusicProviderOAuthCallback(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *userServiceClient) StoreUserPhotos(ctx context.Context, in *StoreUserPhotosRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, UserService_StoreUserPhotos_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -79,6 +91,7 @@ type UserServiceServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	MusicProviderLogin(context.Context, *MusicProviderLoginRequest) (*MusicProviderLoginResponse, error)
 	MusicProviderOAuthCallback(context.Context, *MusicProviderOAuthCallbackRequest) (*emptypb.Empty, error)
+	StoreUserPhotos(context.Context, *StoreUserPhotosRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -97,6 +110,9 @@ func (UnimplementedUserServiceServer) MusicProviderLogin(context.Context, *Music
 }
 func (UnimplementedUserServiceServer) MusicProviderOAuthCallback(context.Context, *MusicProviderOAuthCallbackRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MusicProviderOAuthCallback not implemented")
+}
+func (UnimplementedUserServiceServer) StoreUserPhotos(context.Context, *StoreUserPhotosRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StoreUserPhotos not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -173,6 +189,24 @@ func _UserService_MusicProviderOAuthCallback_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_StoreUserPhotos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StoreUserPhotosRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).StoreUserPhotos(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_StoreUserPhotos_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).StoreUserPhotos(ctx, req.(*StoreUserPhotosRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -191,6 +225,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MusicProviderOAuthCallback",
 			Handler:    _UserService_MusicProviderOAuthCallback_Handler,
+		},
+		{
+			MethodName: "StoreUserPhotos",
+			Handler:    _UserService_StoreUserPhotos_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

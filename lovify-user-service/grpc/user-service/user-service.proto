@@ -10,6 +10,7 @@ service UserService {
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
   rpc MusicProviderLogin(MusicProviderLoginRequest) returns (MusicProviderLoginResponse);
   rpc MusicProviderOAuthCallback(MusicProviderOAuthCallbackRequest) returns (google.protobuf.Empty);
+  rpc StoreUserPhotos(StoreUserPhotosRequest) returns (google.protobuf.Empty);
 }
 
 enum Gender {
@@ -48,4 +49,14 @@ message MusicProviderLoginResponse {
 message MusicProviderOAuthCallbackRequest {
   string state = 1;
   string code = 2;
+}
+
+message StoreUserPhotosRequest {
+  repeated Photo photos = 1;
+}
+
+message Photo {
+  string userID = 1;
+  string filename = 2;
+  bytes data = 3;
 }

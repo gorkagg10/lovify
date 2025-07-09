@@ -389,6 +389,110 @@ func (x *MusicProviderOAuthCallbackRequest) GetCode() string {
 	return ""
 }
 
+type StoreUserPhotosRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Photos        []*Photo               `protobuf:"bytes,1,rep,name=photos" json:"photos,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StoreUserPhotosRequest) Reset() {
+	*x = StoreUserPhotosRequest{}
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StoreUserPhotosRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StoreUserPhotosRequest) ProtoMessage() {}
+
+func (x *StoreUserPhotosRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StoreUserPhotosRequest.ProtoReflect.Descriptor instead.
+func (*StoreUserPhotosRequest) Descriptor() ([]byte, []int) {
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *StoreUserPhotosRequest) GetPhotos() []*Photo {
+	if x != nil {
+		return x.Photos
+	}
+	return nil
+}
+
+type Photo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserID        *string                `protobuf:"bytes,1,opt,name=userID" json:"userID,omitempty"`
+	Filename      *string                `protobuf:"bytes,2,opt,name=filename" json:"filename,omitempty"`
+	Data          []byte                 `protobuf:"bytes,3,opt,name=data" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Photo) Reset() {
+	*x = Photo{}
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Photo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Photo) ProtoMessage() {}
+
+func (x *Photo) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Photo.ProtoReflect.Descriptor instead.
+func (*Photo) Descriptor() ([]byte, []int) {
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *Photo) GetUserID() string {
+	if x != nil && x.UserID != nil {
+		return *x.UserID
+	}
+	return ""
+}
+
+func (x *Photo) GetFilename() string {
+	if x != nil && x.Filename != nil {
+		return *x.Filename
+	}
+	return ""
+}
+
+func (x *Photo) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_grpc_user_service_user_service_proto protoreflect.FileDescriptor
 
 const file_grpc_user_service_user_service_proto_rawDesc = "" +
@@ -409,7 +513,13 @@ const file_grpc_user_service_user_service_proto_rawDesc = "" +
 	"\x03url\x18\x01 \x01(\tR\x03url\"M\n" +
 	"!MusicProviderOAuthCallbackRequest\x12\x14\n" +
 	"\x05state\x18\x01 \x01(\tR\x05state\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code*2\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\"L\n" +
+	"\x16StoreUserPhotosRequest\x122\n" +
+	"\x06photos\x18\x01 \x03(\v2\x1a.lovify_user_service.PhotoR\x06photos\"O\n" +
+	"\x05Photo\x12\x16\n" +
+	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\x1a\n" +
+	"\bfilename\x18\x02 \x01(\tR\bfilename\x12\x12\n" +
+	"\x04data\x18\x03 \x01(\fR\x04data*2\n" +
 	"\x06Gender\x12\x12\n" +
 	"\x0eUNKNOWN_GENDER\x10\x00\x12\b\n" +
 	"\x04MALE\x10\x01\x12\n" +
@@ -419,12 +529,13 @@ const file_grpc_user_service_user_service_proto_rawDesc = "" +
 	"\x1aUNKNOWN_SEXUAL_ORIENTATION\x10\x00\x12\x10\n" +
 	"\fHETEROSEXUAL\x10\x01\x12\x0e\n" +
 	"\n" +
-	"HOMOSEXUAL\x10\x022\xd1\x02\n" +
+	"HOMOSEXUAL\x10\x022\xa9\x03\n" +
 	"\vUserService\x12]\n" +
 	"\n" +
 	"CreateUser\x12&.lovify_user_service.CreateUserRequest\x1a'.lovify_user_service.CreateUserResponse\x12u\n" +
 	"\x12MusicProviderLogin\x12..lovify_user_service.MusicProviderLoginRequest\x1a/.lovify_user_service.MusicProviderLoginResponse\x12l\n" +
-	"\x1aMusicProviderOAuthCallback\x126.lovify_user_service.MusicProviderOAuthCallbackRequest\x1a\x16.google.protobuf.EmptyB\x15Z\x13lovify-user/serviceb\beditionsp\xe8\a"
+	"\x1aMusicProviderOAuthCallback\x126.lovify_user_service.MusicProviderOAuthCallbackRequest\x1a\x16.google.protobuf.Empty\x12V\n" +
+	"\x0fStoreUserPhotos\x12+.lovify_user_service.StoreUserPhotosRequest\x1a\x16.google.protobuf.EmptyB\x15Z\x13lovify-user/serviceb\beditionsp\xe8\a"
 
 var (
 	file_grpc_user_service_user_service_proto_rawDescOnce sync.Once
@@ -439,7 +550,7 @@ func file_grpc_user_service_user_service_proto_rawDescGZIP() []byte {
 }
 
 var file_grpc_user_service_user_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_grpc_user_service_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_grpc_user_service_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_grpc_user_service_user_service_proto_goTypes = []any{
 	(Gender)(0),                               // 0: lovify_user_service.Gender
 	(SexualOrientation)(0),                    // 1: lovify_user_service.SexualOrientation
@@ -448,24 +559,29 @@ var file_grpc_user_service_user_service_proto_goTypes = []any{
 	(*MusicProviderLoginRequest)(nil),         // 4: lovify_user_service.MusicProviderLoginRequest
 	(*MusicProviderLoginResponse)(nil),        // 5: lovify_user_service.MusicProviderLoginResponse
 	(*MusicProviderOAuthCallbackRequest)(nil), // 6: lovify_user_service.MusicProviderOAuthCallbackRequest
-	(*timestamppb.Timestamp)(nil),             // 7: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),                     // 8: google.protobuf.Empty
+	(*StoreUserPhotosRequest)(nil),            // 7: lovify_user_service.StoreUserPhotosRequest
+	(*Photo)(nil),                             // 8: lovify_user_service.Photo
+	(*timestamppb.Timestamp)(nil),             // 9: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),                     // 10: google.protobuf.Empty
 }
 var file_grpc_user_service_user_service_proto_depIdxs = []int32{
-	7, // 0: lovify_user_service.CreateUserRequest.birthday:type_name -> google.protobuf.Timestamp
-	0, // 1: lovify_user_service.CreateUserRequest.gender:type_name -> lovify_user_service.Gender
-	1, // 2: lovify_user_service.CreateUserRequest.sexualOrientation:type_name -> lovify_user_service.SexualOrientation
-	2, // 3: lovify_user_service.UserService.CreateUser:input_type -> lovify_user_service.CreateUserRequest
-	4, // 4: lovify_user_service.UserService.MusicProviderLogin:input_type -> lovify_user_service.MusicProviderLoginRequest
-	6, // 5: lovify_user_service.UserService.MusicProviderOAuthCallback:input_type -> lovify_user_service.MusicProviderOAuthCallbackRequest
-	3, // 6: lovify_user_service.UserService.CreateUser:output_type -> lovify_user_service.CreateUserResponse
-	5, // 7: lovify_user_service.UserService.MusicProviderLogin:output_type -> lovify_user_service.MusicProviderLoginResponse
-	8, // 8: lovify_user_service.UserService.MusicProviderOAuthCallback:output_type -> google.protobuf.Empty
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	9,  // 0: lovify_user_service.CreateUserRequest.birthday:type_name -> google.protobuf.Timestamp
+	0,  // 1: lovify_user_service.CreateUserRequest.gender:type_name -> lovify_user_service.Gender
+	1,  // 2: lovify_user_service.CreateUserRequest.sexualOrientation:type_name -> lovify_user_service.SexualOrientation
+	8,  // 3: lovify_user_service.StoreUserPhotosRequest.photos:type_name -> lovify_user_service.Photo
+	2,  // 4: lovify_user_service.UserService.CreateUser:input_type -> lovify_user_service.CreateUserRequest
+	4,  // 5: lovify_user_service.UserService.MusicProviderLogin:input_type -> lovify_user_service.MusicProviderLoginRequest
+	6,  // 6: lovify_user_service.UserService.MusicProviderOAuthCallback:input_type -> lovify_user_service.MusicProviderOAuthCallbackRequest
+	7,  // 7: lovify_user_service.UserService.StoreUserPhotos:input_type -> lovify_user_service.StoreUserPhotosRequest
+	3,  // 8: lovify_user_service.UserService.CreateUser:output_type -> lovify_user_service.CreateUserResponse
+	5,  // 9: lovify_user_service.UserService.MusicProviderLogin:output_type -> lovify_user_service.MusicProviderLoginResponse
+	10, // 10: lovify_user_service.UserService.MusicProviderOAuthCallback:output_type -> google.protobuf.Empty
+	10, // 11: lovify_user_service.UserService.StoreUserPhotos:output_type -> google.protobuf.Empty
+	8,  // [8:12] is the sub-list for method output_type
+	4,  // [4:8] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_grpc_user_service_user_service_proto_init() }
@@ -479,7 +595,7 @@ func file_grpc_user_service_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_grpc_user_service_user_service_proto_rawDesc), len(file_grpc_user_service_user_service_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

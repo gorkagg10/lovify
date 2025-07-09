@@ -2,7 +2,7 @@ package http
 
 import (
 	"errors"
-	"github.com/gorkagg10/lovify-api/internal/database"
+	"github.com/gorkagg10/lovify/lovify-api/internal/database"
 	"net/http"
 )
 

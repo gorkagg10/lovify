@@ -5,9 +5,9 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/gorkagg10/lovify-api/config"
-	"github.com/gorkagg10/lovify-api/grpc"
-	transportHttp "github.com/gorkagg10/lovify-api/internal/transport/http"
+	"github.com/gorkagg10/lovify/lovify-api/config"
+	"github.com/gorkagg10/lovify/lovify-api/grpc"
+	transportHttp "github.com/gorkagg10/lovify/lovify-api/internal/transport/http"
 	authServiceGrpc "github.com/gorkagg10/lovify/lovify-authentication-service/grpc/auth-service"
 )
 

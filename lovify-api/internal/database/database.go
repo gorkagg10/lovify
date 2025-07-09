@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/gorkagg10/lovify-api/internal/login"
+	"github.com/gorkagg10/lovify/lovify-api/internal/login"
 )
 
 var Users = map[string]login.Login{}

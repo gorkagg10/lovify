@@ -3,8 +3,8 @@ package http
 import (
 	"context"
 	"encoding/json"
-	"github.com/gorkagg10/lovify-api/config"
-	authServiceGrpc "github.com/gorkagg10/lovify-authentication-service/grpc/auth-service"
+	"github.com/gorkagg10/lovify/lovify-api/config"
+	authServiceGrpc "github.com/gorkagg10/lovify/lovify-authentication-service/grpc/auth-service"
 	userServiceGrpc "github.com/gorkagg10/lovify/lovify-user-service/grpc/user-service"
 	"github.com/rs/cors"
 	"log/slog"

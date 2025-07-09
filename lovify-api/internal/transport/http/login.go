@@ -7,8 +7,8 @@ import (
 	"google.golang.org/grpc/status"
 	"net/http"
 
-	autherrors "github.com/gorkagg10/lovify-authentication-service/errors"
-	authServiceGrpc "github.com/gorkagg10/lovify-authentication-service/grpc/auth-service"
+	autherrors "github.com/gorkagg10/lovify/lovify-authentication-service/errors"
+	authServiceGrpc "github.com/gorkagg10/lovify/lovify-authentication-service/grpc/auth-service"
 )
 
 const (

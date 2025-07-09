@@ -33,9 +33,9 @@ services:
     ports:
       - '27017:27017'
   lovify-auth-service:
-    container_name: lovify-auth-service
+    container_name: lovify-authentication-service
     build:
-      context: ./lovify-auth-service
+      context: lovify-authentication-service
       dockerfile: Dockerfile
     environment:
       DB_HOST: postgres-db

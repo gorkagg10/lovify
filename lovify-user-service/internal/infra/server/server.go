@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"fmt"
 	userServiceGrpc "github.com/gorkagg10/lovify/lovify-user-service/grpc/user-service"
 	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/oauth"
 	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/profile"
@@ -68,15 +69,13 @@ func (s *UserServer) StoreUserPhotos(_ context.Context, req *userServiceGrpc.Sto
 
 func storePhoto(uploadDir string, filename string, data []byte) error {
 	destinationPath := filepath.Join(uploadDir, filename)
-	destination, err := os.Create(destinationPath)
-	if err != nil {
+	if err := os.MkdirAll(filepath.Dir(destinationPath), 0755); err != nil {
 		return err
 	}
-	defer destination.Close()
 
-	_, err = destination.Write(data)
-	if err != nil {
-		return err
+	if err := os.WriteFile(destinationPath, data, 0644); err != nil {
+		return fmt.Errorf("error guardando archivo: %v", err)
 	}
+
 	return nil
 }

@@ -6,6 +6,8 @@ import (
 	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/oauth"
 	"github.com/gorkagg10/lovify/lovify-user-service/internal/domain/profile"
 	"google.golang.org/protobuf/types/known/emptypb"
+	"os"
+	"path/filepath"
 )
 
 type UserServer struct {
@@ -51,4 +53,30 @@ func (s *UserServer) MusicProviderOAuthCallback(ctx context.Context, req *userSe
 		return nil, err
 	}
 	return &emptypb.Empty{}, nil
+}
+
+func (s *UserServer) StoreUserPhotos(_ context.Context, req *userServiceGrpc.StoreUserPhotosRequest) (*emptypb.Empty, error) {
+	uploadDir := filepath.Join("uploads", req.GetUserID())
+	for _, photo := range req.GetPhotos() {
+		err := storePhoto(uploadDir, photo.GetFilename(), photo.GetData())
+		if err != nil {
+			return nil, err
+		}
+	}
+	return &emptypb.Empty{}, nil
+}
+
+func storePhoto(uploadDir string, filename string, data []byte) error {
+	destinationPath := filepath.Join(uploadDir, filename)
+	destination, err := os.Create(destinationPath)
+	if err != nil {
+		return err
+	}
+	defer destination.Close()
+
+	_, err = destination.Write(data)
+	if err != nil {
+		return err
+	}
+	return nil
 }

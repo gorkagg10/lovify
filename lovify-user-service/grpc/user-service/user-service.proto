@@ -53,10 +53,11 @@ message MusicProviderOAuthCallbackRequest {
 
 message StoreUserPhotosRequest {
   repeated Photo photos = 1;
+  string userID = 2;
 }
 
 message Photo {
-  string userID = 1;
+  reserved 1;
   string filename = 2;
   bytes data = 3;
 }

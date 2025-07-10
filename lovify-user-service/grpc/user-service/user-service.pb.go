@@ -392,6 +392,7 @@ func (x *MusicProviderOAuthCallbackRequest) GetCode() string {
 type StoreUserPhotosRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Photos        []*Photo               `protobuf:"bytes,1,rep,name=photos" json:"photos,omitempty"`
+	UserID        *string                `protobuf:"bytes,2,opt,name=userID" json:"userID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -433,9 +434,15 @@ func (x *StoreUserPhotosRequest) GetPhotos() []*Photo {
 	return nil
 }
 
+func (x *StoreUserPhotosRequest) GetUserID() string {
+	if x != nil && x.UserID != nil {
+		return *x.UserID
+	}
+	return ""
+}
+
 type Photo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserID        *string                `protobuf:"bytes,1,opt,name=userID" json:"userID,omitempty"`
 	Filename      *string                `protobuf:"bytes,2,opt,name=filename" json:"filename,omitempty"`
 	Data          []byte                 `protobuf:"bytes,3,opt,name=data" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -472,13 +479,6 @@ func (*Photo) Descriptor() ([]byte, []int) {
 	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *Photo) GetUserID() string {
-	if x != nil && x.UserID != nil {
-		return *x.UserID
-	}
-	return ""
-}
-
 func (x *Photo) GetFilename() string {
 	if x != nil && x.Filename != nil {
 		return *x.Filename
@@ -513,13 +513,13 @@ const file_grpc_user_service_user_service_proto_rawDesc = "" +
 	"\x03url\x18\x01 \x01(\tR\x03url\"M\n" +
 	"!MusicProviderOAuthCallbackRequest\x12\x14\n" +
 	"\x05state\x18\x01 \x01(\tR\x05state\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\"L\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\"d\n" +
 	"\x16StoreUserPhotosRequest\x122\n" +
-	"\x06photos\x18\x01 \x03(\v2\x1a.lovify_user_service.PhotoR\x06photos\"O\n" +
-	"\x05Photo\x12\x16\n" +
-	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\x1a\n" +
+	"\x06photos\x18\x01 \x03(\v2\x1a.lovify_user_service.PhotoR\x06photos\x12\x16\n" +
+	"\x06userID\x18\x02 \x01(\tR\x06userID\"=\n" +
+	"\x05Photo\x12\x1a\n" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\x12\x12\n" +
-	"\x04data\x18\x03 \x01(\fR\x04data*2\n" +
+	"\x04data\x18\x03 \x01(\fR\x04dataJ\x04\b\x01\x10\x02*2\n" +
 	"\x06Gender\x12\x12\n" +
 	"\x0eUNKNOWN_GENDER\x10\x00\x12\b\n" +
 	"\x04MALE\x10\x01\x12\n" +

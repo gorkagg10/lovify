@@ -3,6 +3,7 @@ package http
 import (
 	"encoding/json"
 	"google.golang.org/protobuf/types/known/timestamppb"
+	"io"
 	"log/slog"
 	"net/http"
 	"strings"
@@ -94,4 +95,51 @@ func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	w.Write(jsonUser)
+}
+
+func (h *Handler) StorePhotos(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	userID := params["user_id"]
+	err := r.ParseMultipartForm(20 << 20)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	files := r.MultipartForm.File["photos[]"]
+
+	photos := make([]*userServiceGrpc.Photo, len(files))
+	for i, fileHeader := range files {
+		file, err := fileHeader.Open()
+		if err != nil {
+			http.Error(w, "No se pudo abrir el archivo", http.StatusBadRequest)
+			return
+		}
+		defer file.Close()
+
+		photo, err := io.ReadAll(file)
+		if err != nil {
+			http.Error(w, "No se pudo abrir el archivo", http.StatusBadRequest)
+			return
+		}
+		photos[i] = &userServiceGrpc.Photo{
+			UserID:   &userID,
+			Filename: &fileHeader.Filename,
+			Data:     photo,
+		}
+	}
+	if len(files) == 0 {
+		http.Error(w, "no se enviaron archivos", http.StatusBadRequest)
+		return
+	}
+	_, err = h.UserServiceClient.StoreUserPhotos(
+		r.Context(),
+		&userServiceGrpc.StoreUserPhotosRequest{
+			Photos: photos,
+		})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
 }

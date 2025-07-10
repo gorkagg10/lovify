@@ -58,8 +58,12 @@ func (s *UserServer) MusicProviderOAuthCallback(ctx context.Context, req *userSe
 
 func (s *UserServer) StoreUserPhotos(_ context.Context, req *userServiceGrpc.StoreUserPhotosRequest) (*emptypb.Empty, error) {
 	uploadDir := filepath.Join("uploads", req.GetUserID())
+	err := os.RemoveAll(uploadDir)
+	if err != nil {
+		return nil, err
+	}
 	for _, photo := range req.GetPhotos() {
-		err := storePhoto(uploadDir, photo.GetFilename(), photo.GetData())
+		err = storePhoto(uploadDir, photo.GetFilename(), photo.GetData())
 		if err != nil {
 			return nil, err
 		}

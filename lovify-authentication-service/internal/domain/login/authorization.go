@@ -45,7 +45,7 @@ func (a *Authorization) Register(ctx context.Context, email string, password str
 	if err != nil {
 		return err
 	}
-	user := NewUser(email, hashedPassword, false)
+	user := NewUser(email, hashedPassword, false, "")
 	if err = a.userRepository.CreateUser(ctx, user); err != nil {
 		return err
 	}
@@ -119,7 +119,7 @@ func (a *Authorization) ProcessProfileCreation(msg jetstream.Msg) {
 		}
 		return
 	}
-	err := a.userRepository.ConnectProfile(profile.Email)
+	err := a.userRepository.ConnectProfile(profile.Email, profile.UserID)
 	if err != nil {
 		slog.Error("error connecting profile to user", err)
 		if err = msg.Nak(); err != nil {

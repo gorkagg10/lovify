@@ -7,13 +7,15 @@ type User struct {
 	sessionToken       *Token
 	csrfToken          *Token
 	isProfileConnected bool
+	profileID          string
 }
 
-func NewUser(email string, hashedPassword string, isProfileConnected bool) *User {
+func NewUser(email string, hashedPassword string, isProfileConnected bool, profileID string) *User {
 	return &User{
 		email:              email,
 		hashedPassword:     hashedPassword,
 		isProfileConnected: isProfileConnected,
+		profileID:          profileID,
 	}
 }
 
@@ -43,4 +45,8 @@ func (u *User) setCSRFToken(csrfToken *Token) {
 
 func (u *User) IsProfileConnected() bool {
 	return u.isProfileConnected
+}
+
+func (u *User) ProfileID() string {
+	return u.profileID
 }

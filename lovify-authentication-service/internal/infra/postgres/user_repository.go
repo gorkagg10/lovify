@@ -37,13 +37,13 @@ func (u *UserRepository) GetUser(ctx context.Context, email string) (*login.User
 	var user User
 	if err := u.pgClient.QueryRowContext(
 		ctx,
-		`SELECT email, password, profile_connected from users where email = $1;`, email).Scan(&user.Email, &user.Password, &user.IsProfileConnected); err != nil {
+		`SELECT email, password, profile_connected, profile_id from users where email = $1;`, email).Scan(&user.Email, &user.Password, &user.IsProfileConnected, &user.ProfileID); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, fmt.Errorf("user not found")
 		}
 		return nil, fmt.Errorf("getting user from database: %w", err)
 	}
-	return login.NewUser(user.Email, user.Password, user.IsProfileConnected), nil
+	return login.NewUser(user.Email, user.Password, user.IsProfileConnected, user.ProfileID), nil
 }
 
 func (u *UserRepository) CreateUser(ctx context.Context, user *login.User) error {
@@ -59,11 +59,11 @@ func (u *UserRepository) CreateUser(ctx context.Context, user *login.User) error
 	return nil
 }
 
-func (u *UserRepository) ConnectProfile(email string) error {
+func (u *UserRepository) ConnectProfile(email string, profileID string) error {
 	if err := u.pgClient.QueryRow(
 		`UPDATE users
-				SET profile_connected = true
-				WHERE email = $1`, email).Err(); err != nil {
+				SET profile_connected = true, profile_id = $1
+				WHERE email = $2`, profileID, email).Err(); err != nil {
 		slog.Error("connecting profile", slog.String("error", err.Error()))
 		return err
 	}

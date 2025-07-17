@@ -132,6 +132,7 @@ type LoginResponse struct {
 	SessionToken       *Token                 `protobuf:"bytes,1,opt,name=sessionToken" json:"sessionToken,omitempty"`
 	CsrfToken          *Token                 `protobuf:"bytes,2,opt,name=csrfToken" json:"csrfToken,omitempty"`
 	IsProfileConnected *bool                  `protobuf:"varint,3,opt,name=isProfileConnected" json:"isProfileConnected,omitempty"`
+	ProfileID          *string                `protobuf:"bytes,4,opt,name=profileID" json:"profileID,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -185,6 +186,13 @@ func (x *LoginResponse) GetIsProfileConnected() bool {
 		return *x.IsProfileConnected
 	}
 	return false
+}
+
+func (x *LoginResponse) GetProfileID() string {
+	if x != nil && x.ProfileID != nil {
+		return *x.ProfileID
+	}
+	return ""
 }
 
 type Token struct {
@@ -309,11 +317,12 @@ const file_grpc_auth_service_auth_service_proto_rawDesc = "" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"@\n" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"\xb9\x01\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"\xd7\x01\n" +
 	"\rLoginResponse\x12>\n" +
 	"\fsessionToken\x18\x01 \x01(\v2\x1a.lovify_auth_service.TokenR\fsessionToken\x128\n" +
 	"\tcsrfToken\x18\x02 \x01(\v2\x1a.lovify_auth_service.TokenR\tcsrfToken\x12.\n" +
-	"\x12isProfileConnected\x18\x03 \x01(\bR\x12isProfileConnected\"a\n" +
+	"\x12isProfileConnected\x18\x03 \x01(\bR\x12isProfileConnected\x12\x1c\n" +
+	"\tprofileID\x18\x04 \x01(\tR\tprofileID\"a\n" +
 	"\x05Token\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x12B\n" +
 	"\x0eexpirationDate\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0eexpirationDate\"n\n" +

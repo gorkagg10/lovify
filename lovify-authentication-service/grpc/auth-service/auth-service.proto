@@ -26,6 +26,7 @@ message LoginResponse {
   Token sessionToken = 1;
   Token csrfToken = 2;
   bool isProfileConnected = 3;
+  string profileID = 4;
 }
 
 message Token {

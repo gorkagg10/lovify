@@ -5,6 +5,7 @@ type User struct {
 	Email              string
 	Password           string
 	IsProfileConnected bool
+	ProfileID          string
 }
 
 type Token struct {

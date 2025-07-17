@@ -2,6 +2,7 @@ package mongodb
 
 import (
 	"context"
+	"time"
 
 	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
@@ -45,6 +46,75 @@ func (u *UserRepository) CreateUserProfile(ctx context.Context, profile *profile
 		return "", err
 	}
 	return userProfileID, nil
+}
+
+func (u *UserRepository) GetUserProfile(ctx context.Context, userID string) (*profile.UserProfile, error) {
+	filter := bson.D{{"_id", userID}}
+
+	var userProfile UserProfile
+	err := u.UserProfileCollection.FindOne(ctx, filter).Decode(&userProfile)
+	if err != nil {
+		return nil, err
+	}
+
+	musicProviderDataFilter := bson.D{{"user_id", userID}}
+
+	var musicProviderData MusicProviderData
+	err = u.MusicProviderDataCollection.FindOne(ctx, musicProviderDataFilter).Decode(&musicProviderData)
+	if err != nil {
+		return nil, err
+	}
+
+	birthday, err := time.Parse("2006-01-02 15:04:05 -0700 MST", userProfile.Birthday)
+	if err != nil {
+		return nil, err
+	}
+
+	topTracks := make([]profile.Track, 5)
+	for i, track := range musicProviderData.TopTracks[:5] {
+		image := profile.NewImage(
+			track.Album.Cover.Url,
+			track.Album.Cover.Height,
+			track.Album.Cover.Width,
+		)
+		album := profile.NewAlbum(
+			track.Album.Name,
+			track.Album.Type,
+			image,
+		)
+		topTracks[i] = *profile.NewTrack(
+			track.Name,
+			album,
+			track.Artists,
+		)
+	}
+
+	topArtists := make([]profile.Artist, 5)
+	for i, artist := range musicProviderData.TopArtist[:5] {
+		image := profile.NewImage(
+			artist.Image.Url,
+			artist.Image.Height,
+			artist.Image.Width,
+		)
+		topArtists[i] = *profile.NewArtist(
+			artist.Name,
+			artist.Genres,
+			image,
+		)
+	}
+
+	profileMusicProviderData := profile.NewMusicProviderData(topTracks, topArtists)
+
+	return profile.NewUserProfile(
+		userProfile.Email,
+		birthday,
+		userProfile.Name,
+		userProfile.Gender,
+		userProfile.SexualOrientation,
+		userProfile.Description,
+		userProfile.MusicProviderConnected,
+		profileMusicProviderData,
+	), nil
 }
 
 func (u *UserRepository) ConnectWithMusicProvider(ctx context.Context, userID string) error {

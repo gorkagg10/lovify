@@ -493,6 +493,418 @@ func (x *Photo) GetData() []byte {
 	return nil
 }
 
+type GetUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserID        *string                `protobuf:"bytes,1,opt,name=userID" json:"userID,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserRequest) Reset() {
+	*x = GetUserRequest{}
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserRequest) ProtoMessage() {}
+
+func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
+func (*GetUserRequest) Descriptor() ([]byte, []int) {
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetUserRequest) GetUserID() string {
+	if x != nil && x.UserID != nil {
+		return *x.UserID
+	}
+	return ""
+}
+
+type GetUserResponse struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	UserID            *string                `protobuf:"bytes,1,opt,name=userID" json:"userID,omitempty"`
+	Name              *string                `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	Description       *string                `protobuf:"bytes,3,opt,name=description" json:"description,omitempty"`
+	Gender            *Gender                `protobuf:"varint,4,opt,name=gender,enum=lovify_user_service.Gender" json:"gender,omitempty"`
+	SexualOrientation *SexualOrientation     `protobuf:"varint,5,opt,name=sexualOrientation,enum=lovify_user_service.SexualOrientation" json:"sexualOrientation,omitempty"`
+	Photos            []string               `protobuf:"bytes,6,rep,name=photos" json:"photos,omitempty"`
+	TopTracks         *TopTracks             `protobuf:"bytes,7,opt,name=topTracks" json:"topTracks,omitempty"`
+	TopArtists        *TopArtists            `protobuf:"bytes,8,opt,name=topArtists" json:"topArtists,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *GetUserResponse) Reset() {
+	*x = GetUserResponse{}
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserResponse) ProtoMessage() {}
+
+func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserResponse.ProtoReflect.Descriptor instead.
+func (*GetUserResponse) Descriptor() ([]byte, []int) {
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetUserResponse) GetUserID() string {
+	if x != nil && x.UserID != nil {
+		return *x.UserID
+	}
+	return ""
+}
+
+func (x *GetUserResponse) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *GetUserResponse) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+func (x *GetUserResponse) GetGender() Gender {
+	if x != nil && x.Gender != nil {
+		return *x.Gender
+	}
+	return Gender_UNKNOWN_GENDER
+}
+
+func (x *GetUserResponse) GetSexualOrientation() SexualOrientation {
+	if x != nil && x.SexualOrientation != nil {
+		return *x.SexualOrientation
+	}
+	return SexualOrientation_UNKNOWN_SEXUAL_ORIENTATION
+}
+
+func (x *GetUserResponse) GetPhotos() []string {
+	if x != nil {
+		return x.Photos
+	}
+	return nil
+}
+
+func (x *GetUserResponse) GetTopTracks() *TopTracks {
+	if x != nil {
+		return x.TopTracks
+	}
+	return nil
+}
+
+func (x *GetUserResponse) GetTopArtists() *TopArtists {
+	if x != nil {
+		return x.TopArtists
+	}
+	return nil
+}
+
+type TopTracks struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Track         []*Track               `protobuf:"bytes,1,rep,name=track" json:"track,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TopTracks) Reset() {
+	*x = TopTracks{}
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TopTracks) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TopTracks) ProtoMessage() {}
+
+func (x *TopTracks) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TopTracks.ProtoReflect.Descriptor instead.
+func (*TopTracks) Descriptor() ([]byte, []int) {
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *TopTracks) GetTrack() []*Track {
+	if x != nil {
+		return x.Track
+	}
+	return nil
+}
+
+type TopArtists struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Artist        []*Artist              `protobuf:"bytes,2,rep,name=artist" json:"artist,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TopArtists) Reset() {
+	*x = TopArtists{}
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TopArtists) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TopArtists) ProtoMessage() {}
+
+func (x *TopArtists) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TopArtists.ProtoReflect.Descriptor instead.
+func (*TopArtists) Descriptor() ([]byte, []int) {
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *TopArtists) GetArtist() []*Artist {
+	if x != nil {
+		return x.Artist
+	}
+	return nil
+}
+
+type Track struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Album         *Album                 `protobuf:"bytes,2,opt,name=album" json:"album,omitempty"`
+	Artists       []string               `protobuf:"bytes,3,rep,name=artists" json:"artists,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Track) Reset() {
+	*x = Track{}
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Track) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Track) ProtoMessage() {}
+
+func (x *Track) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Track.ProtoReflect.Descriptor instead.
+func (*Track) Descriptor() ([]byte, []int) {
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *Track) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *Track) GetAlbum() *Album {
+	if x != nil {
+		return x.Album
+	}
+	return nil
+}
+
+func (x *Track) GetArtists() []string {
+	if x != nil {
+		return x.Artists
+	}
+	return nil
+}
+
+type Album struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Type          *string                `protobuf:"bytes,2,opt,name=type" json:"type,omitempty"`
+	Cover         *string                `protobuf:"bytes,3,opt,name=cover" json:"cover,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Album) Reset() {
+	*x = Album{}
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Album) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Album) ProtoMessage() {}
+
+func (x *Album) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Album.ProtoReflect.Descriptor instead.
+func (*Album) Descriptor() ([]byte, []int) {
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *Album) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *Album) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
+}
+
+func (x *Album) GetCover() string {
+	if x != nil && x.Cover != nil {
+		return *x.Cover
+	}
+	return ""
+}
+
+type Artist struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Genres        []string               `protobuf:"bytes,2,rep,name=genres" json:"genres,omitempty"`
+	Image         *string                `protobuf:"bytes,3,opt,name=image" json:"image,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Artist) Reset() {
+	*x = Artist{}
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Artist) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Artist) ProtoMessage() {}
+
+func (x *Artist) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Artist.ProtoReflect.Descriptor instead.
+func (*Artist) Descriptor() ([]byte, []int) {
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *Artist) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *Artist) GetGenres() []string {
+	if x != nil {
+		return x.Genres
+	}
+	return nil
+}
+
+func (x *Artist) GetImage() string {
+	if x != nil && x.Image != nil {
+		return *x.Image
+	}
+	return ""
+}
+
 var File_grpc_user_service_user_service_proto protoreflect.FileDescriptor
 
 const file_grpc_user_service_user_service_proto_rawDesc = "" +
@@ -519,7 +931,37 @@ const file_grpc_user_service_user_service_proto_rawDesc = "" +
 	"\x06userID\x18\x02 \x01(\tR\x06userID\"=\n" +
 	"\x05Photo\x12\x1a\n" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\x12\x12\n" +
-	"\x04data\x18\x03 \x01(\fR\x04dataJ\x04\b\x01\x10\x02*2\n" +
+	"\x04data\x18\x03 \x01(\fR\x04dataJ\x04\b\x01\x10\x02\"(\n" +
+	"\x0eGetUserRequest\x12\x16\n" +
+	"\x06userID\x18\x01 \x01(\tR\x06userID\"\x81\x03\n" +
+	"\x0fGetUserResponse\x12\x16\n" +
+	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x123\n" +
+	"\x06gender\x18\x04 \x01(\x0e2\x1b.lovify_user_service.GenderR\x06gender\x12T\n" +
+	"\x11sexualOrientation\x18\x05 \x01(\x0e2&.lovify_user_service.SexualOrientationR\x11sexualOrientation\x12\x16\n" +
+	"\x06photos\x18\x06 \x03(\tR\x06photos\x12<\n" +
+	"\ttopTracks\x18\a \x01(\v2\x1e.lovify_user_service.TopTracksR\ttopTracks\x12?\n" +
+	"\n" +
+	"topArtists\x18\b \x01(\v2\x1f.lovify_user_service.TopArtistsR\n" +
+	"topArtists\"=\n" +
+	"\tTopTracks\x120\n" +
+	"\x05track\x18\x01 \x03(\v2\x1a.lovify_user_service.TrackR\x05track\"A\n" +
+	"\n" +
+	"TopArtists\x123\n" +
+	"\x06artist\x18\x02 \x03(\v2\x1b.lovify_user_service.ArtistR\x06artist\"g\n" +
+	"\x05Track\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x120\n" +
+	"\x05album\x18\x02 \x01(\v2\x1a.lovify_user_service.AlbumR\x05album\x12\x18\n" +
+	"\aartists\x18\x03 \x03(\tR\aartists\"E\n" +
+	"\x05Album\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x14\n" +
+	"\x05cover\x18\x03 \x01(\tR\x05cover\"J\n" +
+	"\x06Artist\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
+	"\x06genres\x18\x02 \x03(\tR\x06genres\x12\x14\n" +
+	"\x05image\x18\x03 \x01(\tR\x05image*2\n" +
 	"\x06Gender\x12\x12\n" +
 	"\x0eUNKNOWN_GENDER\x10\x00\x12\b\n" +
 	"\x04MALE\x10\x01\x12\n" +
@@ -529,10 +971,11 @@ const file_grpc_user_service_user_service_proto_rawDesc = "" +
 	"\x1aUNKNOWN_SEXUAL_ORIENTATION\x10\x00\x12\x10\n" +
 	"\fHETEROSEXUAL\x10\x01\x12\x0e\n" +
 	"\n" +
-	"HOMOSEXUAL\x10\x022\xa9\x03\n" +
+	"HOMOSEXUAL\x10\x022\xff\x03\n" +
 	"\vUserService\x12]\n" +
 	"\n" +
-	"CreateUser\x12&.lovify_user_service.CreateUserRequest\x1a'.lovify_user_service.CreateUserResponse\x12u\n" +
+	"CreateUser\x12&.lovify_user_service.CreateUserRequest\x1a'.lovify_user_service.CreateUserResponse\x12T\n" +
+	"\aGetUser\x12#.lovify_user_service.GetUserRequest\x1a$.lovify_user_service.GetUserResponse\x12u\n" +
 	"\x12MusicProviderLogin\x12..lovify_user_service.MusicProviderLoginRequest\x1a/.lovify_user_service.MusicProviderLoginResponse\x12l\n" +
 	"\x1aMusicProviderOAuthCallback\x126.lovify_user_service.MusicProviderOAuthCallbackRequest\x1a\x16.google.protobuf.Empty\x12V\n" +
 	"\x0fStoreUserPhotos\x12+.lovify_user_service.StoreUserPhotosRequest\x1a\x16.google.protobuf.EmptyB\x15Z\x13lovify-user/serviceb\beditionsp\xe8\a"
@@ -550,7 +993,7 @@ func file_grpc_user_service_user_service_proto_rawDescGZIP() []byte {
 }
 
 var file_grpc_user_service_user_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_grpc_user_service_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_grpc_user_service_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_grpc_user_service_user_service_proto_goTypes = []any{
 	(Gender)(0),                               // 0: lovify_user_service.Gender
 	(SexualOrientation)(0),                    // 1: lovify_user_service.SexualOrientation
@@ -561,27 +1004,43 @@ var file_grpc_user_service_user_service_proto_goTypes = []any{
 	(*MusicProviderOAuthCallbackRequest)(nil), // 6: lovify_user_service.MusicProviderOAuthCallbackRequest
 	(*StoreUserPhotosRequest)(nil),            // 7: lovify_user_service.StoreUserPhotosRequest
 	(*Photo)(nil),                             // 8: lovify_user_service.Photo
-	(*timestamppb.Timestamp)(nil),             // 9: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),                     // 10: google.protobuf.Empty
+	(*GetUserRequest)(nil),                    // 9: lovify_user_service.GetUserRequest
+	(*GetUserResponse)(nil),                   // 10: lovify_user_service.GetUserResponse
+	(*TopTracks)(nil),                         // 11: lovify_user_service.TopTracks
+	(*TopArtists)(nil),                        // 12: lovify_user_service.TopArtists
+	(*Track)(nil),                             // 13: lovify_user_service.Track
+	(*Album)(nil),                             // 14: lovify_user_service.Album
+	(*Artist)(nil),                            // 15: lovify_user_service.Artist
+	(*timestamppb.Timestamp)(nil),             // 16: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),                     // 17: google.protobuf.Empty
 }
 var file_grpc_user_service_user_service_proto_depIdxs = []int32{
-	9,  // 0: lovify_user_service.CreateUserRequest.birthday:type_name -> google.protobuf.Timestamp
+	16, // 0: lovify_user_service.CreateUserRequest.birthday:type_name -> google.protobuf.Timestamp
 	0,  // 1: lovify_user_service.CreateUserRequest.gender:type_name -> lovify_user_service.Gender
 	1,  // 2: lovify_user_service.CreateUserRequest.sexualOrientation:type_name -> lovify_user_service.SexualOrientation
 	8,  // 3: lovify_user_service.StoreUserPhotosRequest.photos:type_name -> lovify_user_service.Photo
-	2,  // 4: lovify_user_service.UserService.CreateUser:input_type -> lovify_user_service.CreateUserRequest
-	4,  // 5: lovify_user_service.UserService.MusicProviderLogin:input_type -> lovify_user_service.MusicProviderLoginRequest
-	6,  // 6: lovify_user_service.UserService.MusicProviderOAuthCallback:input_type -> lovify_user_service.MusicProviderOAuthCallbackRequest
-	7,  // 7: lovify_user_service.UserService.StoreUserPhotos:input_type -> lovify_user_service.StoreUserPhotosRequest
-	3,  // 8: lovify_user_service.UserService.CreateUser:output_type -> lovify_user_service.CreateUserResponse
-	5,  // 9: lovify_user_service.UserService.MusicProviderLogin:output_type -> lovify_user_service.MusicProviderLoginResponse
-	10, // 10: lovify_user_service.UserService.MusicProviderOAuthCallback:output_type -> google.protobuf.Empty
-	10, // 11: lovify_user_service.UserService.StoreUserPhotos:output_type -> google.protobuf.Empty
-	8,  // [8:12] is the sub-list for method output_type
-	4,  // [4:8] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	0,  // 4: lovify_user_service.GetUserResponse.gender:type_name -> lovify_user_service.Gender
+	1,  // 5: lovify_user_service.GetUserResponse.sexualOrientation:type_name -> lovify_user_service.SexualOrientation
+	11, // 6: lovify_user_service.GetUserResponse.topTracks:type_name -> lovify_user_service.TopTracks
+	12, // 7: lovify_user_service.GetUserResponse.topArtists:type_name -> lovify_user_service.TopArtists
+	13, // 8: lovify_user_service.TopTracks.track:type_name -> lovify_user_service.Track
+	15, // 9: lovify_user_service.TopArtists.artist:type_name -> lovify_user_service.Artist
+	14, // 10: lovify_user_service.Track.album:type_name -> lovify_user_service.Album
+	2,  // 11: lovify_user_service.UserService.CreateUser:input_type -> lovify_user_service.CreateUserRequest
+	9,  // 12: lovify_user_service.UserService.GetUser:input_type -> lovify_user_service.GetUserRequest
+	4,  // 13: lovify_user_service.UserService.MusicProviderLogin:input_type -> lovify_user_service.MusicProviderLoginRequest
+	6,  // 14: lovify_user_service.UserService.MusicProviderOAuthCallback:input_type -> lovify_user_service.MusicProviderOAuthCallbackRequest
+	7,  // 15: lovify_user_service.UserService.StoreUserPhotos:input_type -> lovify_user_service.StoreUserPhotosRequest
+	3,  // 16: lovify_user_service.UserService.CreateUser:output_type -> lovify_user_service.CreateUserResponse
+	10, // 17: lovify_user_service.UserService.GetUser:output_type -> lovify_user_service.GetUserResponse
+	5,  // 18: lovify_user_service.UserService.MusicProviderLogin:output_type -> lovify_user_service.MusicProviderLoginResponse
+	17, // 19: lovify_user_service.UserService.MusicProviderOAuthCallback:output_type -> google.protobuf.Empty
+	17, // 20: lovify_user_service.UserService.StoreUserPhotos:output_type -> google.protobuf.Empty
+	16, // [16:21] is the sub-list for method output_type
+	11, // [11:16] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_grpc_user_service_user_service_proto_init() }
@@ -595,7 +1054,7 @@ func file_grpc_user_service_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_grpc_user_service_user_service_proto_rawDesc), len(file_grpc_user_service_user_service_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   7,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

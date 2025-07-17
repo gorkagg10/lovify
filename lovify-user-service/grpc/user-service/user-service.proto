@@ -8,6 +8,7 @@ package lovify_user_service;
 
 service UserService {
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
   rpc MusicProviderLogin(MusicProviderLoginRequest) returns (MusicProviderLoginResponse);
   rpc MusicProviderOAuthCallback(MusicProviderOAuthCallbackRequest) returns (google.protobuf.Empty);
   rpc StoreUserPhotos(StoreUserPhotosRequest) returns (google.protobuf.Empty);
@@ -60,4 +61,45 @@ message Photo {
   reserved 1;
   string filename = 2;
   bytes data = 3;
+}
+
+message GetUserRequest {
+  string userID = 1;
+}
+
+message GetUserResponse {
+  string userID = 1;
+  string name = 2;
+  string description = 3;
+  Gender gender = 4;
+  SexualOrientation sexualOrientation = 5;
+  repeated string photos = 6;
+  TopTracks topTracks = 7;
+  TopArtists topArtists = 8;
+}
+
+message TopTracks {
+  repeated Track track = 1;
+}
+
+message TopArtists {
+  repeated Artist artist = 2;
+}
+
+message Track {
+  string name = 1;
+  Album album = 2;
+  repeated string artists = 3;
+}
+
+message Album {
+  string name = 1;
+  string type = 2;
+  string cover = 3;
+}
+
+message Artist {
+  string name = 1;
+  repeated string genres = 2;
+  string image = 3;
 }

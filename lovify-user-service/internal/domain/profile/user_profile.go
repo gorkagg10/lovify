@@ -52,6 +52,8 @@ func NewUserProfile(
 	gender string,
 	sexualOrientation string,
 	description string,
+	connectedToMusicProvider bool,
+	musicProviderInfo *MusicProviderData,
 ) *UserProfile {
 	return &UserProfile{
 		email:                    email,
@@ -60,6 +62,7 @@ func NewUserProfile(
 		gender:                   gender,
 		sexualOrientation:        sexualOrientation,
 		description:              description,
-		connectedToMusicProvider: false,
+		connectedToMusicProvider: connectedToMusicProvider,
+		musicProviderInfo:        musicProviderInfo,
 	}
 }

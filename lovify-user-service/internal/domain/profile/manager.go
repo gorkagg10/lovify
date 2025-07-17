@@ -45,7 +45,7 @@ func (m *Manager) CreateUserProfile(ctx context.Context, req *userServiceGrpc.Cr
 		return "", err
 	}
 
-	profile := events.NewProfile(req.GetEmail())
+	profile := events.NewProfile(req.GetEmail(), userProfileID)
 	profileMsg, err := profile.ToMsg()
 	if err != nil {
 		return "", err

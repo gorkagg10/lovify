@@ -7,6 +7,7 @@ import (
 	"github.com/gorkagg10/lovify/lovify-matching-service/internal/infra/mongodb"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"google.golang.org/protobuf/types/known/emptypb"
 
 	matchingServiceGrpc "github.com/gorkagg10/lovify/lovify-matching-service/grpc/matching-service"
 )
@@ -106,4 +107,8 @@ func compatible(userA, userB mongodb.UserProfile) bool {
 		return userA.Gender == userB.Gender
 	}
 	return true
+}
+
+func (m *MatchingServer) HandleLike(ctx context.Context, req *matchingServiceGrpc.HandleLikeRequest) (*emptypb.Empty, error) {
+	return &emptypb.Empty{}, nil
 }

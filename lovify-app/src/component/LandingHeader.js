@@ -15,7 +15,7 @@ function LandingHeader() {
                     <span className="brand">Lovify</span>
                 </div>
             </div>
-            <button className="login-button" onClick={handleLoginClick}>Inicia Sesión</button>
+            <button className="login-button-header" onClick={handleLoginClick}>Inicia Sesión</button>
         </header>
     );
 }

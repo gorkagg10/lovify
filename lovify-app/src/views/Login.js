@@ -15,7 +15,6 @@ function Login() {
         const formData = new FormData();
         formData.append("email", email);
         formData.append("password", password);
-        console.log(apiUrl)
 
         const response = await fetch("http://localhost:8080/auth/login", {
             method:'POST',
@@ -25,9 +24,15 @@ function Login() {
         });
 
         if (response.ok) {
-            console.log(response);
             sessionStorage.setItem('email', email)
-            navigate('/users')
+            const data = await response.json();
+            console.log(data);
+            if (data.is_profile_connected) {
+                navigate('/app')
+            }
+            else {
+                navigate('/app/profile/photos')
+            }
         } else {
             setMessage('Error logging in!');
         }
@@ -58,7 +63,7 @@ function Login() {
                     />
                 </div>
 
-                <button className="login.button" type="submit">Iniciar Sesión</button>
+                <button className="login-button" type="submit">Iniciar Sesión</button>
 
                 {message && <p className="login-message">{message}</p>}
             </form>

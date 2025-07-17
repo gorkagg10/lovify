@@ -30,19 +30,26 @@
 }
 
 .card {
-    width: 320px;
-    height: 420px;
+    width: 375px;
+    height: 667px;
     border-radius: 10px;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 24px;
-    background-size: cover;        /* ocupa todo */
-    background-position: center;   /* centrado */
-    background-repeat: no-repeat;  /* sin repetición */
 }
 
+.card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* ✅ igual que background-size: cover */
+    object-position: center;  /* ✅ igual que background-position: center */
+    border-radius: 10px;
+}
 
 .arrow {
     position: absolute;
@@ -79,11 +86,11 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 20px;
+    padding: 0 0 50px 20px;
     box-sizing: border-box;
     color: white;
-
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent); /* 🎯 gradiente difuminado */
+    border-radius: 10px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 100), 90%,transparent); /* 🎯 gradiente difuminado */
     backdrop-filter: blur(0.5px); /* opcional: desenfoque si usas fondo translúcido */
 }
 
@@ -94,7 +101,7 @@
 
 .card__actions {
     position: absolute;
-    bottom: 20px;
+    bottom: -25px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -124,4 +131,60 @@
 
 .btn:hover {
     transform: scale(1.1);
+}
+
+.top_track_photo{
+    border-radius: 4px;
+}
+
+.top__track__header {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.top__track {
+    display: flex;
+    gap: 16px;
+}
+
+.top__track__title {
+    font-weight: bold;
+}
+
+.card__info--title h2 {
+    margin: 10px 0 0 0;
+    text-align: left;
+    color: #d9d9d9;
+}
+
+.card__info--title p {
+    margin: 10px 0 0 0;
+    font-size: 16px;
+    text-align: left;
+    color: #d9d9d9;
+}
+
+.top__track_info {
+    display: flex;
+    align-items: center;
+}
+
+.bio {
+    font-weight: bold;
+}
+
+.favorite__artists {
+    font-weight: bold;
+}
+
+.artist-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.artist-row img {
+    height: 74px;
+    border-radius: 4px;
 }

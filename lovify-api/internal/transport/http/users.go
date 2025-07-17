@@ -2,6 +2,7 @@ package http
 
 import (
 	"encoding/json"
+	"fmt"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"io"
 	"log/slog"
@@ -48,7 +49,7 @@ func (h *Handler) RegisterSpotify(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	http.Redirect(w, r, "http://localhost:3000/app", http.StatusTemporaryRedirect)
+	http.Redirect(w, r, fmt.Sprintf("%s/app", h.config.FrontEndHost), http.StatusTemporaryRedirect)
 }
 
 func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
@@ -123,7 +124,6 @@ func (h *Handler) StorePhotos(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		photos[i] = &userServiceGrpc.Photo{
-			UserID:   &userID,
 			Filename: &fileHeader.Filename,
 			Data:     photo,
 		}
@@ -135,6 +135,7 @@ func (h *Handler) StorePhotos(w http.ResponseWriter, r *http.Request) {
 	_, err = h.UserServiceClient.StoreUserPhotos(
 		r.Context(),
 		&userServiceGrpc.StoreUserPhotosRequest{
+			UserID: &userID,
 			Photos: photos,
 		})
 	if err != nil {
@@ -142,4 +143,94 @@ func (h *Handler) StorePhotos(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
+}
+
+type Track struct {
+	Name    string   `json:"name"`
+	Album   Album    `json:"album"`
+	Artists []string `json:"artists"`
+}
+
+type Album struct {
+	Name  string `json:"name"`
+	Type  string `json:"type"`
+	Cover string `json:"cover"`
+}
+
+type Artist struct {
+	Name   string   `json:"name"`
+	Genres []string `json:"genres"`
+	Image  string   `json:"image"`
+}
+
+type GetUserRecommendationResponse struct {
+	Id         string   `json:"id"`
+	Name       string   `json:"name"`
+	Age        int32    `json:"age"`
+	Bio        string   `json:"bio"`
+	Photos     []string `json:"photos"`
+	TopTracks  []Track  `json:"top_tracks"`
+	TopArtists []Artist `json:"top_artists"`
+}
+
+func (h *Handler) GetRecommendations(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	_ = params["user_id"]
+
+	recommendedUsers := []string{"6e71c9a8-cb7a-4e1e-b2f0-d25439a7802b"}
+	getUserRecommendationsResponse := make([]GetUserRecommendationResponse, len(recommendedUsers))
+	for i, user := range recommendedUsers {
+		userResponse, err := h.UserServiceClient.GetUser(
+			r.Context(),
+			&userServiceGrpc.GetUserRequest{
+				UserID: &user,
+			},
+		)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		topTracks := make([]Track, len(userResponse.GetTopTracks()))
+		for j, track := range userResponse.GetTopTracks() {
+			topTracks[j] = Track{
+				Name: track.GetName(),
+				Album: Album{
+					Name:  track.GetAlbum().GetName(),
+					Type:  track.GetAlbum().GetType(),
+					Cover: track.GetAlbum().GetCover(),
+				},
+				Artists: track.GetArtists(),
+			}
+		}
+
+		topArtists := make([]Artist, len(userResponse.GetTopArtists()))
+		for j, artist := range userResponse.GetTopArtists() {
+			topArtists[j] = Artist{
+				Name:   artist.GetName(),
+				Genres: artist.GetGenres(),
+				Image:  artist.GetImage(),
+			}
+		}
+
+		getUserRecommendationsResponse[i] = GetUserRecommendationResponse{
+			Id:         userResponse.GetUserID(),
+			Name:       userResponse.GetName(),
+			Bio:        userResponse.GetDescription(),
+			Photos:     userResponse.GetPhotos(),
+			TopTracks:  topTracks,
+			TopArtists: topArtists,
+			Age:        userResponse.GetAge(),
+		}
+	}
+
+	jsonGetUserRecommendationsResponse, err := json.Marshal(getUserRecommendationsResponse)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonGetUserRecommendationsResponse)
 }

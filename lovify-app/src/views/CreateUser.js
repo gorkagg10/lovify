@@ -112,7 +112,7 @@ function CreateUser() {
                         />
                     </div>
                 </div>
-                <button type="submit">Crear Perfil</button>
+                <button type="submit" className="create-user-button">Crear Perfil</button>
             </form>
         </div>
     );

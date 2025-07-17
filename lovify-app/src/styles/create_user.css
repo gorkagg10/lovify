@@ -54,4 +54,22 @@ textarea {
     outline: none;
 }
 
+.create-user-button{
+    margin-top: 60px;
+    background: #1CD66A;
+    font-weight: bold;
+    font-size: 14px;
+    width: 300px;
+    border: none;
+    padding: 14px;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.create-user-button:hover {
+    background-color: #1db954;
+}
+
+
 

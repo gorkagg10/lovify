@@ -6,31 +6,31 @@ function Sidebar() {
     const matches = [
         {
             id: "1",
-            image: "gorka.png",
+            image: "/pexels-hannah-nelson-390257-1065084.jpg",
             age: 22,
-            name: "Gorka",
+            name: "Claudia",
         },
         {
             id: "2",
-            image: "gorka.png",
+            image: "/pexels-pixabay-415829.jpg",
             age: 18,
-            name: "Gorka",
+            name: "Julia",
         }
     ];
     const conversations = [
         {
             id: "1",
-            image: "gorka.png",
-            name: "Rahima",
+            image: "/pexels-almadastudio-609549.jpg",
+            name: "Fatima",
             age: 22,
-            last_message: "hola k ase"
+            last_message: "Hola!"
         },
         {
             id: "2",
-            image: "gorka.png",
-            name: "Gorka",
+            image: "/pexels-kqpho-1921168.jpg",
+            name: "Marina",
             age: 22,
-            last_message: "hola k ase 2 me llamo gorkan jjjjjjjjjjjjj"
+            last_message: "Que guay!"
         }
     ]
 
@@ -39,7 +39,7 @@ function Sidebar() {
             <header className="sidebar__header">
                 <Avatar
                     alt="Gorka"
-                    src="gorka.png"
+                    src="/gorka.png"
                     sx={{ width: 56, height: 56 }}
                 />
                 <span className="username">Gorka</span>

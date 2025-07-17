@@ -10,12 +10,14 @@ const (
 	Port                = "PORT"
 	AuthServiceEndpoint = "AUTH_SERVICE_ENDPOINT"
 	UserServiceEndpoint = "USER_SERVICE_ENDPOINT"
+	FrontEndHost        = "FRONT_END_HOST"
 )
 
 type Config struct {
 	Port                string
 	AuthServiceEndpoint string
 	UserServiceEndpoint string
+	FrontEndHost        string
 }
 
 func NewConfig() (*Config, error) {
@@ -32,9 +34,14 @@ func NewConfig() (*Config, error) {
 	if userServiceEndpoint == "" {
 		return nil, fmt.Errorf("%s must be set", UserServiceEndpoint)
 	}
+	frontEndHost := os.Getenv(FrontEndHost)
+	if frontEndHost == "" {
+		frontEndHost = "http://localhost:3000"
+	}
 	return &Config{
 		Port:                port,
 		AuthServiceEndpoint: authServiceEndpoint,
 		UserServiceEndpoint: userServiceEndpoint,
+		FrontEndHost:        frontEndHost,
 	}, nil
 }

@@ -8,7 +8,7 @@ services:
       - "8222:8222"     # Monitor HTTP (opcional)
       - "6222:6222"     # Cluster interno (opcional)
     volumes:
-      - nats-data:/data
+      - ./nats-data:/data
     command: >
       -js
       -sd /data
@@ -19,7 +19,7 @@ services:
     image: postgres:latest
     restart: unless-stopped
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: mysecretpassword
     ports:
@@ -29,7 +29,7 @@ services:
     image: mongodb/mongodb-community-server:latest
     restart: unless-stopped
     volumes:
-      - mongodb-data:/data/db
+      - ./mongodb-data:/data/db
     ports:
       - '27017:27017'
   lovify-auth-service:
@@ -49,8 +49,3 @@ services:
       - '8081:8081'
     depends_on:
       - postgres-db
-volumes:
-  postgres-data:
-  mongodb-data:
-  nats-data:
-

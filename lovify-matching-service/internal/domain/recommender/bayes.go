@@ -3,7 +3,7 @@ package recommender
 import "math"
 
 // cosSim calcula la similitud coseno entre dos vectores esparcidos
-func cosSim(a, b map[string]float64) float64 {
+func CosSim(a, b map[string]float64) float64 {
 	var dot, na, nb float64
 	for g, va := range a {
 		if vb, ok := b[g]; ok {

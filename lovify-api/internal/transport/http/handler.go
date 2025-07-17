@@ -18,6 +18,7 @@ import (
 
 // Handler
 type Handler struct {
+	config            *config.Config
 	Router            *mux.Router
 	Server            *http.Server
 	AuthServiceClient authServiceGrpc.AuthServiceClient
@@ -37,6 +38,7 @@ func NewHandler(
 ) *Handler {
 	slog.Info("setting up our handler")
 	h := &Handler{
+		config:            config,
 		AuthServiceClient: authServiceClient,
 		UserServiceClient: userServiceClient,
 	}
@@ -51,7 +53,7 @@ func NewHandler(
 
 	c := cors.New(
 		cors.Options{
-			AllowedOrigins:   []string{"http://localhost:3000"},
+			AllowedOrigins:   []string{"http://localhost:3000", "http://lovify-app:3000"},
 			AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 			AllowedHeaders:   []string{"*"},
 			AllowCredentials: true,
@@ -73,9 +75,11 @@ func (h *Handler) mapRoutes() {
 	h.Router.HandleFunc("/alive", h.AliveCheck).Methods("GET")
 	h.Router.HandleFunc("/auth/register", h.Register).Methods("POST")
 	h.Router.HandleFunc("/auth/login", h.Login).Methods("POST")
+	h.Router.HandleFunc("/users/{user_id}/photos", h.StorePhotos).Methods("POST")
 	h.Router.HandleFunc("/users/{user_id}/login/spotify", h.LoginSpotify)
 	h.Router.HandleFunc("/callback/spotify", h.RegisterSpotify)
 	h.Router.HandleFunc("/users", h.CreateUser).Methods("POST")
+	h.Router.HandleFunc("/users/{user_id}/recommendations", h.GetRecommendations).Methods("GET")
 	//h.Router.HandleFunc("/auth/protected", h.Protected).Methods("POST")
 }
 

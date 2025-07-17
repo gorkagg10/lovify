@@ -1,9 +1,11 @@
 import {useState} from "react";
 import {useConfig} from "../context/ConfigContext";
+import {useNavigate} from "react-router-dom";
 
 const MAX_IMAGES = 6;
 
 function ProfilePhotoUploader() {
+    const navigate = useNavigate();
     const { apiUrl } = useConfig()
     const [photos, setPhotos] = useState([]);
 
@@ -16,8 +18,7 @@ function ProfilePhotoUploader() {
     const handleAdd = (e) => {
         const file = e.target.files[0];
         if (!file) return;
-        const url = URL.createObjectURL(file);
-        setPhotos((prev) => [...prev, url]);
+        setPhotos((prev) => [...prev, file]);
     };
 
     const handleSave = async () => {
@@ -34,7 +35,11 @@ function ProfilePhotoUploader() {
             body: formData,
         })
 
-        console.log(response)
+        if (response.ok) {
+            navigate('/spotify-connect')
+        }
+
+        //TODO: Display Error Message?
     }
 
     return (
@@ -45,7 +50,7 @@ function ProfilePhotoUploader() {
                     <div className="photo-slot" key={i}>
                         {photos[i] ? (
                             <>
-                                <img src={photos[i]} alt={`Foto ${i}`}/>
+                                <img src={URL.createObjectURL(photos[i])} alt={`Foto ${i}`}/>
                                 <button className="remove-btn" onClick={() => handleRemove(i)}>
                                     ×
                                 </button>

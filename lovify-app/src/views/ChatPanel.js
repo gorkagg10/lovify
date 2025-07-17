@@ -1,10 +1,12 @@
+import {useState} from "react";
+
 function ChatPanel() {
     const selectedUser = {
         id: "2",
-        image: "gorka.png",
-        name: "Gorka",
+        image: "/pexels-kqpho-1921168.jpg",
+        name: "Marina",
         age: 22,
-        last_message: "hola k ase 2 me llamo gorkan jjjjjjjjjjjjj"
+        timestamp: "2025-07-02T19:30:00Z",
     }
 
     const messages = [
@@ -17,7 +19,7 @@ function ChatPanel() {
         {
             id: 2,
             sender: "me", // mensaje enviado por ti
-            text: "¡Hola Júlia! Muy bien, ¿y tú?",
+            text: "¡Hola Marina! Muy bien, ¿y tú?",
             timestamp: "2025-07-03T19:31:00Z",
         },
         {
@@ -35,16 +37,23 @@ function ChatPanel() {
         {
             id: 5,
             sender: "them",
-            text: "Sin duda *Starboy*. ¿Y la tuya?",
+            text: "Sin duda Starboy. ¿Y la tuya?",
             timestamp: "2025-07-03T19:33:00Z",
-        },]
+        },
+        {
+            id: 6,
+            sender: "me",
+            text: "Que guay!",
+            timestamp: "2025-07-03T19:34:00Z",
+        },
+    ]
 
     return (
         <div className="chat-panel">
-            {/*<div className="chat-panel__header">
+            <div className="chat-panel__header">
                 <img className="chat-panel__logo" src={selectedUser.image} alt={selectedUser.name}/>
                 <span>{selectedUser.name}, {selectedUser.age}</span>
-            </div>*/}
+            </div>
 
             <div className="chat-messages">
                 {messages.map((msg, i) => (
@@ -55,6 +64,13 @@ function ChatPanel() {
                         {msg.text}
                     </div>
                 ))}
+            </div>
+            <div className="chat-input">
+                <input
+                    type="text"
+                    placeholder="Escribe un mensaje..."
+                />
+                <button>ENVIAR</button>
             </div>
         </div>
     )

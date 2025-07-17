@@ -1,4 +1,4 @@
-package server
+package main
 
 import (
 	"context"
@@ -49,7 +49,8 @@ func main() {
 	slog.Info("listening", slog.String("port", fmt.Sprintf(":%d", port)))
 
 	userCollection := dbClient.Database("userService").Collection("profiles")
-	matchingServer := server.NewMatchingServer(userCollection)
+	musicProviderDataCollection := dbClient.Database("userService").Collection("musicProviderData")
+	matchingServer := server.NewMatchingServer(userCollection, musicProviderDataCollection)
 	srv := SetupGrpcServer(matchingServer)
 
 	go func() {

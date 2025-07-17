@@ -1,12 +1,7 @@
 package mongodb
 
 import (
-	"context"
-	"go.mongodb.org/mongo-driver/bson"
-
 	"go.mongodb.org/mongo-driver/mongo"
-
-	"github.com/gorkagg10/lovify/lovify-matching-service/internal/domain/profile"
 )
 
 type UserRepository struct {
@@ -23,6 +18,7 @@ func NewUserRepository(
 	}
 }
 
+/*
 func (u *UserRepository) GetUserProfile(ctx context.Context, userID string) (*profile.UserProfile, error) {
 	var user
 	err := u.UserProfileCollection.FindOne(ctx, bson.M{"user_id": userID}).Decode(&requester)
@@ -31,3 +27,4 @@ func (u *UserRepository) GetUserProfile(ctx context.Context, userID string) (*pr
 	}
 	return userProfileID, nil
 }
+*/

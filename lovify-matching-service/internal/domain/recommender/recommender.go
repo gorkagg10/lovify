@@ -65,7 +65,7 @@ func BuildPreferences(users []User, minScore float64) map[string][]ScoredUser {
 			if user.Email == vectorUser.Email || !compatible(user, vectorUser) {
 				continue
 			}
-			score := cosSim(vectors[user.Email], vectors[vectorUser.Email])
+			score := CosSim(vectors[user.Email], vectors[vectorUser.Email])
 			if score >= minScore {
 				preferences[user.Email] = append(preferences[user.Email], ScoredUser{
 					OtherID: vectorUser.Email,

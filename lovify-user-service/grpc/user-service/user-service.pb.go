@@ -545,8 +545,9 @@ type GetUserResponse struct {
 	Gender            *Gender                `protobuf:"varint,4,opt,name=gender,enum=lovify_user_service.Gender" json:"gender,omitempty"`
 	SexualOrientation *SexualOrientation     `protobuf:"varint,5,opt,name=sexualOrientation,enum=lovify_user_service.SexualOrientation" json:"sexualOrientation,omitempty"`
 	Photos            []string               `protobuf:"bytes,6,rep,name=photos" json:"photos,omitempty"`
-	TopTracks         *TopTracks             `protobuf:"bytes,7,opt,name=topTracks" json:"topTracks,omitempty"`
-	TopArtists        *TopArtists            `protobuf:"bytes,8,opt,name=topArtists" json:"topArtists,omitempty"`
+	TopTracks         []*Track               `protobuf:"bytes,7,rep,name=topTracks" json:"topTracks,omitempty"`
+	TopArtists        []*Artist              `protobuf:"bytes,8,rep,name=topArtists" json:"topArtists,omitempty"`
+	Age               *int32                 `protobuf:"varint,9,opt,name=age" json:"age,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -623,106 +624,25 @@ func (x *GetUserResponse) GetPhotos() []string {
 	return nil
 }
 
-func (x *GetUserResponse) GetTopTracks() *TopTracks {
+func (x *GetUserResponse) GetTopTracks() []*Track {
 	if x != nil {
 		return x.TopTracks
 	}
 	return nil
 }
 
-func (x *GetUserResponse) GetTopArtists() *TopArtists {
+func (x *GetUserResponse) GetTopArtists() []*Artist {
 	if x != nil {
 		return x.TopArtists
 	}
 	return nil
 }
 
-type TopTracks struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Track         []*Track               `protobuf:"bytes,1,rep,name=track" json:"track,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TopTracks) Reset() {
-	*x = TopTracks{}
-	mi := &file_grpc_user_service_user_service_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TopTracks) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TopTracks) ProtoMessage() {}
-
-func (x *TopTracks) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_user_service_user_service_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
+func (x *GetUserResponse) GetAge() int32 {
+	if x != nil && x.Age != nil {
+		return *x.Age
 	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TopTracks.ProtoReflect.Descriptor instead.
-func (*TopTracks) Descriptor() ([]byte, []int) {
-	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *TopTracks) GetTrack() []*Track {
-	if x != nil {
-		return x.Track
-	}
-	return nil
-}
-
-type TopArtists struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Artist        []*Artist              `protobuf:"bytes,2,rep,name=artist" json:"artist,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TopArtists) Reset() {
-	*x = TopArtists{}
-	mi := &file_grpc_user_service_user_service_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TopArtists) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TopArtists) ProtoMessage() {}
-
-func (x *TopArtists) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_user_service_user_service_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TopArtists.ProtoReflect.Descriptor instead.
-func (*TopArtists) Descriptor() ([]byte, []int) {
-	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *TopArtists) GetArtist() []*Artist {
-	if x != nil {
-		return x.Artist
-	}
-	return nil
+	return 0
 }
 
 type Track struct {
@@ -736,7 +656,7 @@ type Track struct {
 
 func (x *Track) Reset() {
 	*x = Track{}
-	mi := &file_grpc_user_service_user_service_proto_msgTypes[11]
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -748,7 +668,7 @@ func (x *Track) String() string {
 func (*Track) ProtoMessage() {}
 
 func (x *Track) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_user_service_user_service_proto_msgTypes[11]
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -761,7 +681,7 @@ func (x *Track) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Track.ProtoReflect.Descriptor instead.
 func (*Track) Descriptor() ([]byte, []int) {
-	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{11}
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Track) GetName() string {
@@ -796,7 +716,7 @@ type Album struct {
 
 func (x *Album) Reset() {
 	*x = Album{}
-	mi := &file_grpc_user_service_user_service_proto_msgTypes[12]
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -808,7 +728,7 @@ func (x *Album) String() string {
 func (*Album) ProtoMessage() {}
 
 func (x *Album) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_user_service_user_service_proto_msgTypes[12]
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -821,7 +741,7 @@ func (x *Album) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Album.ProtoReflect.Descriptor instead.
 func (*Album) Descriptor() ([]byte, []int) {
-	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{12}
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *Album) GetName() string {
@@ -856,7 +776,7 @@ type Artist struct {
 
 func (x *Artist) Reset() {
 	*x = Artist{}
-	mi := &file_grpc_user_service_user_service_proto_msgTypes[13]
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -868,7 +788,7 @@ func (x *Artist) String() string {
 func (*Artist) ProtoMessage() {}
 
 func (x *Artist) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_user_service_user_service_proto_msgTypes[13]
+	mi := &file_grpc_user_service_user_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -881,7 +801,7 @@ func (x *Artist) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Artist.ProtoReflect.Descriptor instead.
 func (*Artist) Descriptor() ([]byte, []int) {
-	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{13}
+	return file_grpc_user_service_user_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *Artist) GetName() string {
@@ -933,23 +853,19 @@ const file_grpc_user_service_user_service_proto_rawDesc = "" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\x12\x12\n" +
 	"\x04data\x18\x03 \x01(\fR\x04dataJ\x04\b\x01\x10\x02\"(\n" +
 	"\x0eGetUserRequest\x12\x16\n" +
-	"\x06userID\x18\x01 \x01(\tR\x06userID\"\x81\x03\n" +
+	"\x06userID\x18\x01 \x01(\tR\x06userID\"\x8b\x03\n" +
 	"\x0fGetUserResponse\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x123\n" +
 	"\x06gender\x18\x04 \x01(\x0e2\x1b.lovify_user_service.GenderR\x06gender\x12T\n" +
 	"\x11sexualOrientation\x18\x05 \x01(\x0e2&.lovify_user_service.SexualOrientationR\x11sexualOrientation\x12\x16\n" +
-	"\x06photos\x18\x06 \x03(\tR\x06photos\x12<\n" +
-	"\ttopTracks\x18\a \x01(\v2\x1e.lovify_user_service.TopTracksR\ttopTracks\x12?\n" +
+	"\x06photos\x18\x06 \x03(\tR\x06photos\x128\n" +
+	"\ttopTracks\x18\a \x03(\v2\x1a.lovify_user_service.TrackR\ttopTracks\x12;\n" +
 	"\n" +
-	"topArtists\x18\b \x01(\v2\x1f.lovify_user_service.TopArtistsR\n" +
-	"topArtists\"=\n" +
-	"\tTopTracks\x120\n" +
-	"\x05track\x18\x01 \x03(\v2\x1a.lovify_user_service.TrackR\x05track\"A\n" +
-	"\n" +
-	"TopArtists\x123\n" +
-	"\x06artist\x18\x02 \x03(\v2\x1b.lovify_user_service.ArtistR\x06artist\"g\n" +
+	"topArtists\x18\b \x03(\v2\x1b.lovify_user_service.ArtistR\n" +
+	"topArtists\x12\x10\n" +
+	"\x03age\x18\t \x01(\x05R\x03age\"g\n" +
 	"\x05Track\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x120\n" +
 	"\x05album\x18\x02 \x01(\v2\x1a.lovify_user_service.AlbumR\x05album\x12\x18\n" +
@@ -993,7 +909,7 @@ func file_grpc_user_service_user_service_proto_rawDescGZIP() []byte {
 }
 
 var file_grpc_user_service_user_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_grpc_user_service_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_grpc_user_service_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_grpc_user_service_user_service_proto_goTypes = []any{
 	(Gender)(0),                               // 0: lovify_user_service.Gender
 	(SexualOrientation)(0),                    // 1: lovify_user_service.SexualOrientation
@@ -1006,41 +922,37 @@ var file_grpc_user_service_user_service_proto_goTypes = []any{
 	(*Photo)(nil),                             // 8: lovify_user_service.Photo
 	(*GetUserRequest)(nil),                    // 9: lovify_user_service.GetUserRequest
 	(*GetUserResponse)(nil),                   // 10: lovify_user_service.GetUserResponse
-	(*TopTracks)(nil),                         // 11: lovify_user_service.TopTracks
-	(*TopArtists)(nil),                        // 12: lovify_user_service.TopArtists
-	(*Track)(nil),                             // 13: lovify_user_service.Track
-	(*Album)(nil),                             // 14: lovify_user_service.Album
-	(*Artist)(nil),                            // 15: lovify_user_service.Artist
-	(*timestamppb.Timestamp)(nil),             // 16: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),                     // 17: google.protobuf.Empty
+	(*Track)(nil),                             // 11: lovify_user_service.Track
+	(*Album)(nil),                             // 12: lovify_user_service.Album
+	(*Artist)(nil),                            // 13: lovify_user_service.Artist
+	(*timestamppb.Timestamp)(nil),             // 14: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),                     // 15: google.protobuf.Empty
 }
 var file_grpc_user_service_user_service_proto_depIdxs = []int32{
-	16, // 0: lovify_user_service.CreateUserRequest.birthday:type_name -> google.protobuf.Timestamp
+	14, // 0: lovify_user_service.CreateUserRequest.birthday:type_name -> google.protobuf.Timestamp
 	0,  // 1: lovify_user_service.CreateUserRequest.gender:type_name -> lovify_user_service.Gender
 	1,  // 2: lovify_user_service.CreateUserRequest.sexualOrientation:type_name -> lovify_user_service.SexualOrientation
 	8,  // 3: lovify_user_service.StoreUserPhotosRequest.photos:type_name -> lovify_user_service.Photo
 	0,  // 4: lovify_user_service.GetUserResponse.gender:type_name -> lovify_user_service.Gender
 	1,  // 5: lovify_user_service.GetUserResponse.sexualOrientation:type_name -> lovify_user_service.SexualOrientation
-	11, // 6: lovify_user_service.GetUserResponse.topTracks:type_name -> lovify_user_service.TopTracks
-	12, // 7: lovify_user_service.GetUserResponse.topArtists:type_name -> lovify_user_service.TopArtists
-	13, // 8: lovify_user_service.TopTracks.track:type_name -> lovify_user_service.Track
-	15, // 9: lovify_user_service.TopArtists.artist:type_name -> lovify_user_service.Artist
-	14, // 10: lovify_user_service.Track.album:type_name -> lovify_user_service.Album
-	2,  // 11: lovify_user_service.UserService.CreateUser:input_type -> lovify_user_service.CreateUserRequest
-	9,  // 12: lovify_user_service.UserService.GetUser:input_type -> lovify_user_service.GetUserRequest
-	4,  // 13: lovify_user_service.UserService.MusicProviderLogin:input_type -> lovify_user_service.MusicProviderLoginRequest
-	6,  // 14: lovify_user_service.UserService.MusicProviderOAuthCallback:input_type -> lovify_user_service.MusicProviderOAuthCallbackRequest
-	7,  // 15: lovify_user_service.UserService.StoreUserPhotos:input_type -> lovify_user_service.StoreUserPhotosRequest
-	3,  // 16: lovify_user_service.UserService.CreateUser:output_type -> lovify_user_service.CreateUserResponse
-	10, // 17: lovify_user_service.UserService.GetUser:output_type -> lovify_user_service.GetUserResponse
-	5,  // 18: lovify_user_service.UserService.MusicProviderLogin:output_type -> lovify_user_service.MusicProviderLoginResponse
-	17, // 19: lovify_user_service.UserService.MusicProviderOAuthCallback:output_type -> google.protobuf.Empty
-	17, // 20: lovify_user_service.UserService.StoreUserPhotos:output_type -> google.protobuf.Empty
-	16, // [16:21] is the sub-list for method output_type
-	11, // [11:16] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	11, // 6: lovify_user_service.GetUserResponse.topTracks:type_name -> lovify_user_service.Track
+	13, // 7: lovify_user_service.GetUserResponse.topArtists:type_name -> lovify_user_service.Artist
+	12, // 8: lovify_user_service.Track.album:type_name -> lovify_user_service.Album
+	2,  // 9: lovify_user_service.UserService.CreateUser:input_type -> lovify_user_service.CreateUserRequest
+	9,  // 10: lovify_user_service.UserService.GetUser:input_type -> lovify_user_service.GetUserRequest
+	4,  // 11: lovify_user_service.UserService.MusicProviderLogin:input_type -> lovify_user_service.MusicProviderLoginRequest
+	6,  // 12: lovify_user_service.UserService.MusicProviderOAuthCallback:input_type -> lovify_user_service.MusicProviderOAuthCallbackRequest
+	7,  // 13: lovify_user_service.UserService.StoreUserPhotos:input_type -> lovify_user_service.StoreUserPhotosRequest
+	3,  // 14: lovify_user_service.UserService.CreateUser:output_type -> lovify_user_service.CreateUserResponse
+	10, // 15: lovify_user_service.UserService.GetUser:output_type -> lovify_user_service.GetUserResponse
+	5,  // 16: lovify_user_service.UserService.MusicProviderLogin:output_type -> lovify_user_service.MusicProviderLoginResponse
+	15, // 17: lovify_user_service.UserService.MusicProviderOAuthCallback:output_type -> google.protobuf.Empty
+	15, // 18: lovify_user_service.UserService.StoreUserPhotos:output_type -> google.protobuf.Empty
+	14, // [14:19] is the sub-list for method output_type
+	9,  // [9:14] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_grpc_user_service_user_service_proto_init() }
@@ -1054,7 +966,7 @@ func file_grpc_user_service_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_grpc_user_service_user_service_proto_rawDesc), len(file_grpc_user_service_user_service_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   14,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

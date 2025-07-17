@@ -8,6 +8,7 @@ import (
 
 type UserRepository interface {
 	CreateUserProfile(context.Context, *UserProfile) (string, error)
+	GetUserProfile(context.Context, string) (*UserProfile, error)
 	ConnectWithMusicProvider(ctx context.Context, userID string) error
 	StoreMusicProviderToken(ctx context.Context, userID string, token *oauth.Token) error
 	StoreMusicProviderData(ctx context.Context, userID string, musicProviderData *MusicProviderData) error

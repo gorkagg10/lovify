@@ -37,6 +37,8 @@ func (m *Manager) CreateUserProfile(ctx context.Context, req *userServiceGrpc.Cr
 		req.GetGender().String(),
 		req.GetSexualOrientation().String(),
 		req.GetDescription(),
+		false,
+		nil,
 	)
 	userProfileID, err := m.userRepository.CreateUserProfile(ctx, userProfile)
 	if err != nil {
@@ -122,4 +124,12 @@ func getUserID(state string) (string, error) {
 		return "", err
 	}
 	return string(stateBytes), nil
+}
+
+func (m *Manager) GetProfile(ctx context.Context, userID string) (*UserProfile, error) {
+	userProfile, err := m.userRepository.GetUserProfile(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+	return userProfile, nil
 }

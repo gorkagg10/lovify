@@ -74,16 +74,9 @@ message GetUserResponse {
   Gender gender = 4;
   SexualOrientation sexualOrientation = 5;
   repeated string photos = 6;
-  TopTracks topTracks = 7;
-  TopArtists topArtists = 8;
-}
-
-message TopTracks {
-  repeated Track track = 1;
-}
-
-message TopArtists {
-  repeated Artist artist = 2;
+  repeated Track topTracks = 7;
+  repeated Artist topArtists = 8;
+  int32 age = 9;
 }
 
 message Track {

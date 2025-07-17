@@ -9,6 +9,7 @@ package service
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -20,6 +21,55 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+type Like int32
+
+const (
+	Like_UNKNOWN_LIKE Like = 0
+	Like_LIKE         Like = 1
+	Like_DISLIKE      Like = 2
+)
+
+// Enum value maps for Like.
+var (
+	Like_name = map[int32]string{
+		0: "UNKNOWN_LIKE",
+		1: "LIKE",
+		2: "DISLIKE",
+	}
+	Like_value = map[string]int32{
+		"UNKNOWN_LIKE": 0,
+		"LIKE":         1,
+		"DISLIKE":      2,
+	}
+)
+
+func (x Like) Enum() *Like {
+	p := new(Like)
+	*p = x
+	return p
+}
+
+func (x Like) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Like) Descriptor() protoreflect.EnumDescriptor {
+	return file_grpc_matching_service_matching_service_proto_enumTypes[0].Descriptor()
+}
+
+func (Like) Type() protoreflect.EnumType {
+	return &file_grpc_matching_service_matching_service_proto_enumTypes[0]
+}
+
+func (x Like) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Like.Descriptor instead.
+func (Like) EnumDescriptor() ([]byte, []int) {
+	return file_grpc_matching_service_matching_service_proto_rawDescGZIP(), []int{0}
+}
 
 type RecommendUsersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -109,17 +159,89 @@ func (x *RecommendUsersResponse) GetRecommendedUsersIDs() []string {
 	return nil
 }
 
+type HandleLikeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FromUserID    *string                `protobuf:"bytes,1,opt,name=fromUserID" json:"fromUserID,omitempty"`
+	ToUserID      *string                `protobuf:"bytes,2,opt,name=toUserID" json:"toUserID,omitempty"`
+	Like          *Like                  `protobuf:"varint,3,opt,name=like,enum=lovify_matching_service.Like" json:"like,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HandleLikeRequest) Reset() {
+	*x = HandleLikeRequest{}
+	mi := &file_grpc_matching_service_matching_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HandleLikeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HandleLikeRequest) ProtoMessage() {}
+
+func (x *HandleLikeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_matching_service_matching_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HandleLikeRequest.ProtoReflect.Descriptor instead.
+func (*HandleLikeRequest) Descriptor() ([]byte, []int) {
+	return file_grpc_matching_service_matching_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *HandleLikeRequest) GetFromUserID() string {
+	if x != nil && x.FromUserID != nil {
+		return *x.FromUserID
+	}
+	return ""
+}
+
+func (x *HandleLikeRequest) GetToUserID() string {
+	if x != nil && x.ToUserID != nil {
+		return *x.ToUserID
+	}
+	return ""
+}
+
+func (x *HandleLikeRequest) GetLike() Like {
+	if x != nil && x.Like != nil {
+		return *x.Like
+	}
+	return Like_UNKNOWN_LIKE
+}
+
 var File_grpc_matching_service_matching_service_proto protoreflect.FileDescriptor
 
 const file_grpc_matching_service_matching_service_proto_rawDesc = "" +
 	"\n" +
-	",grpc/matching-service/matching-service.proto\x12\x17lovify_matching_service\"/\n" +
+	",grpc/matching-service/matching-service.proto\x12\x17lovify_matching_service\x1a\x1bgoogle/protobuf/empty.proto\"/\n" +
 	"\x15RecommendUsersRequest\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\"J\n" +
 	"\x16RecommendUsersResponse\x120\n" +
-	"\x13recommendedUsersIDs\x18\x01 \x03(\tR\x13recommendedUsersIDs2\x84\x01\n" +
+	"\x13recommendedUsersIDs\x18\x01 \x03(\tR\x13recommendedUsersIDs\"\x82\x01\n" +
+	"\x11HandleLikeRequest\x12\x1e\n" +
+	"\n" +
+	"fromUserID\x18\x01 \x01(\tR\n" +
+	"fromUserID\x12\x1a\n" +
+	"\btoUserID\x18\x02 \x01(\tR\btoUserID\x121\n" +
+	"\x04like\x18\x03 \x01(\x0e2\x1d.lovify_matching_service.LikeR\x04like*/\n" +
+	"\x04Like\x12\x10\n" +
+	"\fUNKNOWN_LIKE\x10\x00\x12\b\n" +
+	"\x04LIKE\x10\x01\x12\v\n" +
+	"\aDISLIKE\x10\x022\xd6\x01\n" +
 	"\x0fMatchingService\x12q\n" +
-	"\x0eRecommendUsers\x12..lovify_matching_service.RecommendUsersRequest\x1a/.lovify_matching_service.RecommendUsersResponseB\x19Z\x17lovify-matching/serviceb\beditionsp\xe8\a"
+	"\x0eRecommendUsers\x12..lovify_matching_service.RecommendUsersRequest\x1a/.lovify_matching_service.RecommendUsersResponse\x12P\n" +
+	"\n" +
+	"HandleLike\x12*.lovify_matching_service.HandleLikeRequest\x1a\x16.google.protobuf.EmptyB\x19Z\x17lovify-matching/serviceb\beditionsp\xe8\a"
 
 var (
 	file_grpc_matching_service_matching_service_proto_rawDescOnce sync.Once
@@ -133,19 +255,26 @@ func file_grpc_matching_service_matching_service_proto_rawDescGZIP() []byte {
 	return file_grpc_matching_service_matching_service_proto_rawDescData
 }
 
-var file_grpc_matching_service_matching_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_grpc_matching_service_matching_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_grpc_matching_service_matching_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_grpc_matching_service_matching_service_proto_goTypes = []any{
-	(*RecommendUsersRequest)(nil),  // 0: lovify_matching_service.RecommendUsersRequest
-	(*RecommendUsersResponse)(nil), // 1: lovify_matching_service.RecommendUsersResponse
+	(Like)(0),                      // 0: lovify_matching_service.Like
+	(*RecommendUsersRequest)(nil),  // 1: lovify_matching_service.RecommendUsersRequest
+	(*RecommendUsersResponse)(nil), // 2: lovify_matching_service.RecommendUsersResponse
+	(*HandleLikeRequest)(nil),      // 3: lovify_matching_service.HandleLikeRequest
+	(*emptypb.Empty)(nil),          // 4: google.protobuf.Empty
 }
 var file_grpc_matching_service_matching_service_proto_depIdxs = []int32{
-	0, // 0: lovify_matching_service.MatchingService.RecommendUsers:input_type -> lovify_matching_service.RecommendUsersRequest
-	1, // 1: lovify_matching_service.MatchingService.RecommendUsers:output_type -> lovify_matching_service.RecommendUsersResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: lovify_matching_service.HandleLikeRequest.like:type_name -> lovify_matching_service.Like
+	1, // 1: lovify_matching_service.MatchingService.RecommendUsers:input_type -> lovify_matching_service.RecommendUsersRequest
+	3, // 2: lovify_matching_service.MatchingService.HandleLike:input_type -> lovify_matching_service.HandleLikeRequest
+	2, // 3: lovify_matching_service.MatchingService.RecommendUsers:output_type -> lovify_matching_service.RecommendUsersResponse
+	4, // 4: lovify_matching_service.MatchingService.HandleLike:output_type -> google.protobuf.Empty
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_grpc_matching_service_matching_service_proto_init() }
@@ -158,13 +287,14 @@ func file_grpc_matching_service_matching_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_grpc_matching_service_matching_service_proto_rawDesc), len(file_grpc_matching_service_matching_service_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   2,
+			NumEnums:      1,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_grpc_matching_service_matching_service_proto_goTypes,
 		DependencyIndexes: file_grpc_matching_service_matching_service_proto_depIdxs,
+		EnumInfos:         file_grpc_matching_service_matching_service_proto_enumTypes,
 		MessageInfos:      file_grpc_matching_service_matching_service_proto_msgTypes,
 	}.Build()
 	File_grpc_matching_service_matching_service_proto = out.File

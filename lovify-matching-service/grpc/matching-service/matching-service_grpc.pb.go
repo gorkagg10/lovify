@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -20,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	MatchingService_RecommendUsers_FullMethodName = "/lovify_matching_service.MatchingService/RecommendUsers"
+	MatchingService_HandleLike_FullMethodName     = "/lovify_matching_service.MatchingService/HandleLike"
 )
 
 // MatchingServiceClient is the client API for MatchingService service.
@@ -27,6 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MatchingServiceClient interface {
 	RecommendUsers(ctx context.Context, in *RecommendUsersRequest, opts ...grpc.CallOption) (*RecommendUsersResponse, error)
+	HandleLike(ctx context.Context, in *HandleLikeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type matchingServiceClient struct {
@@ -47,11 +50,22 @@ func (c *matchingServiceClient) RecommendUsers(ctx context.Context, in *Recommen
 	return out, nil
 }
 
+func (c *matchingServiceClient) HandleLike(ctx context.Context, in *HandleLikeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, MatchingService_HandleLike_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MatchingServiceServer is the server API for MatchingService service.
 // All implementations must embed UnimplementedMatchingServiceServer
 // for forward compatibility.
 type MatchingServiceServer interface {
 	RecommendUsers(context.Context, *RecommendUsersRequest) (*RecommendUsersResponse, error)
+	HandleLike(context.Context, *HandleLikeRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedMatchingServiceServer()
 }
 
@@ -64,6 +78,9 @@ type UnimplementedMatchingServiceServer struct{}
 
 func (UnimplementedMatchingServiceServer) RecommendUsers(context.Context, *RecommendUsersRequest) (*RecommendUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RecommendUsers not implemented")
+}
+func (UnimplementedMatchingServiceServer) HandleLike(context.Context, *HandleLikeRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HandleLike not implemented")
 }
 func (UnimplementedMatchingServiceServer) mustEmbedUnimplementedMatchingServiceServer() {}
 func (UnimplementedMatchingServiceServer) testEmbeddedByValue()                         {}
@@ -104,6 +121,24 @@ func _MatchingService_RecommendUsers_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MatchingService_HandleLike_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HandleLikeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchingServiceServer).HandleLike(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchingService_HandleLike_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchingServiceServer).HandleLike(ctx, req.(*HandleLikeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MatchingService_ServiceDesc is the grpc.ServiceDesc for MatchingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +149,10 @@ var MatchingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RecommendUsers",
 			Handler:    _MatchingService_RecommendUsers_Handler,
+		},
+		{
+			MethodName: "HandleLike",
+			Handler:    _MatchingService_HandleLike_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -21,7 +21,7 @@ message RecommendUsersResponse {
 message HandleLikeRequest {
   string fromUserID = 1;
   string toUserID = 2;
-  Like like = 3;
+  Like type = 3;
 }
 
 enum Like {

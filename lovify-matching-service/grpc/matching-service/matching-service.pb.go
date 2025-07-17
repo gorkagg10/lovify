@@ -163,7 +163,7 @@ type HandleLikeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FromUserID    *string                `protobuf:"bytes,1,opt,name=fromUserID" json:"fromUserID,omitempty"`
 	ToUserID      *string                `protobuf:"bytes,2,opt,name=toUserID" json:"toUserID,omitempty"`
-	Like          *Like                  `protobuf:"varint,3,opt,name=like,enum=lovify_matching_service.Like" json:"like,omitempty"`
+	Type          *Like                  `protobuf:"varint,3,opt,name=type,enum=lovify_matching_service.Like" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -212,9 +212,9 @@ func (x *HandleLikeRequest) GetToUserID() string {
 	return ""
 }
 
-func (x *HandleLikeRequest) GetLike() Like {
-	if x != nil && x.Like != nil {
-		return *x.Like
+func (x *HandleLikeRequest) GetType() Like {
+	if x != nil && x.Type != nil {
+		return *x.Type
 	}
 	return Like_UNKNOWN_LIKE
 }
@@ -233,7 +233,7 @@ const file_grpc_matching_service_matching_service_proto_rawDesc = "" +
 	"fromUserID\x18\x01 \x01(\tR\n" +
 	"fromUserID\x12\x1a\n" +
 	"\btoUserID\x18\x02 \x01(\tR\btoUserID\x121\n" +
-	"\x04like\x18\x03 \x01(\x0e2\x1d.lovify_matching_service.LikeR\x04like*/\n" +
+	"\x04type\x18\x03 \x01(\x0e2\x1d.lovify_matching_service.LikeR\x04type*/\n" +
 	"\x04Like\x12\x10\n" +
 	"\fUNKNOWN_LIKE\x10\x00\x12\b\n" +
 	"\x04LIKE\x10\x01\x12\v\n" +
@@ -265,7 +265,7 @@ var file_grpc_matching_service_matching_service_proto_goTypes = []any{
 	(*emptypb.Empty)(nil),          // 4: google.protobuf.Empty
 }
 var file_grpc_matching_service_matching_service_proto_depIdxs = []int32{
-	0, // 0: lovify_matching_service.HandleLikeRequest.like:type_name -> lovify_matching_service.Like
+	0, // 0: lovify_matching_service.HandleLikeRequest.type:type_name -> lovify_matching_service.Like
 	1, // 1: lovify_matching_service.MatchingService.RecommendUsers:input_type -> lovify_matching_service.RecommendUsersRequest
 	3, // 2: lovify_matching_service.MatchingService.HandleLike:input_type -> lovify_matching_service.HandleLikeRequest
 	2, // 3: lovify_matching_service.MatchingService.RecommendUsers:output_type -> lovify_matching_service.RecommendUsersResponse

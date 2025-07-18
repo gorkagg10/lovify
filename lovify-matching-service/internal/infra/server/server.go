@@ -8,6 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"google.golang.org/protobuf/types/known/emptypb"
+	"time"
 
 	matchingServiceGrpc "github.com/gorkagg10/lovify/lovify-matching-service/grpc/matching-service"
 )
@@ -20,12 +21,21 @@ type MatchingServer struct {
 	matchingServiceGrpc.UnimplementedMatchingServiceServer
 	UserProfileCollection       *mongo.Collection
 	MusicProviderDataCollection *mongo.Collection
+	LikeCollection              *mongo.Collection
+	MatchCollection             *mongo.Collection
 }
 
-func NewMatchingServer(userProfileCollection *mongo.Collection, musicProviderDataCollection *mongo.Collection) *MatchingServer {
+func NewMatchingServer(
+	userProfileCollection *mongo.Collection,
+	musicProviderDataCollection *mongo.Collection,
+	likeCollection *mongo.Collection,
+	matchCollection *mongo.Collection,
+) *MatchingServer {
 	return &MatchingServer{
 		UserProfileCollection:       userProfileCollection,
 		MusicProviderDataCollection: musicProviderDataCollection,
+		LikeCollection:              likeCollection,
+		MatchCollection:             matchCollection,
 	}
 }
 
@@ -110,5 +120,36 @@ func compatible(userA, userB mongodb.UserProfile) bool {
 }
 
 func (m *MatchingServer) HandleLike(ctx context.Context, req *matchingServiceGrpc.HandleLikeRequest) (*emptypb.Empty, error) {
+	newLike := mongodb.Like{
+		FromUserId: req.GetFromUserID(),
+		ToUserId:   req.GetToUserID(),
+		Type:       req.GetType().String(),
+		CreatedAt:  time.Now(),
+	}
+	_, err := m.LikeCollection.InsertOne(ctx, newLike)
+	if err != nil {
+		return nil, err
+	}
+	if req.GetType() == matchingServiceGrpc.Like_LIKE {
+		matchFilter := bson.M{
+			"from_user_id": req.GetToUserID(),
+			"to_user_id":   req.GetFromUserID(),
+			"type":         matchingServiceGrpc.Like_LIKE.String(),
+		}
+		var reverse mongodb.Like
+		err = m.LikeCollection.FindOne(ctx, matchFilter).Decode(&reverse)
+		if err == nil {
+			match := mongodb.Match{
+				User1ID:             req.GetFromUserID(),
+				User2ID:             req.GetToUserID(),
+				MatchedAt:           time.Now(),
+				ConversationStarted: false,
+			}
+			_, err = m.MatchCollection.InsertOne(ctx, match)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
 	return &emptypb.Empty{}, nil
 }

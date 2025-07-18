@@ -50,7 +50,14 @@ func main() {
 
 	userCollection := dbClient.Database("userService").Collection("profiles")
 	musicProviderDataCollection := dbClient.Database("userService").Collection("musicProviderData")
-	matchingServer := server.NewMatchingServer(userCollection, musicProviderDataCollection)
+	likeCollection := dbClient.Database("matchingService").Collection("likes")
+	matchCollection := dbClient.Database("matchingService").Collection("matches")
+	matchingServer := server.NewMatchingServer(
+		userCollection,
+		musicProviderDataCollection,
+		likeCollection,
+		matchCollection,
+	)
 	srv := SetupGrpcServer(matchingServer)
 
 	go func() {

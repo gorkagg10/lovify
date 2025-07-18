@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -219,11 +220,151 @@ func (x *HandleLikeRequest) GetType() Like {
 	return Like_UNKNOWN_LIKE
 }
 
+type GetMatchesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserID        *string                `protobuf:"bytes,1,opt,name=userID" json:"userID,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMatchesRequest) Reset() {
+	*x = GetMatchesRequest{}
+	mi := &file_grpc_matching_service_matching_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMatchesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMatchesRequest) ProtoMessage() {}
+
+func (x *GetMatchesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_matching_service_matching_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMatchesRequest.ProtoReflect.Descriptor instead.
+func (*GetMatchesRequest) Descriptor() ([]byte, []int) {
+	return file_grpc_matching_service_matching_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetMatchesRequest) GetUserID() string {
+	if x != nil && x.UserID != nil {
+		return *x.UserID
+	}
+	return ""
+}
+
+type GetMatchesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Matches       []*Match               `protobuf:"bytes,1,rep,name=matches" json:"matches,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMatchesResponse) Reset() {
+	*x = GetMatchesResponse{}
+	mi := &file_grpc_matching_service_matching_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMatchesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMatchesResponse) ProtoMessage() {}
+
+func (x *GetMatchesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_matching_service_matching_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMatchesResponse.ProtoReflect.Descriptor instead.
+func (*GetMatchesResponse) Descriptor() ([]byte, []int) {
+	return file_grpc_matching_service_matching_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetMatchesResponse) GetMatches() []*Match {
+	if x != nil {
+		return x.Matches
+	}
+	return nil
+}
+
+type Match struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserID        *string                `protobuf:"bytes,1,opt,name=userID" json:"userID,omitempty"`
+	MatchedAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=matchedAt" json:"matchedAt,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Match) Reset() {
+	*x = Match{}
+	mi := &file_grpc_matching_service_matching_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Match) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Match) ProtoMessage() {}
+
+func (x *Match) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_matching_service_matching_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Match.ProtoReflect.Descriptor instead.
+func (*Match) Descriptor() ([]byte, []int) {
+	return file_grpc_matching_service_matching_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Match) GetUserID() string {
+	if x != nil && x.UserID != nil {
+		return *x.UserID
+	}
+	return ""
+}
+
+func (x *Match) GetMatchedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.MatchedAt
+	}
+	return nil
+}
+
 var File_grpc_matching_service_matching_service_proto protoreflect.FileDescriptor
 
 const file_grpc_matching_service_matching_service_proto_rawDesc = "" +
 	"\n" +
-	",grpc/matching-service/matching-service.proto\x12\x17lovify_matching_service\x1a\x1bgoogle/protobuf/empty.proto\"/\n" +
+	",grpc/matching-service/matching-service.proto\x12\x17lovify_matching_service\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"/\n" +
 	"\x15RecommendUsersRequest\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\"J\n" +
 	"\x16RecommendUsersResponse\x120\n" +
@@ -233,15 +374,24 @@ const file_grpc_matching_service_matching_service_proto_rawDesc = "" +
 	"fromUserID\x18\x01 \x01(\tR\n" +
 	"fromUserID\x12\x1a\n" +
 	"\btoUserID\x18\x02 \x01(\tR\btoUserID\x121\n" +
-	"\x04type\x18\x03 \x01(\x0e2\x1d.lovify_matching_service.LikeR\x04type*/\n" +
+	"\x04type\x18\x03 \x01(\x0e2\x1d.lovify_matching_service.LikeR\x04type\"+\n" +
+	"\x11GetMatchesRequest\x12\x16\n" +
+	"\x06userID\x18\x01 \x01(\tR\x06userID\"N\n" +
+	"\x12GetMatchesResponse\x128\n" +
+	"\amatches\x18\x01 \x03(\v2\x1e.lovify_matching_service.MatchR\amatches\"Y\n" +
+	"\x05Match\x12\x16\n" +
+	"\x06userID\x18\x01 \x01(\tR\x06userID\x128\n" +
+	"\tmatchedAt\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tmatchedAt*/\n" +
 	"\x04Like\x12\x10\n" +
 	"\fUNKNOWN_LIKE\x10\x00\x12\b\n" +
 	"\x04LIKE\x10\x01\x12\v\n" +
-	"\aDISLIKE\x10\x022\xd6\x01\n" +
+	"\aDISLIKE\x10\x022\xbd\x02\n" +
 	"\x0fMatchingService\x12q\n" +
 	"\x0eRecommendUsers\x12..lovify_matching_service.RecommendUsersRequest\x1a/.lovify_matching_service.RecommendUsersResponse\x12P\n" +
 	"\n" +
-	"HandleLike\x12*.lovify_matching_service.HandleLikeRequest\x1a\x16.google.protobuf.EmptyB\x19Z\x17lovify-matching/serviceb\beditionsp\xe8\a"
+	"HandleLike\x12*.lovify_matching_service.HandleLikeRequest\x1a\x16.google.protobuf.Empty\x12e\n" +
+	"\n" +
+	"GetMatches\x12*.lovify_matching_service.GetMatchesRequest\x1a+.lovify_matching_service.GetMatchesResponseB\x19Z\x17lovify-matching/serviceb\beditionsp\xe8\a"
 
 var (
 	file_grpc_matching_service_matching_service_proto_rawDescOnce sync.Once
@@ -256,25 +406,33 @@ func file_grpc_matching_service_matching_service_proto_rawDescGZIP() []byte {
 }
 
 var file_grpc_matching_service_matching_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_grpc_matching_service_matching_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_grpc_matching_service_matching_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_grpc_matching_service_matching_service_proto_goTypes = []any{
 	(Like)(0),                      // 0: lovify_matching_service.Like
 	(*RecommendUsersRequest)(nil),  // 1: lovify_matching_service.RecommendUsersRequest
 	(*RecommendUsersResponse)(nil), // 2: lovify_matching_service.RecommendUsersResponse
 	(*HandleLikeRequest)(nil),      // 3: lovify_matching_service.HandleLikeRequest
-	(*emptypb.Empty)(nil),          // 4: google.protobuf.Empty
+	(*GetMatchesRequest)(nil),      // 4: lovify_matching_service.GetMatchesRequest
+	(*GetMatchesResponse)(nil),     // 5: lovify_matching_service.GetMatchesResponse
+	(*Match)(nil),                  // 6: lovify_matching_service.Match
+	(*timestamppb.Timestamp)(nil),  // 7: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),          // 8: google.protobuf.Empty
 }
 var file_grpc_matching_service_matching_service_proto_depIdxs = []int32{
 	0, // 0: lovify_matching_service.HandleLikeRequest.type:type_name -> lovify_matching_service.Like
-	1, // 1: lovify_matching_service.MatchingService.RecommendUsers:input_type -> lovify_matching_service.RecommendUsersRequest
-	3, // 2: lovify_matching_service.MatchingService.HandleLike:input_type -> lovify_matching_service.HandleLikeRequest
-	2, // 3: lovify_matching_service.MatchingService.RecommendUsers:output_type -> lovify_matching_service.RecommendUsersResponse
-	4, // 4: lovify_matching_service.MatchingService.HandleLike:output_type -> google.protobuf.Empty
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	6, // 1: lovify_matching_service.GetMatchesResponse.matches:type_name -> lovify_matching_service.Match
+	7, // 2: lovify_matching_service.Match.matchedAt:type_name -> google.protobuf.Timestamp
+	1, // 3: lovify_matching_service.MatchingService.RecommendUsers:input_type -> lovify_matching_service.RecommendUsersRequest
+	3, // 4: lovify_matching_service.MatchingService.HandleLike:input_type -> lovify_matching_service.HandleLikeRequest
+	4, // 5: lovify_matching_service.MatchingService.GetMatches:input_type -> lovify_matching_service.GetMatchesRequest
+	2, // 6: lovify_matching_service.MatchingService.RecommendUsers:output_type -> lovify_matching_service.RecommendUsersResponse
+	8, // 7: lovify_matching_service.MatchingService.HandleLike:output_type -> google.protobuf.Empty
+	5, // 8: lovify_matching_service.MatchingService.GetMatches:output_type -> lovify_matching_service.GetMatchesResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_grpc_matching_service_matching_service_proto_init() }
@@ -288,7 +446,7 @@ func file_grpc_matching_service_matching_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_grpc_matching_service_matching_service_proto_rawDesc), len(file_grpc_matching_service_matching_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   3,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -1,0 +1,6 @@
+edition = "2023";
+
+option go_package = "lovify-messaging/service";
+package lovify_messaging_service;
+
+service MessagingService {}

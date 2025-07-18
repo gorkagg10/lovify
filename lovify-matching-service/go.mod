@@ -3,6 +3,7 @@ module github.com/gorkagg10/lovify/lovify-matching-service
 go 1.24.3
 
 require (
+	github.com/google/uuid v1.6.0
 	go.mongodb.org/mongo-driver v1.17.4
 	google.golang.org/grpc v1.73.0
 	google.golang.org/protobuf v1.36.6

@@ -3,11 +3,14 @@ package server
 import (
 	"context"
 	"fmt"
+	"github.com/google/uuid"
 	"github.com/gorkagg10/lovify/lovify-matching-service/internal/domain/recommender"
 	"github.com/gorkagg10/lovify/lovify-matching-service/internal/infra/mongodb"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"google.golang.org/protobuf/types/known/emptypb"
+	"google.golang.org/protobuf/types/known/timestamppb"
 	"time"
 
 	matchingServiceGrpc "github.com/gorkagg10/lovify/lovify-matching-service/grpc/matching-service"
@@ -139,7 +142,9 @@ func (m *MatchingServer) HandleLike(ctx context.Context, req *matchingServiceGrp
 		var reverse mongodb.Like
 		err = m.LikeCollection.FindOne(ctx, matchFilter).Decode(&reverse)
 		if err == nil {
+			matchID := uuid.New().String()
 			match := mongodb.Match{
+				ID:                  matchID,
 				User1ID:             req.GetFromUserID(),
 				User2ID:             req.GetToUserID(),
 				MatchedAt:           time.Now(),
@@ -152,4 +157,40 @@ func (m *MatchingServer) HandleLike(ctx context.Context, req *matchingServiceGrp
 		}
 	}
 	return &emptypb.Empty{}, nil
+}
+
+func (m *MatchingServer) GetMatches(ctx context.Context, req *matchingServiceGrpc.GetMatchesRequest) (*matchingServiceGrpc.GetMatchesResponse, error) {
+	matchFilter := bson.M{
+		"$or": []bson.M{
+			{"user_1_id": req.GetUserID()},
+			{"user_2_id": req.GetUserID()},
+		},
+		"conversation_started": false,
+	}
+	cursor, err := m.MatchCollection.Find(ctx, matchFilter, options.Find().
+		SetSort(bson.D{{Key: "matchedAt", Value: -1}}))
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(ctx)
+
+	var matches []*matchingServiceGrpc.Match
+	for cursor.Next(ctx) {
+		var match mongodb.Match
+		if err = cursor.Decode(&match); err != nil {
+			return nil, err
+		}
+		otherID := match.User2ID
+		if match.User2ID == req.GetUserID() {
+			otherID = match.User1ID
+		}
+		matches = append(matches, &matchingServiceGrpc.Match{
+			MatchID:   &match.ID,
+			UserID:    &otherID,
+			MatchedAt: timestamppb.New(match.MatchedAt),
+		})
+	}
+	return &matchingServiceGrpc.GetMatchesResponse{
+		Matches: matches,
+	}, nil
 }

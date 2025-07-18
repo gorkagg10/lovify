@@ -312,6 +312,7 @@ type Match struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserID        *string                `protobuf:"bytes,1,opt,name=userID" json:"userID,omitempty"`
 	MatchedAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=matchedAt" json:"matchedAt,omitempty"`
+	MatchID       *string                `protobuf:"bytes,3,opt,name=matchID" json:"matchID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -360,6 +361,13 @@ func (x *Match) GetMatchedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *Match) GetMatchID() string {
+	if x != nil && x.MatchID != nil {
+		return *x.MatchID
+	}
+	return ""
+}
+
 var File_grpc_matching_service_matching_service_proto protoreflect.FileDescriptor
 
 const file_grpc_matching_service_matching_service_proto_rawDesc = "" +
@@ -378,10 +386,11 @@ const file_grpc_matching_service_matching_service_proto_rawDesc = "" +
 	"\x11GetMatchesRequest\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\"N\n" +
 	"\x12GetMatchesResponse\x128\n" +
-	"\amatches\x18\x01 \x03(\v2\x1e.lovify_matching_service.MatchR\amatches\"Y\n" +
+	"\amatches\x18\x01 \x03(\v2\x1e.lovify_matching_service.MatchR\amatches\"s\n" +
 	"\x05Match\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\x128\n" +
-	"\tmatchedAt\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tmatchedAt*/\n" +
+	"\tmatchedAt\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tmatchedAt\x12\x18\n" +
+	"\amatchID\x18\x03 \x01(\tR\amatchID*/\n" +
 	"\x04Like\x12\x10\n" +
 	"\fUNKNOWN_LIKE\x10\x00\x12\b\n" +
 	"\x04LIKE\x10\x01\x12\v\n" +

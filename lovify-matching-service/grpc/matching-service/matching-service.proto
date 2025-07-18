@@ -43,4 +43,5 @@ message GetMatchesResponse {
 message Match {
   string userID = 1;
   google.protobuf.Timestamp matchedAt = 2;
+  string matchID = 3;
 }

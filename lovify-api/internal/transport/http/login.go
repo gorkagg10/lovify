@@ -58,7 +58,8 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 }
 
 type LoginResponse struct {
-	IsProfileConnected bool `json:"is_profile_connected"`
+	IsProfileConnected bool   `json:"is_profile_connected"`
+	ProfileID          string `json:"profile_id"`
 }
 
 func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
@@ -103,6 +104,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 
 	loginAPIResponse := LoginResponse{
 		IsProfileConnected: loginResponse.GetIsProfileConnected(),
+		ProfileID:          loginResponse.GetProfileID(),
 	}
 	loginAPIResponseJSON, err := json.Marshal(loginAPIResponse)
 	if err != nil {

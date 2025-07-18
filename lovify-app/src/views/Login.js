@@ -28,10 +28,11 @@ function Login() {
             const data = await response.json();
             console.log(data);
             if (data.is_profile_connected) {
+                sessionStorage.setItem('userID', data.profile_id);
                 navigate('/app')
             }
             else {
-                navigate('/app/profile/photos')
+                navigate('/users')
             }
         } else {
             setMessage('Error logging in!');

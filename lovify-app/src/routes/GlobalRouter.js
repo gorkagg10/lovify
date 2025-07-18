@@ -20,7 +20,7 @@ function GlobalRouter() {
                 <Route path="/app/profile/photos" element={<ProfilePhotos />}/>
                 <Route path="/spotify-connect" element={<SpotifyConnect />}/>
                 <Route path="/app" element={<MainPage />}/>
-                <Route path="/messages/:userId" element={<Messages />}/>
+                <Route path="/messages/:matchId" element={<Messages />}/>
             </Routes>
         </BrowserRouter>
     );

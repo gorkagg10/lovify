@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7765bc57-2532-478d-950d-2415e11b68a4" name="Changes" comment="fix: added user id to msg when creating profile in authentication service">
+      <change beforePath="$PROJECT_DIR$/../lovify-api/cmd/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/cmd/server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/users.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/component/CardArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/component/CardArea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/component/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/component/Sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/routes/GlobalRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/routes/GlobalRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/CreateUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/CreateUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-user-service/events/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/events/events.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-user-service/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-user-service/uploads/c438e1ee-9e3e-49d6-b071-cd125a92ed64/13d2333b-8f58-4c91-a13e-e0dce4041072.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/uploads/6e71c9a8-cb7a-4e1e-b2f0-d25439a7802b/13d2333b-8f58-4c91-a13e-e0dce4041072.JPG" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file:///usr/local/go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;gorkagg10&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:gorkagg10/lovify.git&quot;,
+    &quot;accountId&quot;: &quot;6865bd0f-4c0c-443f-8c90-d019b1722036&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2xaVLvbIGn6EEWHLUXAAi5U0Z74" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "Go Build.Authentication Server.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.GoLinterPluginOnboarding": "true",
+    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "SHELLCHECK.PATH": "/Users/gorka/Library/Application Support/JetBrains/GoLand2025.1/plugins/Shell Script/shellcheck",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/gorka/lovify/lovify-authentication-service/database/migrations",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "go.sdk"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../lovify-authentication-service/database/migrations" />
+      <recent name="$PROJECT_DIR$/database/migrations" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/infra/server" />
+      <recent name="$PROJECT_DIR$/internal/domain/user" />
+      <recent name="$PROJECT_DIR$/grpc/auth-service" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Authentication Server" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="lovify-auth-service" />
+      <working_directory value="$PROJECT_DIR$/../lovify-authentication-service" />
+      <envs>
+        <env name="DB_HOST" value="localhost" />
+        <env name="DB_NAME" value="auth" />
+        <env name="DB_PASSWORD" value="authsvcpwd" />
+        <env name="DB_PORT" value="5432" />
+        <env name="DB_SSL_MODE" value="disable" />
+        <env name="DB_USER" value="auth_svc" />
+        <env name="MIGRATIONS_PATH" value="database/migrations" />
+      </envs>
+      <kind value="DIRECTORY" />
+      <package value="github.com/gorkagg10/lovify-authentication-service" />
+      <directory value="$PROJECT_DIR$/../lovify-authentication-service/cmd/server" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-3b128438d3f6-34ac7aa8f6ab-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-251.23774.430" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-GO-251.23774.430" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7765bc57-2532-478d-950d-2415e11b68a4" name="Changes" comment="" />
+      <created>1748176118564</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1748176118564</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix: go mod name" />
+    <MESSAGE value="fix: added git ignore" />
+    <MESSAGE value="fix: removed .idea" />
+    <MESSAGE value="feat: register endpoint implemented" />
+    <MESSAGE value="feat: login implemented at half" />
+    <MESSAGE value="feat: improvements in code and data migrations implemented" />
+    <MESSAGE value="feat: postgres implementation finished" />
+    <MESSAGE value="feat: postgres implementation finished (2)" />
+    <MESSAGE value="fix: existing user error created" />
+    <MESSAGE value="fix: existing user error created (2)" />
+    <MESSAGE value="refactor: register error handling improved" />
+    <MESSAGE value="fix: changed username for email" />
+    <MESSAGE value="fix: changed userID for email" />
+    <MESSAGE value="fix: fix added user id to msg when creating profile" />
+    <MESSAGE value="fix: added user id to msg when creating profile in authentication service" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: added user id to msg when creating profile in authentication service" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/infra/server/server.go</url>
+          <line>33</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../go/pkg/mod/golang.org/x/crypto@v0.33.0/bcrypt/bcrypt.go</url>
+          <line>108</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/infra/postgres/user_repository.go</url>
+          <line>49</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go</url>
+          <line>39</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/infra/postgres/token_repository.go</url>
+          <line>25</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go</url>
+          <line>87</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/infra/server/server.go</url>
+          <line>46</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go</url>
+          <line>115</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -1,6 +1,7 @@
 package main
 
 import (
+	matchingServiceGrpc "github.com/gorkagg10/lovify/lovify-matching-service/grpc/matching-service"
 	userServiceGrpc "github.com/gorkagg10/lovify/lovify-user-service/grpc/user-service"
 	"log/slog"
 	"os"
@@ -14,8 +15,10 @@ import (
 func Run(
 	config *config.Config,
 	authServiceClient authServiceGrpc.AuthServiceClient,
-	userServiceClient userServiceGrpc.UserServiceClient) error {
-	handler := transportHttp.NewHandler(config, authServiceClient, userServiceClient)
+	userServiceClient userServiceGrpc.UserServiceClient,
+	matchingServiceClient matchingServiceGrpc.MatchingServiceClient,
+) error {
+	handler := transportHttp.NewHandler(config, authServiceClient, userServiceClient, matchingServiceClient)
 	if err := handler.Serve(); err != nil {
 		slog.Error("gracefully serving the application")
 		return err
@@ -35,7 +38,16 @@ func main() {
 		os.Exit(1)
 	}
 	userServiceClient, err := grpc.NewClient(conf.UserServiceEndpoint, userServiceGrpc.NewUserServiceClient)
-	if err = Run(conf, authServiceClient, userServiceClient); err != nil {
+	if err != nil {
+		slog.Error("connecting to user service", slog.String("error", err.Error()))
+		os.Exit(1)
+	}
+	matchingServiceClient, err := grpc.NewClient(conf.MatchingServiceEndpoint, matchingServiceGrpc.NewMatchingServiceClient)
+	if err != nil {
+		slog.Error("connecting to matching service", slog.String("error", err.Error()))
+		os.Exit(1)
+	}
+	if err = Run(conf, authServiceClient, userServiceClient, matchingServiceClient); err != nil {
 		slog.Error("running the application", slog.String("error", err.Error()))
 		os.Exit(1)
 	}

@@ -1,0 +1,7 @@
+postgres-data
+mongodb-data
+nats-data
+node_modules
+mongodb-data.tar.gz
+postgres-data.tar.gz
+nats-data.tar.gz

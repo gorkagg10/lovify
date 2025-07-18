@@ -7,7 +7,8 @@ import {useConfig} from "../context/ConfigContext";
 
 function CardArea() {
     const { apiUrl } = useConfig()
-    const userID = 'c438e1ee-9e3e-49d6-b071-cd125a92ed64'
+    const userID = sessionStorage.getItem("userID")
+    console.log(userID)
     const [users, setUsers] = useState([]);
     const [index, setIndex] = useState(0);
     const [slideIndex, setSlideIndex] = useState(0);
@@ -38,13 +39,23 @@ function CardArea() {
         );
     };
 
-    const nextUser = () => {
+    const like = (likeType) => {
+        fetch(`${apiUrl}/users/${userID}/likes/${user.id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    type: likeType,
+                }),
+            })
+            .then((res) => res.json())
+            .then((data) => setUsers(data))
+            .catch(console.error);
+
         setIndex((prev) => (prev + 1) % users.length);
         setSlideIndex(0); // reset al primer slide del siguiente user
     };
-
-    const sizeInKB = (new Blob([currentSlide]).size / 1024).toFixed(2);
-    console.log("Tamaño base64:", sizeInKB, "KB");
 
     return (
         <div className="card-area">
@@ -131,11 +142,11 @@ function CardArea() {
                 )}
 
                 <div className="card__actions">
-                    <button className="btn btn--no" onClick={nextUser}>
+                    <button className="btn btn--no" onClick={() => like('dislike')}>
                         <ClearIcon fontSize="large" style={{color: '#FF3E3E'}}/>
                     </button>
 
-                    <button className="btn btn--yes" onClick={nextUser}>
+                    <button className="btn btn--yes" onClick={() => like('like')}>
                         <FavoriteIcon fontSize="large" style={{color: '#00C851'}}/>
                     </button>
                 </div>

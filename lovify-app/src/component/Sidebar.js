@@ -1,33 +1,53 @@
 import {Avatar} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useConfig} from "../context/ConfigContext";
+import {useNavigate} from "react-router-dom";
 
 function Sidebar() {
     const [sidebarView, setSidebarView] = useState("matches");
-    const matches = [
-        {
-            id: "1",
-            image: "/pexels-hannah-nelson-390257-1065084.jpg",
-            age: 22,
-            name: "Claudia",
-        },
-        {
-            id: "2",
-            image: "/pexels-pixabay-415829.jpg",
-            age: 18,
-            name: "Julia",
-        }
-    ];
+    const [matches, setMatches] = useState([]);
+    const { apiUrl } = useConfig()
+    const userID = sessionStorage.getItem("userID")
+    const navigate = useNavigate()
+
+    const handleMessageClick = (matchID) => {
+        navigate(`/messages/${matchID}`)
+    }
+
+
+    useEffect(() => {
+        const fetchMatches = async () => {
+            try {
+                const response = await fetch(`${apiUrl}/users/${userID}/matches`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) throw new Error('Error al obtener los matches');
+
+                const data = await response.json();
+                setMatches(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchMatches();
+    }, []);
+
     const conversations = [
         {
             id: "1",
-            image: "/pexels-almadastudio-609549.jpg",
+            first_image: "/pexels-almadastudio-609549.jpg",
             name: "Fatima",
             age: 22,
             last_message: "Hola!"
         },
         {
             id: "2",
-            image: "/pexels-kqpho-1921168.jpg",
+            first_image: "/pexels-kqpho-1921168.jpg",
             name: "Marina",
             age: 22,
             last_message: "Que guay!"
@@ -61,12 +81,12 @@ function Sidebar() {
             {sidebarView === "matches" ? (
                 <ul className="matches">
                     {matches.map((match) => (
-                        <li key={match.id} className="match">
+                        <li key={match.id} className="match" onClick={() => handleMessageClick(match.match_id)}>
                             <Avatar
                                 variant= "rounded"
                                 className="match__avatar"
                                 alt="Gorka"
-                                src={match.image}
+                                src={match.first_image}
                             />
                             <span className="match__name">{match.name}</span>
                         </li>
@@ -80,7 +100,7 @@ function Sidebar() {
                                 variant="rounded"
                                 className="match__avatar"
                                 alt="Gorka"
-                                src={convo.image}
+                                src={convo.first_image}
                             />
                             <div className="conversation-info">
                                 <span className="match__name">{convo.name}</span>

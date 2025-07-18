@@ -3,6 +3,7 @@ package http
 import (
 	"encoding/json"
 	"fmt"
+	matchingServiceGrpc "github.com/gorkagg10/lovify/lovify-matching-service/grpc/matching-service"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"io"
 	"log/slog"
@@ -175,11 +176,21 @@ type GetUserRecommendationResponse struct {
 
 func (h *Handler) GetRecommendations(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	_ = params["user_id"]
+	userID := params["user_id"]
 
-	recommendedUsers := []string{"6e71c9a8-cb7a-4e1e-b2f0-d25439a7802b"}
-	getUserRecommendationsResponse := make([]GetUserRecommendationResponse, len(recommendedUsers))
-	for i, user := range recommendedUsers {
+	recommendedUsers, err := h.MatchingServiceClient.RecommendUsers(
+		r.Context(),
+		&matchingServiceGrpc.RecommendUsersRequest{
+			UserID: &userID,
+		},
+	)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	getUserRecommendationsResponse := make([]GetUserRecommendationResponse, len(recommendedUsers.RecommendedUsersIDs))
+	for i, user := range recommendedUsers.RecommendedUsersIDs {
 		userResponse, err := h.UserServiceClient.GetUser(
 			r.Context(),
 			&userServiceGrpc.GetUserRequest{
@@ -233,4 +244,87 @@ func (h *Handler) GetRecommendations(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonGetUserRecommendationsResponse)
+}
+
+type HandleLikeRequest struct {
+	Type string `json:"type"`
+}
+
+func (h *Handler) HandleLike(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	fromID := params["from_id"]
+	toID := params["to_id"]
+
+	var likeRequest HandleLikeRequest
+	err := json.NewDecoder(r.Body).Decode(&likeRequest)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	likeType := matchingServiceGrpc.Like(matchingServiceGrpc.Like_value[strings.ToUpper(likeRequest.Type)])
+
+	_, err = h.MatchingServiceClient.HandleLike(
+		r.Context(),
+		&matchingServiceGrpc.HandleLikeRequest{
+			FromUserID: &fromID,
+			ToUserID:   &toID,
+			Type:       &likeType,
+		},
+	)
+	w.WriteHeader(http.StatusOK)
+}
+
+type GetMatchesResponse struct {
+	MatchID    string `json:"match_id"`
+	UserID     string `json:"user_id"`
+	Name       string `json:"name"`
+	MatchedAt  string `json:"matched_at"`
+	FirstImage string `json:"first_image"`
+}
+
+func (h *Handler) GetMatches(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	userID := params["user_id"]
+
+	matchesInfo, err := h.MatchingServiceClient.GetMatches(
+		r.Context(),
+		&matchingServiceGrpc.GetMatchesRequest{
+			UserID: &userID,
+		},
+	)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	matches := make([]GetMatchesResponse, len(matchesInfo.Matches))
+	for i, match := range matchesInfo.Matches {
+		userInfo, err := h.UserServiceClient.GetUser(
+			r.Context(),
+			&userServiceGrpc.GetUserRequest{
+				UserID: match.UserID,
+			},
+		)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		matches[i] = GetMatchesResponse{
+			MatchID:    match.GetMatchID(),
+			UserID:     match.GetUserID(),
+			MatchedAt:  match.GetMatchedAt().AsTime().Format(time.RFC3339),
+			Name:       userInfo.GetName(),
+			FirstImage: userInfo.Photos[0],
+		}
+	}
+
+	jsonGetMatchesResponse, err := json.Marshal(matches)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonGetMatchesResponse)
 }

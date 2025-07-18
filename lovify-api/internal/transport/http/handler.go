@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"github.com/gorkagg10/lovify/lovify-api/config"
 	authServiceGrpc "github.com/gorkagg10/lovify/lovify-authentication-service/grpc/auth-service"
+	matchingServiceGrpc "github.com/gorkagg10/lovify/lovify-matching-service/grpc/matching-service"
+	messagingServiceGrpc "github.com/gorkagg10/lovify/lovify-messaging-service"
 	userServiceGrpc "github.com/gorkagg10/lovify/lovify-user-service/grpc/user-service"
 	"github.com/rs/cors"
 	"log/slog"
@@ -18,11 +20,13 @@ import (
 
 // Handler
 type Handler struct {
-	config            *config.Config
-	Router            *mux.Router
-	Server            *http.Server
-	AuthServiceClient authServiceGrpc.AuthServiceClient
-	UserServiceClient userServiceGrpc.UserServiceClient
+	config                 *config.Config
+	Router                 *mux.Router
+	Server                 *http.Server
+	AuthServiceClient      authServiceGrpc.AuthServiceClient
+	UserServiceClient      userServiceGrpc.UserServiceClient
+	MatchingServiceClient  matchingServiceGrpc.MatchingServiceClient
+	MessagingServiceClient messagingServiceGrpc.MessagingServiceClient
 }
 
 // Response object
@@ -35,12 +39,14 @@ func NewHandler(
 	config *config.Config,
 	authServiceClient authServiceGrpc.AuthServiceClient,
 	userServiceClient userServiceGrpc.UserServiceClient,
+	matchingServiceClient matchingServiceGrpc.MatchingServiceClient,
 ) *Handler {
 	slog.Info("setting up our handler")
 	h := &Handler{
-		config:            config,
-		AuthServiceClient: authServiceClient,
-		UserServiceClient: userServiceClient,
+		config:                config,
+		AuthServiceClient:     authServiceClient,
+		UserServiceClient:     userServiceClient,
+		MatchingServiceClient: matchingServiceClient,
 	}
 
 	h.Router = mux.NewRouter()
@@ -80,6 +86,10 @@ func (h *Handler) mapRoutes() {
 	h.Router.HandleFunc("/callback/spotify", h.RegisterSpotify)
 	h.Router.HandleFunc("/users", h.CreateUser).Methods("POST")
 	h.Router.HandleFunc("/users/{user_id}/recommendations", h.GetRecommendations).Methods("GET")
+	h.Router.HandleFunc("/users/{user_id}/matches", h.GetMatches).Methods("GET")
+	h.Router.HandleFunc("/users/{from_id}/likes/{to_id}", h.HandleLike)
+	h.Router.HandleFunc("/users/{user_id}/messages/{match_id}", h.SendMessage).Methods("POST")
+	//h.Router.HandleFunc("/users/{user_id}/messages/{match_id}", h.ListMessages).Methods("GET")
 	//h.Router.HandleFunc("/auth/protected", h.Protected).Methods("POST")
 }
 

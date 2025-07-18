@@ -15,8 +15,7 @@ function CreateUser() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const email = 'gorka.gonzalez.gomez@gmail.com';
-            // localStorage.getItem('email')
+        const email = sessionStorage.getItem('email')
         const formData = new FormData();
 
         if (email) {
@@ -39,7 +38,7 @@ function CreateUser() {
             const data = await response.json();
             console.log(data.id);
             sessionStorage.setItem('userID', data.id);
-            navigate('/spotify-connect')
+            navigate('/app/profile/photos')
         } else {
             setMessage('Error creating user');
         }

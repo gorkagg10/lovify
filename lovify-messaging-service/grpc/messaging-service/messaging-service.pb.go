@@ -26,6 +26,7 @@ type SendMessageRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MatchID       *string                `protobuf:"bytes,1,opt,name=matchID" json:"matchID,omitempty"`
 	UserID        *string                `protobuf:"bytes,2,opt,name=userID" json:"userID,omitempty"`
+	Content       *string                `protobuf:"bytes,3,opt,name=content" json:"content,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -74,14 +75,22 @@ func (x *SendMessageRequest) GetUserID() string {
 	return ""
 }
 
+func (x *SendMessageRequest) GetContent() string {
+	if x != nil && x.Content != nil {
+		return *x.Content
+	}
+	return ""
+}
+
 var File_grpc_messaging_service_messaging_service_proto protoreflect.FileDescriptor
 
 const file_grpc_messaging_service_messaging_service_proto_rawDesc = "" +
 	"\n" +
-	".grpc/messaging-service/messaging-service.proto\x12\x18lovify_messaging_service\x1a\x1bgoogle/protobuf/empty.proto\"F\n" +
+	".grpc/messaging-service/messaging-service.proto\x12\x18lovify_messaging_service\x1a\x1bgoogle/protobuf/empty.proto\"`\n" +
 	"\x12SendMessageRequest\x12\x18\n" +
 	"\amatchID\x18\x01 \x01(\tR\amatchID\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\tR\x06userID2g\n" +
+	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x18\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent2g\n" +
 	"\x10MessagingService\x12S\n" +
 	"\vSendMessage\x12,.lovify_messaging_service.SendMessageRequest\x1a\x16.google.protobuf.EmptyB\x1aZ\x18lovify-messaging/serviceb\beditionsp\xe8\a"
 

@@ -12,4 +12,5 @@ service MessagingService {
 message SendMessageRequest {
   string matchID = 1;
   string userID = 2;
+  string content = 3;
 }

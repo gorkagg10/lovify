@@ -23,6 +23,10 @@ message ListMessagesRequest {
 }
 
 message ListMessagesResponse {
+  repeated Message messages = 1;
+}
+
+message Message {
   string matchID = 1;
   string fromUserID = 2;
   string toUserID = 3;

@@ -20,8 +20,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MessagingService_SendMessage_FullMethodName  = "/lovify_messaging_service.MessagingService/SendMessage"
-	MessagingService_ListMessages_FullMethodName = "/lovify_messaging_service.MessagingService/ListMessages"
+	MessagingService_SendMessage_FullMethodName       = "/lovify_messaging_service.MessagingService/SendMessage"
+	MessagingService_ListMessages_FullMethodName      = "/lovify_messaging_service.MessagingService/ListMessages"
+	MessagingService_ListConversations_FullMethodName = "/lovify_messaging_service.MessagingService/ListConversations"
 )
 
 // MessagingServiceClient is the client API for MessagingService service.
@@ -30,6 +31,7 @@ const (
 type MessagingServiceClient interface {
 	SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ListMessages(ctx context.Context, in *ListMessagesRequest, opts ...grpc.CallOption) (*ListMessagesResponse, error)
+	ListConversations(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*ListConversationsResponse, error)
 }
 
 type messagingServiceClient struct {
@@ -60,12 +62,23 @@ func (c *messagingServiceClient) ListMessages(ctx context.Context, in *ListMessa
 	return out, nil
 }
 
+func (c *messagingServiceClient) ListConversations(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*ListConversationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListConversationsResponse)
+	err := c.cc.Invoke(ctx, MessagingService_ListConversations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MessagingServiceServer is the server API for MessagingService service.
 // All implementations must embed UnimplementedMessagingServiceServer
 // for forward compatibility.
 type MessagingServiceServer interface {
 	SendMessage(context.Context, *SendMessageRequest) (*emptypb.Empty, error)
 	ListMessages(context.Context, *ListMessagesRequest) (*ListMessagesResponse, error)
+	ListConversations(context.Context, *ListConversationsRequest) (*ListConversationsResponse, error)
 	mustEmbedUnimplementedMessagingServiceServer()
 }
 
@@ -81,6 +94,9 @@ func (UnimplementedMessagingServiceServer) SendMessage(context.Context, *SendMes
 }
 func (UnimplementedMessagingServiceServer) ListMessages(context.Context, *ListMessagesRequest) (*ListMessagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMessages not implemented")
+}
+func (UnimplementedMessagingServiceServer) ListConversations(context.Context, *ListConversationsRequest) (*ListConversationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListConversations not implemented")
 }
 func (UnimplementedMessagingServiceServer) mustEmbedUnimplementedMessagingServiceServer() {}
 func (UnimplementedMessagingServiceServer) testEmbeddedByValue()                          {}
@@ -139,6 +155,24 @@ func _MessagingService_ListMessages_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MessagingService_ListConversations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListConversationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MessagingServiceServer).ListConversations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MessagingService_ListConversations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MessagingServiceServer).ListConversations(ctx, req.(*ListConversationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MessagingService_ServiceDesc is the grpc.ServiceDesc for MessagingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -153,6 +187,10 @@ var MessagingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListMessages",
 			Handler:    _MessagingService_ListMessages_Handler,
+		},
+		{
+			MethodName: "ListConversations",
+			Handler:    _MessagingService_ListConversations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

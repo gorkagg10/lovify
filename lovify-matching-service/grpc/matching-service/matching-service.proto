@@ -10,7 +10,6 @@ service MatchingService {
   rpc RecommendUsers(RecommendUsersRequest) returns (RecommendUsersResponse);
   rpc HandleLike(HandleLikeRequest) returns (google.protobuf.Empty);
   rpc GetMatches(GetMatchesRequest) returns (GetMatchesResponse);
-  rpc GetReceiverID(GetReceiverIDRequest) returns (GetReceiverIDResponse);
 }
 
 message RecommendUsersRequest {
@@ -39,15 +38,6 @@ message GetMatchesRequest {
 
 message GetMatchesResponse {
   repeated Match matches = 1;
-}
-
-message GetReceiverIDRequest {
-  string userID = 1;
-  string matchID = 2;
-}
-
-message GetReceiverIDResponse {
-  string receiverID = 1;
 }
 
 message Match {

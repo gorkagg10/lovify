@@ -263,6 +263,162 @@ func (x *Message) GetRead() bool {
 	return false
 }
 
+type ListConversationsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserID        *string                `protobuf:"bytes,1,opt,name=userID" json:"userID,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListConversationsRequest) Reset() {
+	*x = ListConversationsRequest{}
+	mi := &file_grpc_messaging_service_messaging_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListConversationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListConversationsRequest) ProtoMessage() {}
+
+func (x *ListConversationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_messaging_service_messaging_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListConversationsRequest.ProtoReflect.Descriptor instead.
+func (*ListConversationsRequest) Descriptor() ([]byte, []int) {
+	return file_grpc_messaging_service_messaging_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListConversationsRequest) GetUserID() string {
+	if x != nil && x.UserID != nil {
+		return *x.UserID
+	}
+	return ""
+}
+
+type ListConversationsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Conversations []*Conversation        `protobuf:"bytes,1,rep,name=conversations" json:"conversations,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListConversationsResponse) Reset() {
+	*x = ListConversationsResponse{}
+	mi := &file_grpc_messaging_service_messaging_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListConversationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListConversationsResponse) ProtoMessage() {}
+
+func (x *ListConversationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_messaging_service_messaging_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListConversationsResponse.ProtoReflect.Descriptor instead.
+func (*ListConversationsResponse) Descriptor() ([]byte, []int) {
+	return file_grpc_messaging_service_messaging_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListConversationsResponse) GetConversations() []*Conversation {
+	if x != nil {
+		return x.Conversations
+	}
+	return nil
+}
+
+type Conversation struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserID        *string                `protobuf:"bytes,1,opt,name=userID" json:"userID,omitempty"`
+	MatchedAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=matchedAt" json:"matchedAt,omitempty"`
+	MatchID       *string                `protobuf:"bytes,3,opt,name=matchID" json:"matchID,omitempty"`
+	LastMessage   *string                `protobuf:"bytes,4,opt,name=lastMessage" json:"lastMessage,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Conversation) Reset() {
+	*x = Conversation{}
+	mi := &file_grpc_messaging_service_messaging_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Conversation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Conversation) ProtoMessage() {}
+
+func (x *Conversation) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_messaging_service_messaging_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Conversation.ProtoReflect.Descriptor instead.
+func (*Conversation) Descriptor() ([]byte, []int) {
+	return file_grpc_messaging_service_messaging_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *Conversation) GetUserID() string {
+	if x != nil && x.UserID != nil {
+		return *x.UserID
+	}
+	return ""
+}
+
+func (x *Conversation) GetMatchedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.MatchedAt
+	}
+	return nil
+}
+
+func (x *Conversation) GetMatchID() string {
+	if x != nil && x.MatchID != nil {
+		return *x.MatchID
+	}
+	return ""
+}
+
+func (x *Conversation) GetLastMessage() string {
+	if x != nil && x.LastMessage != nil {
+		return *x.LastMessage
+	}
+	return ""
+}
+
 var File_grpc_messaging_service_messaging_service_proto protoreflect.FileDescriptor
 
 const file_grpc_messaging_service_messaging_service_proto_rawDesc = "" +
@@ -285,10 +441,20 @@ const file_grpc_messaging_service_messaging_service_proto_rawDesc = "" +
 	"\btoUserID\x18\x03 \x01(\tR\btoUserID\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x122\n" +
 	"\x06sendAt\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x06sendAt\x12\x12\n" +
-	"\x04read\x18\x06 \x01(\bR\x04read2\xd6\x01\n" +
+	"\x04read\x18\x06 \x01(\bR\x04read\"2\n" +
+	"\x18ListConversationsRequest\x12\x16\n" +
+	"\x06userID\x18\x01 \x01(\tR\x06userID\"i\n" +
+	"\x19ListConversationsResponse\x12L\n" +
+	"\rconversations\x18\x01 \x03(\v2&.lovify_messaging_service.ConversationR\rconversations\"\x9c\x01\n" +
+	"\fConversation\x12\x16\n" +
+	"\x06userID\x18\x01 \x01(\tR\x06userID\x128\n" +
+	"\tmatchedAt\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tmatchedAt\x12\x18\n" +
+	"\amatchID\x18\x03 \x01(\tR\amatchID\x12 \n" +
+	"\vlastMessage\x18\x04 \x01(\tR\vlastMessage2\xd4\x02\n" +
 	"\x10MessagingService\x12S\n" +
 	"\vSendMessage\x12,.lovify_messaging_service.SendMessageRequest\x1a\x16.google.protobuf.Empty\x12m\n" +
-	"\fListMessages\x12-.lovify_messaging_service.ListMessagesRequest\x1a..lovify_messaging_service.ListMessagesResponseB\x1aZ\x18lovify-messaging/serviceb\beditionsp\xe8\a"
+	"\fListMessages\x12-.lovify_messaging_service.ListMessagesRequest\x1a..lovify_messaging_service.ListMessagesResponse\x12|\n" +
+	"\x11ListConversations\x122.lovify_messaging_service.ListConversationsRequest\x1a3.lovify_messaging_service.ListConversationsResponseB\x1aZ\x18lovify-messaging/serviceb\beditionsp\xe8\a"
 
 var (
 	file_grpc_messaging_service_messaging_service_proto_rawDescOnce sync.Once
@@ -302,27 +468,34 @@ func file_grpc_messaging_service_messaging_service_proto_rawDescGZIP() []byte {
 	return file_grpc_messaging_service_messaging_service_proto_rawDescData
 }
 
-var file_grpc_messaging_service_messaging_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_grpc_messaging_service_messaging_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_grpc_messaging_service_messaging_service_proto_goTypes = []any{
-	(*SendMessageRequest)(nil),    // 0: lovify_messaging_service.SendMessageRequest
-	(*ListMessagesRequest)(nil),   // 1: lovify_messaging_service.ListMessagesRequest
-	(*ListMessagesResponse)(nil),  // 2: lovify_messaging_service.ListMessagesResponse
-	(*Message)(nil),               // 3: lovify_messaging_service.Message
-	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),         // 5: google.protobuf.Empty
+	(*SendMessageRequest)(nil),        // 0: lovify_messaging_service.SendMessageRequest
+	(*ListMessagesRequest)(nil),       // 1: lovify_messaging_service.ListMessagesRequest
+	(*ListMessagesResponse)(nil),      // 2: lovify_messaging_service.ListMessagesResponse
+	(*Message)(nil),                   // 3: lovify_messaging_service.Message
+	(*ListConversationsRequest)(nil),  // 4: lovify_messaging_service.ListConversationsRequest
+	(*ListConversationsResponse)(nil), // 5: lovify_messaging_service.ListConversationsResponse
+	(*Conversation)(nil),              // 6: lovify_messaging_service.Conversation
+	(*timestamppb.Timestamp)(nil),     // 7: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),             // 8: google.protobuf.Empty
 }
 var file_grpc_messaging_service_messaging_service_proto_depIdxs = []int32{
 	3, // 0: lovify_messaging_service.ListMessagesResponse.messages:type_name -> lovify_messaging_service.Message
-	4, // 1: lovify_messaging_service.Message.sendAt:type_name -> google.protobuf.Timestamp
-	0, // 2: lovify_messaging_service.MessagingService.SendMessage:input_type -> lovify_messaging_service.SendMessageRequest
-	1, // 3: lovify_messaging_service.MessagingService.ListMessages:input_type -> lovify_messaging_service.ListMessagesRequest
-	5, // 4: lovify_messaging_service.MessagingService.SendMessage:output_type -> google.protobuf.Empty
-	2, // 5: lovify_messaging_service.MessagingService.ListMessages:output_type -> lovify_messaging_service.ListMessagesResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	7, // 1: lovify_messaging_service.Message.sendAt:type_name -> google.protobuf.Timestamp
+	6, // 2: lovify_messaging_service.ListConversationsResponse.conversations:type_name -> lovify_messaging_service.Conversation
+	7, // 3: lovify_messaging_service.Conversation.matchedAt:type_name -> google.protobuf.Timestamp
+	0, // 4: lovify_messaging_service.MessagingService.SendMessage:input_type -> lovify_messaging_service.SendMessageRequest
+	1, // 5: lovify_messaging_service.MessagingService.ListMessages:input_type -> lovify_messaging_service.ListMessagesRequest
+	4, // 6: lovify_messaging_service.MessagingService.ListConversations:input_type -> lovify_messaging_service.ListConversationsRequest
+	8, // 7: lovify_messaging_service.MessagingService.SendMessage:output_type -> google.protobuf.Empty
+	2, // 8: lovify_messaging_service.MessagingService.ListMessages:output_type -> lovify_messaging_service.ListMessagesResponse
+	5, // 9: lovify_messaging_service.MessagingService.ListConversations:output_type -> lovify_messaging_service.ListConversationsResponse
+	7, // [7:10] is the sub-list for method output_type
+	4, // [4:7] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_grpc_messaging_service_messaging_service_proto_init() }
@@ -336,7 +509,7 @@ func file_grpc_messaging_service_messaging_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_grpc_messaging_service_messaging_service_proto_rawDesc), len(file_grpc_messaging_service_messaging_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

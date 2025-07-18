@@ -23,7 +23,6 @@ const (
 	MatchingService_RecommendUsers_FullMethodName = "/lovify_matching_service.MatchingService/RecommendUsers"
 	MatchingService_HandleLike_FullMethodName     = "/lovify_matching_service.MatchingService/HandleLike"
 	MatchingService_GetMatches_FullMethodName     = "/lovify_matching_service.MatchingService/GetMatches"
-	MatchingService_GetReceiverID_FullMethodName  = "/lovify_matching_service.MatchingService/GetReceiverID"
 )
 
 // MatchingServiceClient is the client API for MatchingService service.
@@ -33,7 +32,6 @@ type MatchingServiceClient interface {
 	RecommendUsers(ctx context.Context, in *RecommendUsersRequest, opts ...grpc.CallOption) (*RecommendUsersResponse, error)
 	HandleLike(ctx context.Context, in *HandleLikeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetMatches(ctx context.Context, in *GetMatchesRequest, opts ...grpc.CallOption) (*GetMatchesResponse, error)
-	GetReceiverID(ctx context.Context, in *GetReceiverIDRequest, opts ...grpc.CallOption) (*GetReceiverIDResponse, error)
 }
 
 type matchingServiceClient struct {
@@ -74,16 +72,6 @@ func (c *matchingServiceClient) GetMatches(ctx context.Context, in *GetMatchesRe
 	return out, nil
 }
 
-func (c *matchingServiceClient) GetReceiverID(ctx context.Context, in *GetReceiverIDRequest, opts ...grpc.CallOption) (*GetReceiverIDResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetReceiverIDResponse)
-	err := c.cc.Invoke(ctx, MatchingService_GetReceiverID_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // MatchingServiceServer is the server API for MatchingService service.
 // All implementations must embed UnimplementedMatchingServiceServer
 // for forward compatibility.
@@ -91,7 +79,6 @@ type MatchingServiceServer interface {
 	RecommendUsers(context.Context, *RecommendUsersRequest) (*RecommendUsersResponse, error)
 	HandleLike(context.Context, *HandleLikeRequest) (*emptypb.Empty, error)
 	GetMatches(context.Context, *GetMatchesRequest) (*GetMatchesResponse, error)
-	GetReceiverID(context.Context, *GetReceiverIDRequest) (*GetReceiverIDResponse, error)
 	mustEmbedUnimplementedMatchingServiceServer()
 }
 
@@ -110,9 +97,6 @@ func (UnimplementedMatchingServiceServer) HandleLike(context.Context, *HandleLik
 }
 func (UnimplementedMatchingServiceServer) GetMatches(context.Context, *GetMatchesRequest) (*GetMatchesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMatches not implemented")
-}
-func (UnimplementedMatchingServiceServer) GetReceiverID(context.Context, *GetReceiverIDRequest) (*GetReceiverIDResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetReceiverID not implemented")
 }
 func (UnimplementedMatchingServiceServer) mustEmbedUnimplementedMatchingServiceServer() {}
 func (UnimplementedMatchingServiceServer) testEmbeddedByValue()                         {}
@@ -189,24 +173,6 @@ func _MatchingService_GetMatches_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MatchingService_GetReceiverID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetReceiverIDRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MatchingServiceServer).GetReceiverID(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MatchingService_GetReceiverID_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MatchingServiceServer).GetReceiverID(ctx, req.(*GetReceiverIDRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // MatchingService_ServiceDesc is the grpc.ServiceDesc for MatchingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -225,10 +191,6 @@ var MatchingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMatches",
 			Handler:    _MatchingService_GetMatches_Handler,
-		},
-		{
-			MethodName: "GetReceiverID",
-			Handler:    _MatchingService_GetReceiverID_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

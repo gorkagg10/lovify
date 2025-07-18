@@ -9,6 +9,7 @@ package lovify_messaging_service;
 service MessagingService {
   rpc SendMessage(SendMessageRequest) returns (google.protobuf.Empty);
   rpc ListMessages(ListMessagesRequest) returns (ListMessagesResponse);
+  rpc ListConversations(ListConversationsRequest) returns (ListConversationsResponse);
 }
 
 message SendMessageRequest {
@@ -33,4 +34,19 @@ message Message {
   string content = 4;
   google.protobuf.Timestamp sendAt = 5;
   bool read = 6;
+}
+
+message ListConversationsRequest {
+  string userID = 1;
+}
+
+message ListConversationsResponse {
+  repeated Conversation conversations = 1;
+}
+
+message Conversation {
+  string userID = 1;
+  google.protobuf.Timestamp matchedAt = 2;
+  string matchID = 3;
+  string lastMessage = 4;
 }

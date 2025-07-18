@@ -1,16 +1,32 @@
 edition = "2023";
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "lovify-messaging/service";
 package lovify_messaging_service;
 
 service MessagingService {
   rpc SendMessage(SendMessageRequest) returns (google.protobuf.Empty);
+  rpc ListMessages(ListMessagesRequest) returns (ListMessagesResponse);
 }
 
 message SendMessageRequest {
   string matchID = 1;
   string userID = 2;
   string content = 3;
+}
+
+message ListMessagesRequest {
+  string matchID = 1;
+  string userID = 2;
+}
+
+message ListMessagesResponse {
+  string matchID = 1;
+  string fromUserID = 2;
+  string toUserID = 3;
+  string content = 4;
+  google.protobuf.Timestamp sendAt = 5;
+  bool read = 6;
 }

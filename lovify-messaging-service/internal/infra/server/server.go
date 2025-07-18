@@ -29,7 +29,7 @@ func NewMessagingServer(
 func (m *MessagingServer) SendMessage(ctx context.Context, req *messagingServiceGrpc.SendMessageRequest) (*emptypb.Empty, error) {
 	var match mongodb.Match
 
-	filter := bson.M{"matchId": req.GetMatchID()}
+	filter := bson.M{"id": req.GetMatchID()}
 
 	err := m.MatchCollection.FindOne(ctx, filter).Decode(&match)
 	if err != nil {
@@ -46,6 +46,8 @@ func (m *MessagingServer) SendMessage(ctx context.Context, req *messagingService
 		FromUserID: req.GetUserID(),
 		ToUserID:   toUserID,
 		SentAt:     time.Now(),
+		Content:    req.GetContent(),
+		Read:       false,
 	}
 
 	_, err = m.MessageCollection.InsertOne(ctx, message)

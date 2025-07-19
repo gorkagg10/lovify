@@ -17,6 +17,7 @@ function ChatPanel() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include',
             });
 
             if (!response.ok) throw new Error('Error al obtener los matches');
@@ -35,6 +36,7 @@ function ChatPanel() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include',
             });
 
             if (!response.ok) throw new Error('Error al obtener los matches');

@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	minScore = 0.10
+	minScore = 0.15
 )
 
 type MatchingServer struct {

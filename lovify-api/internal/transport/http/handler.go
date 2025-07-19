@@ -54,8 +54,6 @@ func NewHandler(
 	h.Router = mux.NewRouter()
 	// Sets up our middleware functions
 	h.Router.Use(JSONMiddleware, TimeoutMiddleware)
-	// Sets up CSRF token middleware for the /auth/ prefix
-	//h.Router.PathPrefix("/users/").Subrouter().Use(AuthMiddleware)
 	// setup the routes
 	h.mapRoutes()
 
@@ -80,21 +78,25 @@ func NewHandler(
 
 // mapRoutes - sets up all the routes for our application
 func (h *Handler) mapRoutes() {
+	// Sets up CSRF token middleware for the /auth/ prefix
+	usersRouter := h.Router.PathPrefix("/users").Subrouter()
+	usersRouter.Use(AuthMiddleware(h.AuthServiceClient))
+
 	h.Router.HandleFunc("/alive", h.AliveCheck).Methods("GET")
 	h.Router.HandleFunc("/auth/register", h.Register).Methods("POST")
 	h.Router.HandleFunc("/auth/login", h.Login).Methods("POST")
-	h.Router.HandleFunc("/users/{user_id}/photos", h.StorePhotos).Methods("POST")
 	h.Router.HandleFunc("/users/{user_id}/login/spotify", h.LoginSpotify)
 	h.Router.HandleFunc("/callback/spotify", h.RegisterSpotify)
-	h.Router.HandleFunc("/users", h.CreateUser).Methods("POST")
-	h.Router.HandleFunc("/users/{user_id}/recommendations", h.GetRecommendations).Methods("GET")
-	h.Router.HandleFunc("/users/{user_id}/matches", h.GetMatches).Methods("GET")
-	h.Router.HandleFunc("/users/{user_id}/conversations", h.GetConversations).Methods("GET")
-	h.Router.HandleFunc("/users/{from_id}/likes/{to_id}", h.HandleLike)
-	h.Router.HandleFunc("/users/{user_id}/messages/{match_id}", h.SendMessage).Methods("POST")
-	h.Router.HandleFunc("/users/{user_id}/messages/{match_id}", h.ListMessages).Methods("GET")
-	h.Router.HandleFunc("/users/{user_id}", h.GetUser).Methods("GET")
-	h.Router.HandleFunc("/auth/protected", h.Protected).Methods("POST")
+	usersRouter.HandleFunc("", h.CreateUser).Methods("POST")
+	usersRouter.HandleFunc("/{user_id}/photos", h.StorePhotos).Methods("POST")
+	usersRouter.HandleFunc("/{user_id}/recommendations", h.GetRecommendations).Methods("GET")
+	usersRouter.HandleFunc("/{user_id}/matches", h.GetMatches).Methods("GET")
+	usersRouter.HandleFunc("/{user_id}/conversations", h.GetConversations).Methods("GET")
+	usersRouter.HandleFunc("/{from_id}/likes/{to_id}", h.HandleLike)
+	usersRouter.HandleFunc("/{user_id}/messages/{match_id}", h.SendMessage).Methods("POST")
+	usersRouter.HandleFunc("/{user_id}/messages/{match_id}", h.ListMessages).Methods("GET")
+	usersRouter.HandleFunc("/{user_id}", h.GetUser).Methods("GET")
+	//h.Router.HandleFunc("/auth/protected", h.Protected).Methods("POST")
 }
 
 func (h *Handler) AliveCheck(w http.ResponseWriter, r *http.Request) {

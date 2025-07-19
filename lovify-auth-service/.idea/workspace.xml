@@ -5,19 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7765bc57-2532-478d-950d-2415e11b68a4" name="Changes" comment="fix: added user id to msg when creating profile in authentication service">
+      <change afterPath="$PROJECT_DIR$/../lovify-authentication-service/internal/infra/jwt/token_repository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lovify-api/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lovify-api/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/users.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/middleware.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/session.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../lovify-app/src/component/CardArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/component/CardArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/styles/card_area.css" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/styles/card_area.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/component/ProfilePhotoUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/component/ProfilePhotoUploader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/component/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/component/Sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/ChatPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/ChatPanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/Messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/Messages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/UserSidebar.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-authentication-service/cmd/server/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/internal/infra/jwt/security_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-authentication-service/internal/infra/jwt/security_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/repositories.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/repositories.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/internal/infra/jwt/security_repository.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/internal/infra/postgres/token_repository.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../lovify-matching-service/internal/infra/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-matching-service/internal/infra/server/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,13 +202,8 @@
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/infra/postgres/token_repository.go</url>
-          <line>25</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go</url>
-          <line>87</line>
+          <line>80</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
@@ -209,13 +213,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go</url>
-          <line>115</line>
+          <line>105</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go</url>
           <line>55</line>
           <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/infra/jwt/token_repository.go</url>
+          <line>32</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/infra/server/server.go</url>
+          <line>52</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

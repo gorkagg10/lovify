@@ -14,7 +14,10 @@ function CardArea() {
 
     const fetchRecommendations = async () => {
         try {
-            const response = await fetch(`${apiUrl}/users/${userID}/recommendations`)
+            const response = await fetch(`${apiUrl}/users/${userID}/recommendations`, {
+                method: 'GET',
+                credentials: 'include',
+            })
             if (response.status === 404) {
                 console.log(notFound)
                 setNotFound(true);

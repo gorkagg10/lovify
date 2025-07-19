@@ -4,20 +4,29 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a82aebe3-c736-46a3-a829-3f5520032356" name="Changes" comment="feat: changed scoring algorithm">
+    <list default="true" id="a82aebe3-c736-46a3-a829-3f5520032356" name="Changes" comment="feat: wip almost finished">
+      <change afterPath="$PROJECT_DIR$/lovify-authentication-service/internal/infra/jwt/token_repository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-api/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-api/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/users.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/middleware.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/session.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-app/src/component/CardArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/component/CardArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-app/src/styles/card_area.css" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/styles/card_area.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-app/src/component/ProfilePhotoUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/component/ProfilePhotoUploader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-app/src/component/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/component/Sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-app/src/views/ChatPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/views/ChatPanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-app/src/views/Messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/views/Messages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-app/src/views/UserSidebar.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-auth-service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-auth-service/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-authentication-service/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-authentication-service/cmd/server/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-authentication-service/internal/domain/login/authorization.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-authentication-service/internal/domain/login/authorization.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-authentication-service/internal/infra/jwt/security_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-authentication-service/internal/infra/jwt/security_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-authentication-service/internal/domain/login/repositories.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-authentication-service/internal/domain/login/repositories.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-authentication-service/internal/infra/jwt/security_repository.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-authentication-service/internal/infra/postgres/token_repository.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-matching-service/internal/infra/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-matching-service/internal/infra/server/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-user-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-user-service/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,7 +258,8 @@
     <MESSAGE value="feat: designed get receiver id in matching service" />
     <MESSAGE value="feat: wip, first version usable with docker" />
     <MESSAGE value="feat: changed scoring algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: changed scoring algorithm" />
+    <MESSAGE value="feat: wip almost finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: wip almost finished" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

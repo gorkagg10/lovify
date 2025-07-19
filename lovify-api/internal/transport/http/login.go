@@ -91,6 +91,9 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		Name:     SessionToken,
 		Value:    loginResponse.SessionToken.GetToken(),
 		Expires:  loginResponse.SessionToken.ExpirationDate.AsTime(),
+		Path:     "/",
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode,
 		HttpOnly: true,
 	})
 
@@ -99,6 +102,9 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		Name:     CSRFToken,
 		Value:    loginResponse.CsrfToken.GetToken(),
 		Expires:  loginResponse.CsrfToken.ExpirationDate.AsTime(),
+		Path:     "/",
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode,
 		HttpOnly: false, // Needs to be accessible to the client side
 	})
 
@@ -114,12 +120,4 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(loginAPIResponseJSON)
-}
-
-func (h *Handler) Protected(w http.ResponseWriter, r *http.Request) {
-	if err := Authorize(r); err != nil {
-		http.Error(w, "Unauthorized", http.StatusUnauthorized)
-		return
-	}
-	fmt.Fprintln(w, "Protected route")
 }

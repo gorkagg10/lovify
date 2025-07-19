@@ -34,6 +34,7 @@ services:
       - '27017:27017'
   lovify-auth-service:
     container_name: lovify-authentication-service
+    restart: unless-stopped
     build:
       context: lovify-authentication-service
       dockerfile: Dockerfile

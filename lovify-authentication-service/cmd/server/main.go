@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/gorkagg10/lovify/lovify-authentication-service/events"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/infra/base64"
 	"log/slog"
 	"net"
 	"os"
@@ -66,8 +67,8 @@ func main() {
 	slog.Info("listening", slog.String("port", fmt.Sprintf(":%d", port)))
 
 	userRepository := postgres.NewUserRepository(pgClient)
-	tokenRepository := postgres.NewTokenRepository(pgClient)
-	securityRepository := jwt.NewSecurityRepository()
+	tokenRepository := jwt.NewTokenRepository()
+	securityRepository := base64.NewSecurityRepository()
 
 	authenticationService := login.NewAuthorization(userRepository, securityRepository, tokenRepository)
 	authServer := server.NewAuthServer(authenticationService)
@@ -103,8 +104,8 @@ func setupGrpcServer(authServer *server.AuthServer) *grpc.Server {
 
 func setupAuthServer(pgClient *sql.DB) *server.AuthServer {
 	userRepository := postgres.NewUserRepository(pgClient)
-	tokenRepository := postgres.NewTokenRepository(pgClient)
-	securityRepository := jwt.NewSecurityRepository()
+	tokenRepository := jwt.NewTokenRepository()
+	securityRepository := base64.NewSecurityRepository()
 
 	authenticationService := login.NewAuthorization(userRepository, securityRepository, tokenRepository)
 	return server.NewAuthServer(authenticationService)

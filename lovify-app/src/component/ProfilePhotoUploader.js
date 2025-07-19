@@ -33,6 +33,7 @@ function ProfilePhotoUploader() {
         const response = await fetch(`${apiUrl}/users/${userID}/photos`, {
             method:'POST',
             body: formData,
+            credentials: 'include'
         })
 
         if (response.ok) {

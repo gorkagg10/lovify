@@ -25,6 +25,7 @@ function Sidebar() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    credentials: 'include',
                 });
 
                 if (!response.ok) throw new Error('Error al obtener los matches');
@@ -43,6 +44,7 @@ function Sidebar() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    credentials: 'include',
                 });
 
                 if (!response.ok) throw new Error('Error al obtener los matches');
@@ -61,6 +63,7 @@ function Sidebar() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    credentials: 'include',
                 });
 
                 if (!response.ok) throw new Error('Error al obtener las conversacions');

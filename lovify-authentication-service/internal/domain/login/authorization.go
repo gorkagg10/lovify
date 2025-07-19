@@ -66,24 +66,17 @@ func (a *Authorization) Login(ctx context.Context, email string, password string
 		return nil, fmt.Errorf("checking password: %w", err)
 	}
 
-	sessionToken, err := a.securityRepository.GenerateToken(SessionToken, user.Email())
+	sessionToken, err := a.tokenRepository.GenerateToken(SessionToken, user.Email())
 	if err != nil {
 		return nil, fmt.Errorf("generating session token: %w", err)
-	}
-	err = a.tokenRepository.StoreToken(ctx, sessionToken, email)
-	if err != nil {
-		return nil, fmt.Errorf("storing session token: %w", err)
 	}
 	user.setSessionToken(sessionToken)
 
-	csrfToken, err := a.securityRepository.GenerateToken(CSRFToken, user.Email())
+	csrfToken, err := a.tokenRepository.GenerateToken(CSRFToken, user.Email())
 	if err != nil {
 		return nil, fmt.Errorf("generating session token: %w", err)
 	}
-	err = a.tokenRepository.StoreToken(ctx, csrfToken, email)
-	if err != nil {
-		return nil, fmt.Errorf("storing csrf token: %w", err)
-	}
+
 	user.setCSRFToken(csrfToken)
 
 	return user, nil
@@ -97,16 +90,13 @@ func isValidToken(userToken *Token) bool {
 }
 
 func (a *Authorization) AuthorizeUser(ctx context.Context, email string, sessionToken string, csrfToken string) error {
-	dbSessionToken, err := a.tokenRepository.GetToken(ctx, sessionToken, SessionToken, email)
+	err := a.tokenRepository.ValidateToken(sessionToken)
 	if err != nil {
-		return fmt.Errorf("getting session token: %w", err)
+		return fmt.Errorf("validating session token: %w", err)
 	}
-	if !isValidToken(dbSessionToken) {
-		return errors.New("invalid session token")
-	}
-	dbCSRFToken, err := a.tokenRepository.GetToken(ctx, csrfToken, CSRFToken, email)
-	if !isValidToken(dbCSRFToken) {
-		return errors.New("invalid csrf token")
+	err = a.tokenRepository.ValidateToken(csrfToken)
+	if err != nil {
+		return fmt.Errorf("validating csrf token: %w", err)
 	}
 	return nil
 }

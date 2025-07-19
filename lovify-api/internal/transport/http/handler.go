@@ -55,7 +55,7 @@ func NewHandler(
 	// Sets up our middleware functions
 	h.Router.Use(JSONMiddleware, TimeoutMiddleware)
 	// Sets up CSRF token middleware for the /auth/ prefix
-	h.Router.PathPrefix("/users/").Subrouter().Use(AuthMiddleware)
+	//h.Router.PathPrefix("/users/").Subrouter().Use(AuthMiddleware)
 	// setup the routes
 	h.mapRoutes()
 

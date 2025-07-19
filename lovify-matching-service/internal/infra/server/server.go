@@ -2,7 +2,6 @@ package server
 
 import (
 	"context"
-	"fmt"
 	"github.com/google/uuid"
 	"github.com/gorkagg10/lovify/lovify-matching-service/internal/domain/recommender"
 	"github.com/gorkagg10/lovify/lovify-matching-service/internal/infra/mongodb"
@@ -11,13 +10,14 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
+	"sort"
 	"time"
 
 	matchingServiceGrpc "github.com/gorkagg10/lovify/lovify-matching-service/grpc/matching-service"
 )
 
 const (
-	minSimilarity = 0
+	minScore = 0.15
 )
 
 type MatchingServer struct {
@@ -42,54 +42,26 @@ func NewMatchingServer(
 	}
 }
 
-func (m *MatchingServer) RecommendUsers(ctx context.Context, req *matchingServiceGrpc.RecommendUsersRequest) (*matchingServiceGrpc.RecommendUsersResponse, error) {
-	userID := req.GetUserID()
-
-	var requester mongodb.UserProfile
-	err := m.UserProfileCollection.FindOne(ctx, bson.M{"_id": userID}).Decode(&requester)
-	if err != nil {
-		return nil, fmt.Errorf("usuario no encontrado: %v", err)
-	}
-
-	var musicData mongodb.MusicProviderData
-	err = m.MusicProviderDataCollection.FindOne(ctx, bson.M{"user_id": userID}).Decode(&musicData)
-
-	topArtists := make([]recommender.Artist, len(musicData.TopArtist))
-	for i, topArtist := range musicData.TopArtist {
-		topArtists[i] = recommender.Artist{
-			Name:   topArtist.Name,
-			Genres: topArtist.Genres,
-			Image: &recommender.Image{
-				Url:    topArtist.Image.Url,
-				Height: topArtist.Image.Height,
-				Width:  topArtist.Image.Width,
-			},
-		}
-	}
-	requestVector := recommender.BuildGenreVector(topArtists)
-	// Cargar usuarios candidatos
-	cursor, err := m.UserProfileCollection.Find(ctx, bson.M{"email": bson.M{"$ne": userID}})
+func (m *MatchingServer) getUsers(ctx context.Context) ([]recommender.User, error) {
+	cursor, err := m.UserProfileCollection.Find(ctx, bson.M{})
 	if err != nil {
 		return nil, err
 	}
 	defer cursor.Close(ctx)
 
-	var recommendedUserIDs []string
+	var profiles []recommender.User
 	for cursor.Next(ctx) {
-		var candidate mongodb.UserProfile
-		if err = cursor.Decode(&candidate); err != nil {
+		var profile mongodb.UserProfile
+		if err = cursor.Decode(&profile); err != nil {
 			continue
 		}
 
-		var candidateMusicData mongodb.MusicProviderData
-		err = m.MusicProviderDataCollection.FindOne(ctx, bson.M{"user_id": candidate.ID}).Decode(&candidateMusicData)
-		if err != nil || !compatible(requester, candidate) {
-			continue
-		}
+		var musicData mongodb.MusicProviderData
+		err = m.MusicProviderDataCollection.FindOne(ctx, bson.M{"user_id": profile.ID}).Decode(&musicData)
 
-		candidateTopArtists := make([]recommender.Artist, len(candidateMusicData.TopArtist))
-		for i, topArtist := range candidateMusicData.TopArtist {
-			candidateTopArtists[i] = recommender.Artist{
+		topArtists := make([]recommender.Artist, len(musicData.TopArtist))
+		for i, topArtist := range musicData.TopArtist {
+			topArtists[i] = recommender.Artist{
 				Name:   topArtist.Name,
 				Genres: topArtist.Genres,
 				Image: &recommender.Image{
@@ -100,26 +72,150 @@ func (m *MatchingServer) RecommendUsers(ctx context.Context, req *matchingServic
 			}
 		}
 
-		candidateVector := recommender.BuildGenreVector(candidateTopArtists)
-		score := recommender.CosSim(requestVector, candidateVector)
-		if score >= minSimilarity {
-			recommendedUserIDs = append(recommendedUserIDs, candidate.ID)
+		topTracks := make([]recommender.Track, len(musicData.TopTracks))
+		for i, topTrack := range musicData.TopTracks {
+			album := recommender.Album{
+				Name:      topTrack.Album.Name,
+				AlbumType: topTrack.Album.Type,
+				Image: &recommender.Image{
+					Url:    topTrack.Album.Cover.Url,
+					Height: topTrack.Album.Cover.Height,
+					Width:  topTrack.Album.Cover.Width,
+				},
+			}
+			topTracks[i] = recommender.Track{
+				Name:    topTrack.Name,
+				Album:   &album,
+				Artists: topTrack.Artists,
+			}
+		}
+
+		birthday, err := time.Parse("2006-01-02 15:04:05 -0700 MST", profile.Birthday)
+		if err != nil {
+			return nil, err
+		}
+
+		profiles = append(profiles, recommender.User{
+			ID:                       profile.ID,
+			Email:                    profile.Email,
+			Name:                     profile.Name,
+			Birthday:                 birthday,
+			Gender:                   profile.Gender,
+			SexualOrientation:        profile.SexualOrientation,
+			Description:              profile.Description,
+			ConnectedToMusicProvider: profile.MusicProviderConnected,
+			MusicProviderInfo: &recommender.MusicProviderData{
+				TopArtists: topArtists,
+				TopTracks:  topTracks,
+			},
+		})
+	}
+
+	return profiles, nil
+}
+
+// BuildPreferences creates for each user an ordered list of compatible candidates.
+func (m *MatchingServer) BuildPreferences(users []recommender.User) map[string][]string {
+	preferences := map[string][]string{}
+	vectorCache := map[string]map[string]float64{}
+
+	getVector := func(u *recommender.User) map[string]float64 {
+		if v, ok := vectorCache[u.ID]; ok {
+			return v
+		}
+		vectorCache[u.ID] = recommender.GenreVector(u, 5)
+		return vectorCache[u.ID]
+	}
+
+	compatible := func(a, b recommender.User) bool {
+		switch {
+		case a.SexualOrientation == "HETEROSEXUAL" && b.SexualOrientation == "HETEROSEXUAL":
+			return a.Gender != b.Gender
+		case a.SexualOrientation == "HOMOSEXUAL" && b.SexualOrientation == "HOMOSEXUAL":
+			return a.Gender == b.Gender
+		default:
+			return true // simplificación para "bi" o mixto
 		}
 	}
 
-	return &matchingServiceGrpc.RecommendUsersResponse{
-		RecommendedUsersIDs: recommendedUserIDs,
-	}, nil
+	for _, u := range users {
+		var list []struct {
+			id    string
+			score float64
+		}
+		ua := getVector(&u)
+		for _, v := range users {
+			if u.ID == v.ID || !compatible(u, v) {
+				continue
+			}
+			uv := getVector(&v)
+			sim := recommender.CosSim(ua, uv)
+			if sim >= minScore {
+				list = append(list, struct {
+					id    string
+					score float64
+				}{v.ID, sim})
+			}
+		}
+		sort.Slice(list, func(i, j int) bool { return list[i].score > list[j].score })
+		for _, it := range list {
+			preferences[u.ID] = append(preferences[u.ID], it.id)
+		}
+	}
+	return preferences
 }
 
-func compatible(userA, userB mongodb.UserProfile) bool {
-	if userA.SexualOrientation == "HETEROSEXUAL" && userB.SexualOrientation == "HETEROSEXUAL" {
-		return userA.Gender != userB.Gender
+func (m *MatchingServer) Recommend(users []recommender.User, requester string) (string, float64) {
+	prefs := m.BuildPreferences(users)
+	if _, ok := prefs[requester]; !ok || len(prefs[requester]) == 0 {
+		return "", 0
 	}
-	if userA.SexualOrientation == "HOMOSEXUAL" && userB.SexualOrientation == "HOMOSEXUAL" {
-		return userA.Gender == userB.Gender
+
+	// GS simplificado (proposals solo del requester hasta conseguir match estable)
+	current := map[string]string{}
+	next := 0
+	prop := requester
+	for {
+		if next >= len(prefs[prop]) {
+			break
+		}
+		target := prefs[prop][next]
+		next++
+		if _, taken := current[target]; !taken {
+			current[target] = prop
+			break
+		}
 	}
-	return true
+	if receiver, ok := current[prefs[requester][next-1]]; ok && receiver == requester {
+		// devuelve el score real
+		vecReq := recommender.GenreVector(findUser(users, requester), 5)
+		vecRec := recommender.GenreVector(findUser(users, prefs[requester][next-1]), 5)
+		return prefs[requester][next-1], recommender.CosSim(vecReq, vecRec)
+	}
+	return "", 0
+}
+
+func findUser(users []recommender.User, id string) *recommender.User {
+	for i := range users {
+		if users[i].ID == id {
+			return &users[i]
+		}
+	}
+	return nil
+}
+
+func (m *MatchingServer) RecommendUser(ctx context.Context, req *matchingServiceGrpc.RecommendUserRequest) (*matchingServiceGrpc.RecommendUserResponse, error) {
+	userID := req.GetUserID()
+	users, err := m.getUsers(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	recommendedUserID, _ := m.Recommend(users, userID)
+
+	return &matchingServiceGrpc.RecommendUserResponse{
+		RecommendedUserID: &recommendedUserID,
+	}, nil
 }
 
 func (m *MatchingServer) HandleLike(ctx context.Context, req *matchingServiceGrpc.HandleLikeRequest) (*emptypb.Empty, error) {

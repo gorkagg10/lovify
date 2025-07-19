@@ -20,16 +20,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MatchingService_RecommendUsers_FullMethodName = "/lovify_matching_service.MatchingService/RecommendUsers"
-	MatchingService_HandleLike_FullMethodName     = "/lovify_matching_service.MatchingService/HandleLike"
-	MatchingService_GetMatches_FullMethodName     = "/lovify_matching_service.MatchingService/GetMatches"
+	MatchingService_RecommendUser_FullMethodName = "/lovify_matching_service.MatchingService/RecommendUser"
+	MatchingService_HandleLike_FullMethodName    = "/lovify_matching_service.MatchingService/HandleLike"
+	MatchingService_GetMatches_FullMethodName    = "/lovify_matching_service.MatchingService/GetMatches"
 )
 
 // MatchingServiceClient is the client API for MatchingService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MatchingServiceClient interface {
-	RecommendUsers(ctx context.Context, in *RecommendUsersRequest, opts ...grpc.CallOption) (*RecommendUsersResponse, error)
+	RecommendUser(ctx context.Context, in *RecommendUserRequest, opts ...grpc.CallOption) (*RecommendUserResponse, error)
 	HandleLike(ctx context.Context, in *HandleLikeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetMatches(ctx context.Context, in *GetMatchesRequest, opts ...grpc.CallOption) (*GetMatchesResponse, error)
 }
@@ -42,10 +42,10 @@ func NewMatchingServiceClient(cc grpc.ClientConnInterface) MatchingServiceClient
 	return &matchingServiceClient{cc}
 }
 
-func (c *matchingServiceClient) RecommendUsers(ctx context.Context, in *RecommendUsersRequest, opts ...grpc.CallOption) (*RecommendUsersResponse, error) {
+func (c *matchingServiceClient) RecommendUser(ctx context.Context, in *RecommendUserRequest, opts ...grpc.CallOption) (*RecommendUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RecommendUsersResponse)
-	err := c.cc.Invoke(ctx, MatchingService_RecommendUsers_FullMethodName, in, out, cOpts...)
+	out := new(RecommendUserResponse)
+	err := c.cc.Invoke(ctx, MatchingService_RecommendUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func (c *matchingServiceClient) GetMatches(ctx context.Context, in *GetMatchesRe
 // All implementations must embed UnimplementedMatchingServiceServer
 // for forward compatibility.
 type MatchingServiceServer interface {
-	RecommendUsers(context.Context, *RecommendUsersRequest) (*RecommendUsersResponse, error)
+	RecommendUser(context.Context, *RecommendUserRequest) (*RecommendUserResponse, error)
 	HandleLike(context.Context, *HandleLikeRequest) (*emptypb.Empty, error)
 	GetMatches(context.Context, *GetMatchesRequest) (*GetMatchesResponse, error)
 	mustEmbedUnimplementedMatchingServiceServer()
@@ -89,8 +89,8 @@ type MatchingServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedMatchingServiceServer struct{}
 
-func (UnimplementedMatchingServiceServer) RecommendUsers(context.Context, *RecommendUsersRequest) (*RecommendUsersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RecommendUsers not implemented")
+func (UnimplementedMatchingServiceServer) RecommendUser(context.Context, *RecommendUserRequest) (*RecommendUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RecommendUser not implemented")
 }
 func (UnimplementedMatchingServiceServer) HandleLike(context.Context, *HandleLikeRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HandleLike not implemented")
@@ -119,20 +119,20 @@ func RegisterMatchingServiceServer(s grpc.ServiceRegistrar, srv MatchingServiceS
 	s.RegisterService(&MatchingService_ServiceDesc, srv)
 }
 
-func _MatchingService_RecommendUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RecommendUsersRequest)
+func _MatchingService_RecommendUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecommendUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MatchingServiceServer).RecommendUsers(ctx, in)
+		return srv.(MatchingServiceServer).RecommendUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MatchingService_RecommendUsers_FullMethodName,
+		FullMethod: MatchingService_RecommendUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MatchingServiceServer).RecommendUsers(ctx, req.(*RecommendUsersRequest))
+		return srv.(MatchingServiceServer).RecommendUser(ctx, req.(*RecommendUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -181,8 +181,8 @@ var MatchingService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*MatchingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "RecommendUsers",
-			Handler:    _MatchingService_RecommendUsers_Handler,
+			MethodName: "RecommendUser",
+			Handler:    _MatchingService_RecommendUser_Handler,
 		},
 		{
 			MethodName: "HandleLike",

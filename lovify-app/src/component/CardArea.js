@@ -12,13 +12,16 @@ function CardArea() {
     const [index, setIndex] = useState(0);
     const [slideIndex, setSlideIndex] = useState(0);
 
-
-    useEffect(() => {
+    const fetchRecommendations = () => {
         fetch(`${apiUrl}/users/${userID}/recommendations`)
             .then((res) => res.json())
             .then((data) => setUsers(data))
             .catch(console.error);
-    }, [apiUrl, userID]);
+    }
+
+    useEffect(() => {
+        fetchRecommendations();
+    }, []);
 
     const user = users[index];
     const currentSlide = user?.photos?.[slideIndex];
@@ -50,6 +53,8 @@ function CardArea() {
             .then((res) => res.json())
             .then((data) => setUsers(data))
             .catch(console.error);
+
+        fetchRecommendations();
 
         setIndex((prev) => (prev + 1) % users.length);
         setSlideIndex(0); // reset al primer slide del siguiente user

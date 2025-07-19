@@ -1,6 +1,9 @@
 package recommender
 
-import "sort"
+import (
+	"sort"
+	"strings"
+)
 
 type ScoredUser struct {
 	OtherID string
@@ -36,46 +39,37 @@ func BuildGenreVector(artists []Artist) map[string]float64 {
 	return genreCounter
 }
 
-func compatible(userA, userB User) bool {
-	if userA.SexualOrientation == "HETEROSEXUAL" && userB.SexualOrientation == "HETEROSEXUAL" {
-		return userA.Gender != userB.Gender
+// Devuelve un mapa genero → frecuencia normalizada
+func GenreVector(u *User, topN int) map[string]float64 {
+	if u.MusicProviderInfo == nil {
+		return nil
 	}
-	if userA.SexualOrientation == "HOMOSEXUAL" && userB.SexualOrientation == "HOMOSEXUAL" {
-		return userA.Gender == userB.Gender
-	}
-	return true
-}
-
-// BuildPreferences creates for each user an ordered list of compatible candidates.
-func BuildPreferences(users []User, minScore float64) map[string][]ScoredUser {
-	preferences := make(map[string][]ScoredUser, len(users))
-
-	// vector precalculation
-	vectors := map[string]map[string]float64{}
-	for _, user := range users {
-		if user.MusicProviderInfo != nil {
-			vectors[user.Email] = BuildGenreVector(user.MusicProviderInfo.TopArtists)
-		} else {
-			vectors[user.Email] = map[string]float64{}
+	count := map[string]float64{}
+	for _, art := range u.MusicProviderInfo.TopArtists {
+		for _, g := range art.Genres {
+			count[strings.ToLower(g)]++
 		}
 	}
-
-	for _, user := range users {
-		for _, vectorUser := range users {
-			if user.Email == vectorUser.Email || !compatible(user, vectorUser) {
-				continue
-			}
-			score := CosSim(vectors[user.Email], vectors[vectorUser.Email])
-			if score >= minScore {
-				preferences[user.Email] = append(preferences[user.Email], ScoredUser{
-					OtherID: vectorUser.Email,
-					Score:   score,
-				})
-			}
-		}
-		sort.Slice(preferences[user.Email], func(i, j int) bool {
-			return preferences[user.Email][i].Score > preferences[user.Email][j].Score
-		})
+	// Selecciona los N géneros principales
+	type kv struct {
+		g string
+		f float64
 	}
-	return preferences
+	var kvs []kv
+	for g, f := range count {
+		kvs = append(kvs, kv{g, f})
+	}
+	sort.Slice(kvs, func(i, j int) bool { return kvs[i].f > kvs[j].f })
+	if len(kvs) > topN {
+		kvs = kvs[:topN]
+	}
+	vec := map[string]float64{}
+	var sum float64
+	for _, kv := range kvs {
+		sum += kv.f
+	}
+	for _, kv := range kvs {
+		vec[kv.g] = kv.f / sum
+	}
+	return vec
 }

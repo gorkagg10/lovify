@@ -3,6 +3,7 @@ package recommender
 import "time"
 
 type User struct {
+	ID                       string
 	Email                    string
 	Birthday                 time.Time
 	Name                     string

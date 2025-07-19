@@ -4,22 +4,38 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a82aebe3-c736-46a3-a829-3f5520032356" name="Changes" comment="feat: messaging server implemented">
+    <list default="true" id="a82aebe3-c736-46a3-a829-3f5520032356" name="Changes" comment="feat: wip, first version usable with docker">
+      <change afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/message.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lovify-authentication-service/internal/infra/jwt/security_repository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lovify-matching-service/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lovify-messaging-service/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lovify-messaging-service/internal/infra/mongodb/match.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lovify-messaging-service/internal/infra/mongodb/message.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-api/cmd/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/cmd/server/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-api/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/config/config.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-api/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-api/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/session.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/session.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/users.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-app/src/component/CardArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/component/CardArea.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lovify-app/src/component/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/component/Sidebar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-app/src/routes/GlobalRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/routes/GlobalRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-app/src/views/CreateUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/views/CreateUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-app/src/views/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/views/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-user-service/events/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-user-service/events/events.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-user-service/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-user-service/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-user-service/uploads/c438e1ee-9e3e-49d6-b071-cd125a92ed64/13d2333b-8f58-4c91-a13e-e0dce4041072.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-user-service/uploads/6e71c9a8-cb7a-4e1e-b2f0-d25439a7802b/13d2333b-8f58-4c91-a13e-e0dce4041072.JPG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-app/src/styles/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/styles/sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-app/src/views/ChatPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/views/ChatPanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-auth-service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-auth-service/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-authentication-service/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-authentication-service/cmd/server/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-authentication-service/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-authentication-service/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-authentication-service/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-authentication-service/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-authentication-service/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-authentication-service/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-authentication-service/internal/domain/login/repositories.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-authentication-service/internal/domain/login/repositories.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-messaging-service/internal/infra/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-messaging-service/internal/infra/server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-user-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-user-service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-user-service/cmd/server/User_Service_Local" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-user-service/cmd/server/User_Service_Local" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-user-service/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-user-service/cmd/server/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-user-service/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-user-service/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lovify-user-service/internal/infra/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-user-service/internal/infra/server/server.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,33 +78,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;Go Build.Lovify API.executor&quot;: &quot;Run&quot;,
-    &quot;Go Build.Lovify Auth Service.executor&quot;: &quot;Run&quot;,
-    &quot;Go Build.Lovify User Service.executor&quot;: &quot;Debug&quot;,
-    &quot;Go Build.go build github.com/gorkagg10/lovify/lovify-matching-service.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.GoLinterPluginOnboarding&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/gorka/lovify/lovify-matching-service/grpc/matching-service&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/gorka/Applications/GoLand.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "Go Build.Lovify API.executor": "Run",
+    "Go Build.Lovify Auth Service.executor": "Run",
+    "Go Build.Lovify User Service.executor": "Run",
+    "Go Build.go build github.com/gorkagg10/lovify/lovify-matching-service.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.GoLinterPluginOnboarding": "true",
+    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/gorka/lovify/lovify-matching-service/grpc/matching-service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.configurations.included.in.services": "true",
+    "ts.external.directory.path": "/Users/gorka/Applications/GoLand.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lovify-matching-service/grpc/matching-service" />
@@ -169,6 +185,10 @@
       <filePath value="$PROJECT_DIR$/lovify-matching-service/main.go" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
       <deployment type="dockerfile">
         <settings />
@@ -243,7 +263,10 @@
     <MESSAGE value="feat: implemented handle like endpoint in matching service" />
     <MESSAGE value="fix: added matchID to match service reply" />
     <MESSAGE value="feat: messaging server implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: messaging server implemented" />
+    <MESSAGE value="feat: implemented everything" />
+    <MESSAGE value="feat: designed get receiver id in matching service" />
+    <MESSAGE value="feat: wip, first version usable with docker" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: wip, first version usable with docker" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
@@ -263,7 +286,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/lovify-user-service/internal/infra/server/server.go</url>
-          <line>31</line>
+          <line>33</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

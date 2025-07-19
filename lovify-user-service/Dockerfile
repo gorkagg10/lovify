@@ -20,5 +20,6 @@ RUN CGO_ENABLED=0 go build -o bin/service cmd/server/*.go
 FROM scratch
 
 COPY --from=builder /builder/bin/service /usr/local/bin/appbin
+COPY --from=builder /builder/uploads /usr/local/uploads
 
 ENTRYPOINT ["/usr/local/bin/appbin"]

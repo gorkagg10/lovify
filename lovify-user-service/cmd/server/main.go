@@ -73,7 +73,7 @@ func main() {
 	}
 	slog.Info("listening", slog.String("port", fmt.Sprintf(":%d", port)))
 
-	userServer := setupUserServer(dbClient, conf.SpotifyOAuthConfig, jetStream)
+	userServer := setupUserServer(dbClient, conf.SpotifyOAuthConfig, jetStream, conf.UploadsDir)
 	srv := SetupGrpcServer(userServer)
 
 	go func() {
@@ -114,7 +114,12 @@ func NewSecureHTTPClient() *http.Client {
 	}
 }
 
-func setupUserServer(dbClient *mongo.Client, spotifyOAuthConfig *config.SpotifyOAuthConfig, jetStream jetstream.JetStream) *server.UserServer {
+func setupUserServer(
+	dbClient *mongo.Client,
+	spotifyOAuthConfig *config.SpotifyOAuthConfig,
+	jetStream jetstream.JetStream,
+	uploadsDir string,
+) *server.UserServer {
 	userCollection := dbClient.Database("userService").Collection("profiles")
 	musicProviderTokensCollection := dbClient.Database("userService").Collection("musicProviderTokens")
 	musicProviderDataCollection := dbClient.Database("userService").Collection("musicProviderData")
@@ -134,5 +139,5 @@ func setupUserServer(dbClient *mongo.Client, spotifyOAuthConfig *config.SpotifyO
 
 	profileManager := profile.NewManager(userRepository, securityRepository, musicProviderRepository, jetStream)
 	oAuthService := oauth.NewService(oAuthRepository)
-	return server.NewUserServer(profileManager, oAuthService)
+	return server.NewUserServer(profileManager, oAuthService, uploadsDir)
 }

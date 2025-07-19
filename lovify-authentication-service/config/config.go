@@ -14,6 +14,7 @@ const (
 	DBPassword     = "DB_PASSWORD"
 	DBName         = "DB_NAME"
 	SSLMode        = "DB_SSL_MODE"
+	NatsEndpoint   = "NATS_ENDPOINT"
 
 	DefaultDBHost    = "localhost"
 	DefaultDBPort    = "5432"
@@ -29,6 +30,7 @@ var (
 
 type Config struct {
 	DatabaseConfig *DatabaseConfig
+	NatsEndpoint   string
 }
 
 func NewConfig() (*Config, error) {
@@ -36,8 +38,13 @@ func NewConfig() (*Config, error) {
 	if err != nil {
 		return nil, fmt.Errorf("loading database config: %w", err)
 	}
+	natsEndpoint := os.Getenv(NatsEndpoint)
+	if natsEndpoint == "" {
+		return nil, fmt.Errorf("loading nats endpoint config: %w", err)
+	}
 	return &Config{
 		DatabaseConfig: databaseConfig,
+		NatsEndpoint:   natsEndpoint,
 	}, nil
 }
 

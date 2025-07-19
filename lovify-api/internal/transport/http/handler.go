@@ -6,7 +6,7 @@ import (
 	"github.com/gorkagg10/lovify/lovify-api/config"
 	authServiceGrpc "github.com/gorkagg10/lovify/lovify-authentication-service/grpc/auth-service"
 	matchingServiceGrpc "github.com/gorkagg10/lovify/lovify-matching-service/grpc/matching-service"
-	messagingServiceGrpc "github.com/gorkagg10/lovify/lovify-messaging-service"
+	messagingServiceGrpc "github.com/gorkagg10/lovify/lovify-messaging-service/grpc/messaging-service"
 	userServiceGrpc "github.com/gorkagg10/lovify/lovify-user-service/grpc/user-service"
 	"github.com/rs/cors"
 	"log/slog"
@@ -40,20 +40,22 @@ func NewHandler(
 	authServiceClient authServiceGrpc.AuthServiceClient,
 	userServiceClient userServiceGrpc.UserServiceClient,
 	matchingServiceClient matchingServiceGrpc.MatchingServiceClient,
+	messagingServiceClient messagingServiceGrpc.MessagingServiceClient,
 ) *Handler {
 	slog.Info("setting up our handler")
 	h := &Handler{
-		config:                config,
-		AuthServiceClient:     authServiceClient,
-		UserServiceClient:     userServiceClient,
-		MatchingServiceClient: matchingServiceClient,
+		config:                 config,
+		AuthServiceClient:      authServiceClient,
+		UserServiceClient:      userServiceClient,
+		MatchingServiceClient:  matchingServiceClient,
+		MessagingServiceClient: messagingServiceClient,
 	}
 
 	h.Router = mux.NewRouter()
 	// Sets up our middleware functions
 	h.Router.Use(JSONMiddleware, TimeoutMiddleware)
 	// Sets up CSRF token middleware for the /auth/ prefix
-	//h.Router.PathPrefix("/users/").Subrouter().Use(AuthMiddleware)
+	h.Router.PathPrefix("/users/").Subrouter().Use(AuthMiddleware)
 	// setup the routes
 	h.mapRoutes()
 
@@ -87,10 +89,12 @@ func (h *Handler) mapRoutes() {
 	h.Router.HandleFunc("/users", h.CreateUser).Methods("POST")
 	h.Router.HandleFunc("/users/{user_id}/recommendations", h.GetRecommendations).Methods("GET")
 	h.Router.HandleFunc("/users/{user_id}/matches", h.GetMatches).Methods("GET")
+	h.Router.HandleFunc("/users/{user_id}/conversations", h.GetConversations).Methods("GET")
 	h.Router.HandleFunc("/users/{from_id}/likes/{to_id}", h.HandleLike)
 	h.Router.HandleFunc("/users/{user_id}/messages/{match_id}", h.SendMessage).Methods("POST")
-	//h.Router.HandleFunc("/users/{user_id}/messages/{match_id}", h.ListMessages).Methods("GET")
-	//h.Router.HandleFunc("/auth/protected", h.Protected).Methods("POST")
+	h.Router.HandleFunc("/users/{user_id}/messages/{match_id}", h.ListMessages).Methods("GET")
+	h.Router.HandleFunc("/users/{user_id}", h.GetUser).Methods("GET")
+	h.Router.HandleFunc("/auth/protected", h.Protected).Methods("POST")
 }
 
 func (h *Handler) AliveCheck(w http.ResponseWriter, r *http.Request) {

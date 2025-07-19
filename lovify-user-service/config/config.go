@@ -13,9 +13,11 @@ const (
 	DBHost                   = "DB_HOST"
 	DBPort                   = "DB_PORT"
 	NatsURL                  = "NATS_URL"
+	UploadsDir               = "UPLOADS_DIR"
 
-	DefaultDBHost = "localhost"
-	DefaultDBPort = "27017"
+	DefaultDBHost     = "localhost"
+	DefaultDBPort     = "27017"
+	DefaultUploadsDir = "uploads"
 )
 
 var (
@@ -26,6 +28,7 @@ type Config struct {
 	SpotifyOAuthConfig *SpotifyOAuthConfig
 	DatabaseConfig     *DatabaseConfig
 	NatsURL            string
+	UploadsDir         string
 }
 
 func NewConfig() (*Config, error) {
@@ -41,9 +44,15 @@ func NewConfig() (*Config, error) {
 	if natsURL == "" {
 		return nil, fmt.Errorf(EmptyEnvVariableErrMsg, NatsURL)
 	}
+	uploadsDir := os.Getenv(UploadsDir)
+	if uploadsDir == "" {
+		uploadsDir = DefaultUploadsDir
+	}
 	return &Config{
 		SpotifyOAuthConfig: spotifyOAuthConfig,
 		DatabaseConfig:     databaseConfig,
+		NatsURL:            natsURL,
+		UploadsDir:         uploadsDir,
 	}, nil
 }
 

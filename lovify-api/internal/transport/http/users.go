@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	matchingServiceGrpc "github.com/gorkagg10/lovify/lovify-matching-service/grpc/matching-service"
+	messagingServiceGrpc "github.com/gorkagg10/lovify/lovify-messaging-service/grpc/messaging-service"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"io"
 	"log/slog"
@@ -164,7 +165,7 @@ type Artist struct {
 	Image  string   `json:"image"`
 }
 
-type GetUserRecommendationResponse struct {
+type GetUserResponse struct {
 	Id         string   `json:"id"`
 	Name       string   `json:"name"`
 	Age        int32    `json:"age"`
@@ -189,7 +190,7 @@ func (h *Handler) GetRecommendations(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	getUserRecommendationsResponse := make([]GetUserRecommendationResponse, len(recommendedUsers.RecommendedUsersIDs))
+	getUserRecommendationsResponse := make([]GetUserResponse, len(recommendedUsers.RecommendedUsersIDs))
 	for i, user := range recommendedUsers.RecommendedUsersIDs {
 		userResponse, err := h.UserServiceClient.GetUser(
 			r.Context(),
@@ -224,7 +225,7 @@ func (h *Handler) GetRecommendations(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		getUserRecommendationsResponse[i] = GetUserRecommendationResponse{
+		getUserRecommendationsResponse[i] = GetUserResponse{
 			Id:         userResponse.GetUserID(),
 			Name:       userResponse.GetName(),
 			Bio:        userResponse.GetDescription(),
@@ -327,4 +328,116 @@ func (h *Handler) GetMatches(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonGetMatchesResponse)
+}
+
+func (h *Handler) GetUser(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	userID := params["user_id"]
+
+	userResponse, err := h.UserServiceClient.GetUser(
+		r.Context(),
+		&userServiceGrpc.GetUserRequest{
+			UserID: &userID,
+		},
+	)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	topTracks := make([]Track, len(userResponse.GetTopTracks()))
+	for j, track := range userResponse.GetTopTracks() {
+		topTracks[j] = Track{
+			Name: track.GetName(),
+			Album: Album{
+				Name:  track.GetAlbum().GetName(),
+				Type:  track.GetAlbum().GetType(),
+				Cover: track.GetAlbum().GetCover(),
+			},
+			Artists: track.GetArtists(),
+		}
+	}
+
+	topArtists := make([]Artist, len(userResponse.GetTopArtists()))
+	for j, artist := range userResponse.GetTopArtists() {
+		topArtists[j] = Artist{
+			Name:   artist.GetName(),
+			Genres: artist.GetGenres(),
+			Image:  artist.GetImage(),
+		}
+	}
+
+	user := GetUserResponse{
+		Id:         userResponse.GetUserID(),
+		Name:       userResponse.GetName(),
+		Bio:        userResponse.GetDescription(),
+		Photos:     userResponse.GetPhotos(),
+		TopTracks:  topTracks,
+		TopArtists: topArtists,
+		Age:        userResponse.GetAge(),
+	}
+
+	getUserResponse, err := json.Marshal(user)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(getUserResponse)
+}
+
+type GetConversationsResponse struct {
+	MatchID    string `json:"match_id"`
+	UserID     string `json:"user_id"`
+	Name       string `json:"name"`
+	MatchedAt  string `json:"matched_at"`
+	FirstImage string `json:"first_image"`
+}
+
+func (h *Handler) GetConversations(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	userID := params["user_id"]
+
+	conversationsInfo, err := h.MessagingServiceClient.ListConversations(
+		r.Context(),
+		&messagingServiceGrpc.ListConversationsRequest{
+			UserID: &userID,
+		},
+	)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	conversations := make([]GetConversationsResponse, len(conversationsInfo.Conversations))
+	for i, conversation := range conversationsInfo.Conversations {
+		userInfo, err := h.UserServiceClient.GetUser(
+			r.Context(),
+			&userServiceGrpc.GetUserRequest{
+				UserID: conversation.UserID,
+			},
+		)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		conversations[i] = GetConversationsResponse{
+			MatchID:    conversation.GetMatchID(),
+			UserID:     conversation.GetUserID(),
+			MatchedAt:  conversation.GetMatchedAt().AsTime().Format(time.RFC3339),
+			Name:       userInfo.GetName(),
+			FirstImage: userInfo.Photos[0],
+		}
+	}
+
+	jsonGetConversationsResponse, err := json.Marshal(conversations)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonGetConversationsResponse)
 }

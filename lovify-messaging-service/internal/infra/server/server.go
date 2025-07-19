@@ -6,7 +6,9 @@ import (
 	"github.com/gorkagg10/lovify/lovify-messaging-service/internal/infra/mongodb"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"google.golang.org/protobuf/types/known/emptypb"
+	"google.golang.org/protobuf/types/known/timestamppb"
 	"time"
 )
 
@@ -57,7 +59,7 @@ func (m *MessagingServer) SendMessage(ctx context.Context, req *messagingService
 
 	if !match.ConversationStarted {
 		update := bson.M{
-			"$set": bson.M{"conversationStarted": true},
+			"$set": bson.M{"conversation_started": true},
 		}
 
 		_, err = m.MatchCollection.UpdateOne(ctx, filter, update)
@@ -66,4 +68,80 @@ func (m *MessagingServer) SendMessage(ctx context.Context, req *messagingService
 		}
 	}
 	return &emptypb.Empty{}, nil
+}
+
+func (m *MessagingServer) ListMessages(ctx context.Context, req *messagingServiceGrpc.ListMessagesRequest) (*messagingServiceGrpc.ListMessagesResponse, error) {
+	messageFilter := bson.M{
+		"match_id": req.GetMatchID(),
+	}
+	cursor, err := m.MessageCollection.Find(ctx, messageFilter)
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(ctx)
+
+	var messages []*messagingServiceGrpc.Message
+	for cursor.Next(ctx) {
+		var message mongodb.Message
+		if err = cursor.Decode(&message); err != nil {
+			return nil, err
+		}
+		messages = append(messages,
+			&messagingServiceGrpc.Message{
+				MatchID:    &message.MatchID,
+				FromUserID: &message.FromUserID,
+				ToUserID:   &message.ToUserID,
+				Content:    &message.Content,
+				SendAt:     timestamppb.New(message.SentAt),
+				Read:       &message.Read,
+			})
+	}
+	return &messagingServiceGrpc.ListMessagesResponse{
+		Messages: messages,
+	}, nil
+}
+
+func (m *MessagingServer) ListConversations(ctx context.Context, req *messagingServiceGrpc.ListConversationsRequest) (*messagingServiceGrpc.ListConversationsResponse, error) {
+	matchFilter := bson.M{
+		"$or": []bson.M{
+			{"user_1_id": req.GetUserID()},
+			{"user_2_id": req.GetUserID()},
+		},
+		"conversation_started": true,
+	}
+	cursor, err := m.MatchCollection.Find(ctx, matchFilter, options.Find().
+		SetSort(bson.D{{Key: "matchedAt", Value: -1}}))
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(ctx)
+
+	var conversations []*messagingServiceGrpc.Conversation
+	for cursor.Next(ctx) {
+		var match mongodb.Match
+		if err = cursor.Decode(&match); err != nil {
+			return nil, err
+		}
+		var message mongodb.Message
+		opts := options.FindOne().
+			SetSort(bson.D{{Key: "sent_at", Value: -1}}) // orden descendente
+
+		err = m.MessageCollection.FindOne(ctx, bson.M{"match_id": match.ID}, opts).Decode(&message)
+		if err != nil {
+			return nil, err
+		}
+		otherID := match.User2ID
+		if match.User2ID == req.GetUserID() {
+			otherID = match.User1ID
+		}
+		conversations = append(conversations, &messagingServiceGrpc.Conversation{
+			MatchID:     &match.ID,
+			UserID:      &otherID,
+			MatchedAt:   timestamppb.New(match.MatchedAt),
+			LastMessage: &message.Content,
+		})
+	}
+	return &messagingServiceGrpc.ListConversationsResponse{
+		Conversations: conversations,
+	}, nil
 }

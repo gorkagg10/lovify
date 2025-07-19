@@ -52,7 +52,7 @@ func main() {
 		}
 	}()
 
-	natsHandler, err := events.NewNatsHandler("localhost:4222")
+	natsHandler, err := events.NewNatsHandler(conf.NatsEndpoint)
 	if err != nil {
 		slog.Error("creating nats handler", slog.String("error", err.Error()))
 		os.Exit(1)

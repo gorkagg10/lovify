@@ -19,12 +19,14 @@ type UserServer struct {
 	userServiceGrpc.UnimplementedUserServiceServer
 	ProfileManager *profile.Manager
 	OAuthService   *oauth.Service
+	uploadsDir     string
 }
 
-func NewUserServer(profileManager *profile.Manager, oAuthService *oauth.Service) *UserServer {
+func NewUserServer(profileManager *profile.Manager, oAuthService *oauth.Service, uploadsDir string) *UserServer {
 	return &UserServer{
 		ProfileManager: profileManager,
 		OAuthService:   oAuthService,
+		uploadsDir:     uploadsDir,
 	}
 }
 
@@ -61,7 +63,7 @@ func (s *UserServer) MusicProviderOAuthCallback(ctx context.Context, req *userSe
 }
 
 func (s *UserServer) StoreUserPhotos(_ context.Context, req *userServiceGrpc.StoreUserPhotosRequest) (*emptypb.Empty, error) {
-	uploadDir := filepath.Join("uploads", req.GetUserID())
+	uploadDir := filepath.Join(s.uploadsDir, req.GetUserID())
 	err := os.RemoveAll(uploadDir)
 	if err != nil {
 		return nil, err
@@ -118,8 +120,8 @@ func getTopArtists(artists []profile.Artist) []*userServiceGrpc.Artist {
 	return topArtists
 }
 
-func getPhotos(userID string) ([]string, error) {
-	userDirectory := filepath.Join("uploads", userID)
+func (s *UserServer) getPhotos(userID string) ([]string, error) {
+	userDirectory := filepath.Join(s.uploadsDir, userID)
 	photoEntries, err := os.ReadDir(userDirectory)
 	if err != nil {
 		return nil, err
@@ -171,7 +173,7 @@ func (s *UserServer) GetUser(ctx context.Context, req *userServiceGrpc.GetUserRe
 	}
 	gender := userServiceGrpc.Gender(userServiceGrpc.Gender_value[userProfile.Gender()])
 	sexualOrientation := userServiceGrpc.SexualOrientation(userServiceGrpc.SexualOrientation_value[userProfile.SexualOrientation()])
-	photos, err := getPhotos(req.GetUserID())
+	photos, err := s.getPhotos(req.GetUserID())
 	if err != nil {
 		return nil, err
 	}

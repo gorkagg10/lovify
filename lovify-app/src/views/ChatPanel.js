@@ -1,67 +1,103 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import {useConfig} from "../context/ConfigContext";
 
 function ChatPanel() {
-    const selectedUser = {
-        id: "2",
-        image: "/pexels-kqpho-1921168.jpg",
-        name: "Marina",
-        age: 22,
-        timestamp: "2025-07-02T19:30:00Z",
+    const [messages, setMessages] = useState([]);
+    const { apiUrl } = useConfig()
+    const userID = sessionStorage.getItem("userID")
+    const [receiver, setReceiver] = useState([]);
+    const { matchId } = useParams();
+
+    const fetchReceiverInfo = async () => {
+        const receiverUserID = sessionStorage.getItem("receiverID")
+        try {
+            const response = await fetch(`${apiUrl}/users/${receiverUserID}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) throw new Error('Error al obtener los matches');
+
+            const data = await response.json();
+            setReceiver(data);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    const messages = [
-        {
-            id: 1,
-            sender: "them", // mensaje recibido
-            text: "¡Hola! ¿Cómo estás?",
-            timestamp: "2025-07-03T19:30:00Z",
-        },
-        {
-            id: 2,
-            sender: "me", // mensaje enviado por ti
-            text: "¡Hola Marina! Muy bien, ¿y tú?",
-            timestamp: "2025-07-03T19:31:00Z",
-        },
-        {
-            id: 3,
-            sender: "them",
-            text: "Genial. Me encantó tu perfil musical 😊",
-            timestamp: "2025-07-03T19:32:00Z",
-        },
-        {
-            id: 4,
-            sender: "me",
-            text: "Gracias 😄 ¿Cuál es tu canción favorita de The Weeknd?",
-            timestamp: "2025-07-03T19:32:30Z",
-        },
-        {
-            id: 5,
-            sender: "them",
-            text: "Sin duda Starboy. ¿Y la tuya?",
-            timestamp: "2025-07-03T19:33:00Z",
-        },
-        {
-            id: 6,
-            sender: "me",
-            text: "Que guay!",
-            timestamp: "2025-07-03T19:34:00Z",
-        },
-    ]
+    const fetchMessages = async () => {
+        try {
+            const response = await fetch(`${apiUrl}/users/${userID}/messages/${matchId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) throw new Error('Error al obtener los matches');
+
+            const data = await response.json();
+            setMessages(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchReceiverInfo();
+        fetchMessages();
+    }, []);
+
+    const [content, setContent] = useState("");
+    const [sending, setSending] = useState(false);
+    const [error, setError] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSending(true);
+        setError("");
+
+        try {
+            const res = await fetch(`${apiUrl}/users/${userID}/messages/${matchId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json", // JWT
+                },
+                body: JSON.stringify({ content: content }),
+            });
+
+            if (!res.ok) {
+                const data = await res.json();
+                throw new Error(data.message || "Error al enviar mensaje");
+            }
+
+            setContent("");
+
+            fetchMessages();
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setSending(false);
+        }
+    };
 
     return (
         <div className="chat-panel">
             <div className="chat-panel__header">
-                <img className="chat-panel__logo" src={selectedUser.image} alt={selectedUser.name}/>
-                <span>{selectedUser.name}, {selectedUser.age}</span>
+                <img className="chat-panel__logo" src={receiver.photos?.[0]} alt={receiver.name}/>
+                <span>{receiver.name}, {receiver.age}</span>
             </div>
 
             <div className="chat-messages">
                 {messages.map((msg, i) => (
                     <div
                         key={i}
-                        className={`chat-bubble ${msg.sender === 'me' ? 'from-me' : 'from-them'}`}
+                        className={`chat-bubble ${msg.from_user_id === userID ? 'from-me' : 'from-them'}`}
                     >
-                        {msg.text}
+                        {msg.content}
                     </div>
                 ))}
             </div>
@@ -69,8 +105,13 @@ function ChatPanel() {
                 <input
                     type="text"
                     placeholder="Escribe un mensaje..."
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    disabled={sending}
+                    required
+                    style={{ flexGrow: 1 }}
                 />
-                <button>ENVIAR</button>
+                <button type="submit" disabled={sending || !content.trim()} onClick={handleSubmit}>ENVIAR</button>
             </div>
         </div>
     )

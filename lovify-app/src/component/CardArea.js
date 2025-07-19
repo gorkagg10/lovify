@@ -8,19 +8,17 @@ import {useConfig} from "../context/ConfigContext";
 function CardArea() {
     const { apiUrl } = useConfig()
     const userID = sessionStorage.getItem("userID")
-    console.log(userID)
     const [users, setUsers] = useState([]);
     const [index, setIndex] = useState(0);
     const [slideIndex, setSlideIndex] = useState(0);
 
-    console.log(`${apiUrl}/users/${userID}/recommendations`)
 
     useEffect(() => {
         fetch(`${apiUrl}/users/${userID}/recommendations`)
             .then((res) => res.json())
             .then((data) => setUsers(data))
             .catch(console.error);
-    }, [apiUrl]);
+    }, [apiUrl, userID]);
 
     const user = users[index];
     const currentSlide = user?.photos?.[slideIndex];

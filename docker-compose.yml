@@ -45,7 +45,51 @@ services:
       DB_SSL_MODE: disable
       DB_USER: auth_svc
       MIGRATIONS_PATH: /usr/local/database/migrations
+      NATS_ENDPOINT: nats://nats:4222
     ports:
       - '8081:8081'
     depends_on:
       - postgres-db
+  lovify-user-service:
+    container_name: lovify-user-service
+    build:
+      context: lovify-user-service
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: mongodb
+      DB_PORT: 27017
+      NATS_URL: nats://nats:4222
+      SPOTIFY_OAUTH_CLIENT_ID: f4ed25e807ab4b74b981cd606a75699b
+      SPOTIFY_OAUTH_CLIENT_SECRET: 4b8515bf00ed4f67bbcd9a77d7486bdb
+      SPOTIFY_OAUTH_REDIRECT_URL: http://127.0.0.1:8080/callback/spotify
+      UPLOADS_DIR: /usr/local/uploads
+    ports:
+      - '8082:8082'
+    depends_on:
+      - mongodb
+  lovify-matching-service:
+    container_name: lovify-matching-service
+    build:
+      context: lovify-matching-service
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: mongodb
+      DB_PORT: 27017
+      NATS_URL: nats://nats:4222
+    ports:
+      - '8083:8083'
+    depends_on:
+      - mongodb
+  lovify-messaging-service:
+    container_name: lovify-messaging-service
+    build:
+      context: lovify-messaging-service
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: mongodb
+      DB_PORT: 27017
+      NATS_URL: nats://nats:4222
+    ports:
+      - '8084:8084'
+    depends_on:
+      - mongodb

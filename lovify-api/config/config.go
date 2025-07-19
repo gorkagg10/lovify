@@ -11,15 +11,17 @@ const (
 	AuthServiceEndpoint     = "AUTH_SERVICE_ENDPOINT"
 	UserServiceEndpoint     = "USER_SERVICE_ENDPOINT"
 	MatchingServiceEndpoint = "MATCHING_SERVICE_ENDPOINT"
+	MessageServiceEndpoint  = "MESSAGE_SERVICE_ENDPOINT"
 	FrontEndHost            = "FRONT_END_HOST"
 )
 
 type Config struct {
-	Port                    string
-	AuthServiceEndpoint     string
-	UserServiceEndpoint     string
-	MatchingServiceEndpoint string
-	FrontEndHost            string
+	Port                     string
+	AuthServiceEndpoint      string
+	UserServiceEndpoint      string
+	MatchingServiceEndpoint  string
+	MessagingServiceEndpoint string
+	FrontEndHost             string
 }
 
 func NewConfig() (*Config, error) {
@@ -40,15 +42,20 @@ func NewConfig() (*Config, error) {
 	if matchingServiceEndpoint == "" {
 		return nil, fmt.Errorf("%s must be set", MatchingServiceEndpoint)
 	}
+	messageServiceEndpoint := os.Getenv(MessageServiceEndpoint)
+	if messageServiceEndpoint == "" {
+		return nil, fmt.Errorf("%s must be set", MessageServiceEndpoint)
+	}
 	frontEndHost := os.Getenv(FrontEndHost)
 	if frontEndHost == "" {
 		frontEndHost = "http://localhost:3000"
 	}
 	return &Config{
-		Port:                    port,
-		AuthServiceEndpoint:     authServiceEndpoint,
-		UserServiceEndpoint:     userServiceEndpoint,
-		MatchingServiceEndpoint: matchingServiceEndpoint,
-		FrontEndHost:            frontEndHost,
+		Port:                     port,
+		AuthServiceEndpoint:      authServiceEndpoint,
+		UserServiceEndpoint:      userServiceEndpoint,
+		MatchingServiceEndpoint:  matchingServiceEndpoint,
+		MessagingServiceEndpoint: messageServiceEndpoint,
+		FrontEndHost:             frontEndHost,
 	}, nil
 }

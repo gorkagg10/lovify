@@ -3,6 +3,7 @@ module github.com/gorkagg10/lovify/lovify-authentication-service
 go 1.24.1
 
 require (
+	github.com/golang-jwt/jwt/v5 v5.2.3
 	github.com/golang-migrate/migrate/v4 v4.18.3
 	github.com/gorkagg10/lovify/lovify-user-service v0.0.0-20250717211827-da5b8800d754
 	github.com/nats-io/nats.go v1.43.0

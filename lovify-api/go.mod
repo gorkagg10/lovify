@@ -9,7 +9,7 @@ require golang.org/x/crypto v0.37.0
 require (
 	github.com/gorilla/mux v1.8.1
 	github.com/gorkagg10/lovify/lovify-authentication-service v0.0.0-20250717212628-fcd841f6bf4f
-	github.com/gorkagg10/lovify/lovify-matching-service v0.0.0-20250718153318-4c1b78cd1d0f
+	github.com/gorkagg10/lovify/lovify-matching-service v0.0.0-20250719113426-fcb8228ed573
 	github.com/gorkagg10/lovify/lovify-user-service v0.0.0-20250717211827-da5b8800d754
 	github.com/rs/cors v1.11.1
 	google.golang.org/grpc v1.73.0

@@ -8,22 +8,33 @@ import {useConfig} from "../context/ConfigContext";
 function CardArea() {
     const { apiUrl } = useConfig()
     const userID = sessionStorage.getItem("userID")
-    const [users, setUsers] = useState([]);
-    const [index, setIndex] = useState(0);
+    const [user, setUser] = useState([]);
     const [slideIndex, setSlideIndex] = useState(0);
+    const [notFound, setNotFound] = useState(true);
 
-    const fetchRecommendations = () => {
-        fetch(`${apiUrl}/users/${userID}/recommendations`)
-            .then((res) => res.json())
-            .then((data) => setUsers(data))
-            .catch(console.error);
+    const fetchRecommendations = async () => {
+        try {
+            const response = await fetch(`${apiUrl}/users/${userID}/recommendations`)
+            if (response.status === 404) {
+                console.log(notFound)
+                setNotFound(true);
+            } else if (response.ok) {
+                setNotFound(false);
+                const data = await response.json();
+                setUser(data);  // data = { recommended_user_id, similarity_score }
+            } else {
+                throw new Error("Error desconocido");
+            }
+        } catch (err) {
+            console.error("Error al obtener recomendación:", err);
+            setNotFound(true);
+        }
     }
 
     useEffect(() => {
         fetchRecommendations();
     }, []);
 
-    const user = users[index];
     const currentSlide = user?.photos?.[slideIndex];
 
     if (!user || !currentSlide) return <p>Cargando...</p>;
@@ -51,14 +62,18 @@ function CardArea() {
                 }),
             })
             .then((res) => res.json())
-            .then((data) => setUsers(data))
             .catch(console.error);
 
         fetchRecommendations();
-
-        setIndex((prev) => (prev + 1) % users.length);
         setSlideIndex(0); // reset al primer slide del siguiente user
     };
+
+    if (notFound) return (
+            <div className="error-card">
+                <h1>No hay usuarios compatibles <br /> disponibles en este momento</h1>
+            </div>
+    );
+
 
     return (
         <div className="card-area">

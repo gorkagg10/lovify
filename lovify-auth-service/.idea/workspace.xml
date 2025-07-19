@@ -6,19 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="7765bc57-2532-478d-950d-2415e11b68a4" name="Changes" comment="fix: added user id to msg when creating profile in authentication service">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/users.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lovify-app/src/component/CardArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/component/CardArea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/styles/card_area.css" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/styles/card_area.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-matching-service/grpc/matching-service/matching-service.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-matching-service/grpc/matching-service/matching-service.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-matching-service/grpc/matching-service/matching-service.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-matching-service/grpc/matching-service/matching-service.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-matching-service/grpc/matching-service/matching-service_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-matching-service/grpc/matching-service/matching-service_grpc.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-matching-service/internal/domain/profile/music.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-matching-service/internal/domain/profile/repositories.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-matching-service/internal/domain/profile/user_profile.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-matching-service/internal/domain/recommender/recommender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-matching-service/internal/domain/recommender/recommender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-matching-service/internal/domain/recommender/user_profile.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-matching-service/internal/domain/recommender/user_profile.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-authentication-service/cmd/server/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/internal/infra/jwt/security_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-authentication-service/internal/infra/jwt/security_repository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lovify-matching-service/internal/infra/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-matching-service/internal/infra/server/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/cmd/server/User_Service_Local" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/cmd/server/User_Service_Local" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-user-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-user-service/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +62,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultGoTemplateProperty": "Go File",
-    "Go Build.Authentication Server.executor": "Run",
+    "Go Build.Authentication Server.executor": "Debug",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.GoLinterPluginOnboarding": "true",
     "RunOnceActivity.GoLinterPluginStorageMigration": "true",
@@ -212,6 +211,11 @@
           <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go</url>
           <line>115</line>
           <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go</url>
+          <line>55</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

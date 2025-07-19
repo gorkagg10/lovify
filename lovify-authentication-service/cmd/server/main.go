@@ -17,7 +17,7 @@ import (
 	"github.com/gorkagg10/lovify/lovify-authentication-service/database"
 	service "github.com/gorkagg10/lovify/lovify-authentication-service/grpc/auth-service"
 	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/domain/login"
-	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/infra/base64"
+	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/infra/jwt"
 	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/infra/postgres"
 	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/infra/server"
 )
@@ -67,7 +67,7 @@ func main() {
 
 	userRepository := postgres.NewUserRepository(pgClient)
 	tokenRepository := postgres.NewTokenRepository(pgClient)
-	securityRepository := base64.NewSecurityRepository()
+	securityRepository := jwt.NewSecurityRepository()
 
 	authenticationService := login.NewAuthorization(userRepository, securityRepository, tokenRepository)
 	authServer := server.NewAuthServer(authenticationService)
@@ -104,7 +104,7 @@ func setupGrpcServer(authServer *server.AuthServer) *grpc.Server {
 func setupAuthServer(pgClient *sql.DB) *server.AuthServer {
 	userRepository := postgres.NewUserRepository(pgClient)
 	tokenRepository := postgres.NewTokenRepository(pgClient)
-	securityRepository := base64.NewSecurityRepository()
+	securityRepository := jwt.NewSecurityRepository()
 
 	authenticationService := login.NewAuthorization(userRepository, securityRepository, tokenRepository)
 	return server.NewAuthServer(authenticationService)

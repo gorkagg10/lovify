@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"errors"
 	"github.com/google/uuid"
 	"github.com/gorkagg10/lovify/lovify-matching-service/internal/domain/recommender"
 	"github.com/gorkagg10/lovify/lovify-matching-service/internal/infra/mongodb"
@@ -17,7 +18,7 @@ import (
 )
 
 const (
-	minScore = 0.15
+	minScore = 0.10
 )
 
 type MatchingServer struct {
@@ -115,7 +116,7 @@ func (m *MatchingServer) getUsers(ctx context.Context) ([]recommender.User, erro
 }
 
 // BuildPreferences creates for each user an ordered list of compatible candidates.
-func (m *MatchingServer) BuildPreferences(users []recommender.User) map[string][]string {
+func (m *MatchingServer) BuildPreferences(ctx context.Context, users []recommender.User) map[string][]string {
 	preferences := map[string][]string{}
 	vectorCache := map[string]map[string]float64{}
 
@@ -138,6 +139,18 @@ func (m *MatchingServer) BuildPreferences(users []recommender.User) map[string][
 		}
 	}
 
+	liked := func(a, b recommender.User) bool {
+		likeFilter := bson.M{
+			"from_user_id": a.ID,
+			"to_user_id":   b.ID,
+		}
+		err := m.LikeCollection.FindOne(ctx, likeFilter).Err()
+		if err != nil && errors.Is(err, mongo.ErrNoDocuments) {
+			return false
+		}
+		return true
+	}
+
 	for _, u := range users {
 		var list []struct {
 			id    string
@@ -145,7 +158,7 @@ func (m *MatchingServer) BuildPreferences(users []recommender.User) map[string][
 		}
 		ua := getVector(&u)
 		for _, v := range users {
-			if u.ID == v.ID || !compatible(u, v) {
+			if u.ID == v.ID || !compatible(u, v) || liked(u, v) {
 				continue
 			}
 			uv := getVector(&v)
@@ -165,8 +178,8 @@ func (m *MatchingServer) BuildPreferences(users []recommender.User) map[string][
 	return preferences
 }
 
-func (m *MatchingServer) Recommend(users []recommender.User, requester string) (string, float64) {
-	prefs := m.BuildPreferences(users)
+func (m *MatchingServer) Recommend(ctx context.Context, users []recommender.User, requester string) (string, float64) {
+	prefs := m.BuildPreferences(ctx, users)
 	if _, ok := prefs[requester]; !ok || len(prefs[requester]) == 0 {
 		return "", 0
 	}
@@ -211,7 +224,7 @@ func (m *MatchingServer) RecommendUser(ctx context.Context, req *matchingService
 		return nil, err
 	}
 
-	recommendedUserID, _ := m.Recommend(users, userID)
+	recommendedUserID, _ := m.Recommend(ctx, users, userID)
 
 	return &matchingServiceGrpc.RecommendUserResponse{
 		RecommendedUserID: &recommendedUserID,

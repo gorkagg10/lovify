@@ -179,9 +179,9 @@ func (h *Handler) GetRecommendations(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	userID := params["user_id"]
 
-	recommendedUsers, err := h.MatchingServiceClient.RecommendUsers(
+	recommendedUser, err := h.MatchingServiceClient.RecommendUser(
 		r.Context(),
-		&matchingServiceGrpc.RecommendUsersRequest{
+		&matchingServiceGrpc.RecommendUserRequest{
 			UserID: &userID,
 		},
 	)
@@ -189,54 +189,54 @@ func (h *Handler) GetRecommendations(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	if recommendedUser.GetRecommendedUserID() == "" {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+	userResponse, err := h.UserServiceClient.GetUser(
+		r.Context(),
+		&userServiceGrpc.GetUserRequest{
+			UserID: recommendedUser.RecommendedUserID,
+		},
+	)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
-	getUserRecommendationsResponse := make([]GetUserResponse, len(recommendedUsers.RecommendedUsersIDs))
-	for i, user := range recommendedUsers.RecommendedUsersIDs {
-		userResponse, err := h.UserServiceClient.GetUser(
-			r.Context(),
-			&userServiceGrpc.GetUserRequest{
-				UserID: &user,
+	topTracks := make([]Track, len(userResponse.GetTopTracks()))
+	for j, track := range userResponse.GetTopTracks() {
+		topTracks[j] = Track{
+			Name: track.GetName(),
+			Album: Album{
+				Name:  track.GetAlbum().GetName(),
+				Type:  track.GetAlbum().GetType(),
+				Cover: track.GetAlbum().GetCover(),
 			},
-		)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		topTracks := make([]Track, len(userResponse.GetTopTracks()))
-		for j, track := range userResponse.GetTopTracks() {
-			topTracks[j] = Track{
-				Name: track.GetName(),
-				Album: Album{
-					Name:  track.GetAlbum().GetName(),
-					Type:  track.GetAlbum().GetType(),
-					Cover: track.GetAlbum().GetCover(),
-				},
-				Artists: track.GetArtists(),
-			}
-		}
-
-		topArtists := make([]Artist, len(userResponse.GetTopArtists()))
-		for j, artist := range userResponse.GetTopArtists() {
-			topArtists[j] = Artist{
-				Name:   artist.GetName(),
-				Genres: artist.GetGenres(),
-				Image:  artist.GetImage(),
-			}
-		}
-
-		getUserRecommendationsResponse[i] = GetUserResponse{
-			Id:         userResponse.GetUserID(),
-			Name:       userResponse.GetName(),
-			Bio:        userResponse.GetDescription(),
-			Photos:     userResponse.GetPhotos(),
-			TopTracks:  topTracks,
-			TopArtists: topArtists,
-			Age:        userResponse.GetAge(),
+			Artists: track.GetArtists(),
 		}
 	}
 
-	jsonGetUserRecommendationsResponse, err := json.Marshal(getUserRecommendationsResponse)
+	topArtists := make([]Artist, len(userResponse.GetTopArtists()))
+	for j, artist := range userResponse.GetTopArtists() {
+		topArtists[j] = Artist{
+			Name:   artist.GetName(),
+			Genres: artist.GetGenres(),
+			Image:  artist.GetImage(),
+		}
+	}
+
+	getRecommendationResponse := GetUserResponse{
+		Id:         userResponse.GetUserID(),
+		Name:       userResponse.GetName(),
+		Bio:        userResponse.GetDescription(),
+		Photos:     userResponse.GetPhotos(),
+		TopTracks:  topTracks,
+		TopArtists: topArtists,
+		Age:        userResponse.GetAge(),
+	}
+
+	jsonGetUserRecommendationsResponse, err := json.Marshal(getRecommendationResponse)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

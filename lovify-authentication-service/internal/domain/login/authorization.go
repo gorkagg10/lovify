@@ -66,7 +66,7 @@ func (a *Authorization) Login(ctx context.Context, email string, password string
 		return nil, fmt.Errorf("checking password: %w", err)
 	}
 
-	sessionToken, err := a.securityRepository.GenerateToken(SessionToken)
+	sessionToken, err := a.securityRepository.GenerateToken(SessionToken, user.Email())
 	if err != nil {
 		return nil, fmt.Errorf("generating session token: %w", err)
 	}
@@ -76,7 +76,7 @@ func (a *Authorization) Login(ctx context.Context, email string, password string
 	}
 	user.setSessionToken(sessionToken)
 
-	csrfToken, err := a.securityRepository.GenerateToken(CSRFToken)
+	csrfToken, err := a.securityRepository.GenerateToken(CSRFToken, user.Email())
 	if err != nil {
 		return nil, fmt.Errorf("generating session token: %w", err)
 	}

@@ -1,7 +1,7 @@
-package base64
+package jwt
 
 import (
-	jwt "github.com/golang-jwt/jwt/v5"
+	"github.com/golang-jwt/jwt/v5"
 	autherrors "github.com/gorkagg10/lovify/lovify-authentication-service/errors"
 	"github.com/gorkagg10/lovify/lovify-authentication-service/internal/domain/login"
 	"log/slog"

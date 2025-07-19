@@ -55,6 +55,9 @@ services:
     build:
       context: lovify-user-service
       dockerfile: Dockerfile
+    user: "1000:1000"
+    volumes:
+      - ./lovify-user-service/uploads:/usr/local/uploads
     environment:
       DB_HOST: mongodb
       DB_PORT: 27017
@@ -93,3 +96,31 @@ services:
       - '8084:8084'
     depends_on:
       - mongodb
+  lovify-api:
+    container_name: lovify-api
+    build:
+      context: lovify-api
+      dockerfile: Dockerfile
+    environment:
+      AUTH_SERVICE_ENDPOINT: lovify-auth-service:8081
+      FRONT_END_ENDPOINT: http://lovify-app:3000
+      MATCHING_SERVICE_ENDPOINT: lovify-matching-service:8083
+      MESSAGE_SERVICE_ENDPOINT: lovify-messaging-service:8084
+      PORT: 8080
+      USER_SERVICE_ENDPOINT: lovify-user-service:8082
+    ports:
+      - '8080:8080'
+    depends_on:
+      - lovify-auth-service
+      - lovify-user-service
+      - lovify-matching-service
+      - lovify-messaging-service
+  lovify-app:
+    container_name: lovify-app
+    build:
+      context: lovify-app
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: http://lovify-api:8080
+    ports:
+      - '3000:3000'

@@ -31,64 +31,64 @@ function Sidebar() {
         }
     }
 
-    useEffect(() => {
-        const fetchUserInfo = async () => {
-            try {
-                const response = await fetch(`${apiUrl}/users/${userID}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                });
+    const fetchUserInfo = async () => {
+        try {
+            const response = await fetch(`${apiUrl}/users/${userID}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
 
-                if (!response.ok) throw new Error('Error al obtener los matches');
+            if (!response.ok) throw new Error('Error al obtener los matches');
 
-                const data = await response.json();
-                setUser(data);
-            } catch (error) {
-                console.error(error);
-            }
+            const data = await response.json();
+            setUser(data);
+        } catch (error) {
+            console.error(error);
         }
+    }
 
-        const fetchMatches = async () => {
-            try {
-                const response = await fetch(`${apiUrl}/users/${userID}/matches`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                });
+    const fetchMatches = async () => {
+        try {
+            const response = await fetch(`${apiUrl}/users/${userID}/matches`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
 
-                if (!response.ok) throw new Error('Error al obtener los matches');
+            if (!response.ok) throw new Error('Error al obtener los matches');
 
-                const data = await response.json();
-                setMatches(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
+            const data = await response.json();
+            setMatches(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-        const fetchConversations = async () => {
-            try {
-                const response = await fetch(`${apiUrl}/users/${userID}/conversations`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                });
+    const fetchConversations = async () => {
+        try {
+            const response = await fetch(`${apiUrl}/users/${userID}/conversations`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
 
-                if (!response.ok) throw new Error('Error al obtener las conversacions');
+            if (!response.ok) throw new Error('Error al obtener las conversacions');
 
-                const data = await response.json();
-                setConversations(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
+            const data = await response.json();
+            setConversations(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
+    useEffect(() => {
         fetchUserInfo().then();
         fetchMatches().then();
         fetchConversations().then();

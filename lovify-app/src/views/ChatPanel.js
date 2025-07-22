@@ -74,6 +74,7 @@ function ChatPanel() {
                 headers: {
                     "Content-Type": "application/json", // JWT
                 },
+                credentials: 'include',
                 body: JSON.stringify({ content: content }),
             });
 

@@ -143,8 +143,15 @@ function Sidebar() {
             </div>
                 <button
                     onClick={() => {
-                        localStorage.removeItem("token");
-                        window.location.href = "/login";
+                        fetch("/api/logout", {
+                            method: "POST",
+                            credentials: "include" // Asegura que las cookies se envíen
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data.message); // "Sesión cerrada correctamente"
+                                window.location.href = "/login"; // Redirecciona al login si quieres
+                            });
                     }}
                     className="logout-button"
                 >

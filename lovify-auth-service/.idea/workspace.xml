@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7765bc57-2532-478d-950d-2415e11b68a4" name="Changes" comment="fix: wip almost finished, logout remaining">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/login.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/users.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/styles/chat_panel.css" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/styles/chat_panel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/ChatPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/ChatPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/CreateUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/CreateUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/uploads/fa4e8a5b-b33f-4d2b-9d8a-b8465e9c41a3/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/uploads/fa4e8a5b-b33f-4d2b-9d8a-b8465e9c41a3/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-user-service/uploads/fa4e8a5b-b33f-4d2b-9d8a-b8465e9c41a3/img.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stream-manager/cmd/service/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stream-manager/go.mod" beforeDir="false" />
-    </list>
+    <list default="true" id="7765bc57-2532-478d-950d-2415e11b68a4" name="Changes" comment="fix: wip almost finished, logout remaining" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

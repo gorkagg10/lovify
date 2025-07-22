@@ -96,7 +96,7 @@ func (h *Handler) mapRoutes() {
 	usersRouter.HandleFunc("/{user_id}/messages/{match_id}", h.SendMessage).Methods("POST")
 	usersRouter.HandleFunc("/{user_id}/messages/{match_id}", h.ListMessages).Methods("GET")
 	usersRouter.HandleFunc("/{user_id}", h.GetUser).Methods("GET")
-	h.Router.HandleFunc("auth/logout", h.Logout).Methods("POST")
+	h.Router.HandleFunc("/auth/logout", h.Logout).Methods("POST")
 	//h.Router.HandleFunc("/auth/protected", h.Protected).Methods("POST")
 }
 

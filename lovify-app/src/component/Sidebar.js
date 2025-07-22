@@ -143,7 +143,7 @@ function Sidebar() {
             </div>
                 <button
                     onClick={() => {
-                        fetch("/api/logout", {
+                        fetch(`${apiUrl}/auth/logout`, {
                             method: "POST",
                             credentials: "include" // Asegura que las cookies se envíen
                         })

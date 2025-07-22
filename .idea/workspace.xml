@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a82aebe3-c736-46a3-a829-3f5520032356" name="Changes" comment="docs: readme written">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/login.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-api/internal/transport/http/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-api/internal/transport/http/users.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-app/src/styles/chat_panel.css" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/styles/chat_panel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-app/src/views/ChatPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/views/ChatPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-app/src/views/CreateUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/views/CreateUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-app/src/views/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/views/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-auth-service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-auth-service/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-user-service/uploads/fa4e8a5b-b33f-4d2b-9d8a-b8465e9c41a3/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-user-service/uploads/fa4e8a5b-b33f-4d2b-9d8a-b8465e9c41a3/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovify-user-service/uploads/fa4e8a5b-b33f-4d2b-9d8a-b8465e9c41a3/img.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stream-manager/cmd/service/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stream-manager/go.mod" beforeDir="false" />
-    </list>
+    <list default="true" id="a82aebe3-c736-46a3-a829-3f5520032356" name="Changes" comment="build: lovify-api dependencies updated" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -257,7 +241,8 @@
     <MESSAGE value="feat: changed scoring algorithm" />
     <MESSAGE value="feat: wip almost finished" />
     <MESSAGE value="docs: readme written" />
-    <option name="LAST_COMMIT_MESSAGE" value="docs: readme written" />
+    <MESSAGE value="build: lovify-api dependencies updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="build: lovify-api dependencies updated" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

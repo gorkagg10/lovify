@@ -17,6 +17,20 @@ function Sidebar() {
         navigate(`/messages/${matchID}`)
     }
 
+    const handleLogoutClick = async() => {
+        try {
+            const response = await fetch(`${apiUrl}/auth/logout`, {
+                method: "POST",
+                credentials: "include" // Asegura que las cookies se envíen
+            });
+
+            if (!response.ok) throw new Error('Error al hacer logout');
+            window.location.href = "/login";
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
@@ -142,17 +156,7 @@ function Sidebar() {
                 }
             </div>
                 <button
-                    onClick={() => {
-                        fetch(`${apiUrl}/auth/logout`, {
-                            method: "POST",
-                            credentials: "include" // Asegura que las cookies se envíen
-                        })
-                            .then(res => res.json())
-                            .then(data => {
-                                console.log(data.message); // "Sesión cerrada correctamente"
-                                window.location.href = "/login"; // Redirecciona al login si quieres
-                            });
-                    }}
+                    onClick={handleLogoutClick}
                     className="logout-button"
                 >
                     Cerrar sesión

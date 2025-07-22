@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a82aebe3-c736-46a3-a829-3f5520032356" name="Changes" comment="build: lovify-api dependencies updated" />
+    <list default="true" id="a82aebe3-c736-46a3-a829-3f5520032356" name="Changes" comment="fix: logout">
+      <change beforePath="$PROJECT_DIR$/lovify-app/src/component/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/lovify-app/src/component/Sidebar.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -242,7 +244,8 @@
     <MESSAGE value="feat: wip almost finished" />
     <MESSAGE value="docs: readme written" />
     <MESSAGE value="build: lovify-api dependencies updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="build: lovify-api dependencies updated" />
+    <MESSAGE value="fix: logout" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: logout" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useConfig} from "../context/ConfigContext";
 
 function ChatPanel() {
@@ -8,6 +8,12 @@ function ChatPanel() {
     const userID = sessionStorage.getItem("userID")
     const [receiver, setReceiver] = useState([]);
     const { matchId } = useParams();
+
+    const navigate = useNavigate();
+
+    const onClose = async () => {
+        navigate("/app");
+    }
 
     const fetchReceiverInfo = async () => {
         const receiverUserID = sessionStorage.getItem("receiverID")
@@ -91,6 +97,9 @@ function ChatPanel() {
             <div className="chat-panel__header">
                 <img className="chat-panel__logo" src={receiver.photos?.[0]} alt={receiver.name}/>
                 <span>{receiver.name}, {receiver.age}</span>
+                <button className="close-button" onClick={onClose}>
+                    ×
+                </button>
             </div>
 
             <div className="chat-messages">

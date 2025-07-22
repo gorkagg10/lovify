@@ -36,7 +36,6 @@ function CreateUser() {
 
         if (response.status === 201) {
             const data = await response.json();
-            console.log(data.id);
             sessionStorage.setItem('userID', data.id);
             navigate('/app/profile/photos')
         } else {

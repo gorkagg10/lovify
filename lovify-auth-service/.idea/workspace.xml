@@ -4,29 +4,22 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7765bc57-2532-478d-950d-2415e11b68a4" name="Changes" comment="fix: added user id to msg when creating profile in authentication service">
-      <change afterPath="$PROJECT_DIR$/../lovify-authentication-service/internal/infra/jwt/token_repository.go" afterDir="false" />
+    <list default="true" id="7765bc57-2532-478d-950d-2415e11b68a4" name="Changes" comment="fix: wip almost finished, logout remaining">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-api/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-api/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/login.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/middleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/session.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/component/CardArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/component/CardArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/component/ProfilePhotoUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/component/ProfilePhotoUploader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/component/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/component/Sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-api/internal/transport/http/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-api/internal/transport/http/users.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/styles/chat_panel.css" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/styles/chat_panel.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/ChatPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/ChatPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/Messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/Messages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/UserSidebar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/CreateUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/CreateUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-app/src/views/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-app/src/views/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-authentication-service/cmd/server/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/authorization.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/repositories.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-authentication-service/internal/domain/login/repositories.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/internal/infra/jwt/security_repository.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-authentication-service/internal/infra/postgres/token_repository.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lovify-matching-service/internal/infra/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../lovify-matching-service/internal/infra/server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-user-service/uploads/fa4e8a5b-b33f-4d2b-9d8a-b8465e9c41a3/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-user-service/uploads/fa4e8a5b-b33f-4d2b-9d8a-b8465e9c41a3/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lovify-user-service/uploads/fa4e8a5b-b33f-4d2b-9d8a-b8465e9c41a3/img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stream-manager/cmd/service/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stream-manager/go.mod" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,30 +61,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "Go Build.Authentication Server.executor": "Debug",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.GoLinterPluginOnboarding": "true",
-    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "SHELLCHECK.PATH": "/Users/gorka/Library/Application Support/JetBrains/GoLand2025.1/plugins/Shell Script/shellcheck",
-    "git-widget-placeholder": "main",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/gorka/lovify/lovify-authentication-service/internal/infra/jwt",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "go.sdk"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go Build.Authentication Server.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginOnboarding&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;/Users/gorka/Library/Application Support/JetBrains/GoLand2025.1/plugins/Shell Script/shellcheck&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gorka/lovify/lovify-authentication-service/internal/infra/jwt&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;go.sdk&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/../lovify-authentication-service/internal/infra/jwt" />
@@ -173,7 +166,8 @@
     <MESSAGE value="fix: changed userID for email" />
     <MESSAGE value="fix: fix added user id to msg when creating profile" />
     <MESSAGE value="fix: added user id to msg when creating profile in authentication service" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: added user id to msg when creating profile in authentication service" />
+    <MESSAGE value="fix: wip almost finished, logout remaining" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: wip almost finished, logout remaining" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

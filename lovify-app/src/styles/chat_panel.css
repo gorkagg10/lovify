@@ -96,3 +96,16 @@
     border-radius: 20px;
     cursor: pointer;
 }
+
+.close-button {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    background: none;
+    color: white;
+    border: solid 3px;
+    border-radius: 50%;
+    cursor: pointer;
+}

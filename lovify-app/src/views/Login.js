@@ -16,7 +16,7 @@ function Login() {
         formData.append("email", email);
         formData.append("password", password);
 
-        const response = await fetch("http://localhost:8080/auth/login", {
+        const response = await fetch(`${apiUrl}/auth/login`, {
             method:'POST',
             contentType:'multipart/form-data',
             body: formData,

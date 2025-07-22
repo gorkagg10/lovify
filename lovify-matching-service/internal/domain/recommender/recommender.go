@@ -15,30 +15,6 @@ type GenreKeyValue struct {
 	Freq  float64
 }
 
-// BuildGenreVector devuelve genero -> frecuencia relativa dentro de los artistas favoritos.
-// Normaliza para que ∑score = 1.
-func BuildGenreVector(artists []Artist) map[string]float64 {
-	genreCounter := map[string]float64{}
-	for _, artist := range artists {
-		for _, genre := range artist.Genres {
-			genreCounter[genre]++
-		}
-	}
-
-	// normalize
-	var sum float64
-	for _, v := range genreCounter {
-		sum += v
-	}
-	if sum == 0 {
-		return genreCounter
-	}
-	for genre := range genreCounter {
-		genreCounter[genre] /= sum
-	}
-	return genreCounter
-}
-
 // Devuelve un mapa genero → frecuencia normalizada
 func GenreVector(u *User, topN int) map[string]float64 {
 	if u.MusicProviderInfo == nil {

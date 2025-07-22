@@ -55,8 +55,8 @@ Para hacer uso de la aplicación se deberán seguir los siguientes pasos:
 
 Para la prueba de esta aplicación se disponen de dos usuarios:
 
-- **admin**: con una cuenta vinculada de Spotify.
-- **admin2**: al cual se le puede vincular una cuenta personal de Spotify.
+- **admin**: perfil con una cuenta vinculada de Spotify.
+- **admin2**: al cual se le puede crear un perfil y se le puede vincular una cuenta personal de Spotify.
 
 Los datos del usuario **admin** son los siguientes:
 

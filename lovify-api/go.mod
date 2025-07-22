@@ -10,7 +10,7 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/gorkagg10/lovify/lovify-authentication-service v0.0.0-20250719142407-656c0675a00e
 	github.com/gorkagg10/lovify/lovify-matching-service v0.0.0-20250719142407-656c0675a00e
-	github.com/gorkagg10/lovify/lovify-user-service v0.0.0-20250719142407-656c0675a00e
+	github.com/gorkagg10/lovify/lovify-user-service v0.0.0-20250722205304-72355aa73244
 	github.com/rs/cors v1.11.1
 	google.golang.org/grpc v1.73.0
 )

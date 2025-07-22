@@ -16,8 +16,8 @@ github.com/gorkagg10/lovify/lovify-matching-service v0.0.0-20250719142407-656c06
 github.com/gorkagg10/lovify/lovify-matching-service v0.0.0-20250719142407-656c0675a00e/go.mod h1:nhEwp9RSSzvJ7pBgruEOxWJ6cioLPFYp5mwMpLRb2v0=
 github.com/gorkagg10/lovify/lovify-messaging-service v0.0.0-20250719102724-33d1ab729965 h1:vVb4CYE+j2DN/ynam0KQAID2cPQQr+pBDHeRgy9khRM=
 github.com/gorkagg10/lovify/lovify-messaging-service v0.0.0-20250719102724-33d1ab729965/go.mod h1:v5FbbeJl/M16ptkTkiS75DhLCIgBpIFr/ik6XYgBL5M=
-github.com/gorkagg10/lovify/lovify-user-service v0.0.0-20250719142407-656c0675a00e h1:hJPYmDdekFWZaHlpbK158nkjPt7Xm4qsdICYTmlUwPc=
-github.com/gorkagg10/lovify/lovify-user-service v0.0.0-20250719142407-656c0675a00e/go.mod h1:uIhJyUl+KhlcfgF1UT4ltYfCsQf6puV6MySoX2ukE9s=
+github.com/gorkagg10/lovify/lovify-user-service v0.0.0-20250722205304-72355aa73244 h1:2FBuPZ46WDnCMzoR6YhDVC/ks3Cl8X3T5W8ml6Quebs=
+github.com/gorkagg10/lovify/lovify-user-service v0.0.0-20250722205304-72355aa73244/go.mod h1:uIhJyUl+KhlcfgF1UT4ltYfCsQf6puV6MySoX2ukE9s=
 github.com/rs/cors v1.11.1 h1:eU3gRzXLRK57F5rKMGMZURNdIG4EoAmX8k94r9wXWHA=
 github.com/rs/cors v1.11.1/go.mod h1:XyqrcTp5zjWr1wsJ8PIRZssZ8b/WMcMf71DJnit4EMU=
 go.opentelemetry.io/auto/sdk v1.1.0 h1:cH53jehLUN6UFLY71z+NDOiNJqDdPRaXzTel0sJySYA=

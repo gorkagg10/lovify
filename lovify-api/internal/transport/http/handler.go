@@ -92,10 +92,11 @@ func (h *Handler) mapRoutes() {
 	usersRouter.HandleFunc("/{user_id}/recommendations", h.GetRecommendations).Methods("GET")
 	usersRouter.HandleFunc("/{user_id}/matches", h.GetMatches).Methods("GET")
 	usersRouter.HandleFunc("/{user_id}/conversations", h.GetConversations).Methods("GET")
-	usersRouter.HandleFunc("/{from_id}/likes/{to_id}", h.HandleLike)
+	h.Router.HandleFunc("/users/{user_id}/likes/{to_id}", h.HandleLike)
 	usersRouter.HandleFunc("/{user_id}/messages/{match_id}", h.SendMessage).Methods("POST")
 	usersRouter.HandleFunc("/{user_id}/messages/{match_id}", h.ListMessages).Methods("GET")
 	usersRouter.HandleFunc("/{user_id}", h.GetUser).Methods("GET")
+	h.Router.HandleFunc("auth/logout", h.Logout).Methods("POST")
 	//h.Router.HandleFunc("/auth/protected", h.Protected).Methods("POST")
 }
 

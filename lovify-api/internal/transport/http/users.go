@@ -253,7 +253,7 @@ type HandleLikeRequest struct {
 
 func (h *Handler) HandleLike(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	fromID := params["from_id"]
+	fromID := params["user_id"]
 	toID := params["to_id"]
 
 	var likeRequest HandleLikeRequest

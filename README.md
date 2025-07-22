@@ -63,7 +63,7 @@ Los datos del usuario **admin** son los siguientes:
 - *Email:* admin@example.com
 - *Contraseña:* soyeladmin10
 
-Los datos del usuario admin2 son los siguientes:
+Los datos del usuario **admin2** son los siguientes:
 
 - *Email:* admin2@example.com
 - *Contraseña:* soyeladmin20 
